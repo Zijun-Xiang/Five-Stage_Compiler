@@ -1,0 +1,84 @@
+#DRBC My first Program
+#DRBC This program tests every production rule.
+
+int a, b, c;
+int  pointlessmath(int num1, num2) {
+        output(num1 * num2);
+        output(num1 / num2);
+        output(num1 + num2);
+        output(num1 - num2);
+	output(num1 % num2);
+        return;
+}
+
+function2() {
+	return;
+}
+
+int function(bool p[]; int k) {
+    return x + y;     // Example: return statement with an expression
+}
+
+int main() {
+	int x : 5;              // same as int x = 5
+        int y,z,f;
+	int x:42, y:666;
+        static int abc:123;
+        bool k;
+    	int a[10]:"what";
+	int myArray[10];
+	int element : myArray[2];
+	char W : 'W';
+	int j;
+	x++;
+	y--;
+	;
+	while (y == 0) do {
+                if(x > 0) then {
+                        x -= 1;
+                }
+                else {
+                      	x += 1;
+                }
+        }
+
+	for  m = 0 to 6
+        do {
+            	if x < y
+                then y += 1;
+                        break;
+        }
+
+	for m = 0 to 100 do {
+                for  n = 0 to 100 by 2 do
+                        if (true == true) then {y += 20;}
+                        else
+				while (true == false) do
+                                if(false != false) then {y -= 100;}
+        }
+
+
+	if x < y or x == y
+        then y-=1;
+
+	if a <= b or a>= b
+	then a += 1;
+
+	if a > 0 and b !< 10
+	then a += 10;
+
+	if (not(a > 0))
+	then a+=1;
+
+	a =  8 :<: 4;
+	b = 8 :>: 4;
+	b = -a;
+	b = *a;
+	b = ?a;
+	b *= 5;
+	a /= 4;
+	function2();
+	pointlessmath(a, b);
+}
+
+

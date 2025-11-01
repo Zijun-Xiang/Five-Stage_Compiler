@@ -1,0 +1,184 @@
+#DRBC PRECOMPILER 
+#DRBC PRECOMPILER 
+#DRBC  // Grammar 2
+#DRBC My Test Program
+
+// Variable declarations follow <varDecl> rule
+int x: 42, y: 666;
+char testChar[20]: "Shashwot Niraula";
+int number[5];
+bool flag: true;
+bool isGreater;
+// typeSpec varDeclList ';'
+// char charVar, stringVar[20]: "Hello";
+
+bool notFlag: !flag;
+
+// Character constant follows <constant> rule
+char charConst: 'A';
+
+// Random number generation follows <expstmt> rule
+int randomValue: ?10;
+
+// Error handling example with an invalid array index
+int invalidIndex: 1000;
+
+// Error handling with an invalid unary expression
+int invalidUnaryExp: !flag; // This will generate an error
+
+// MAX function follows <call> and <argList> rules
+int maxResult: MAX(x, y);
+// MIN function follows <call> and <argList> rules
+int minResult: MIN(x, y);
+
+// accordance with the rules 40 and 41.
+int result: -x;  // Unary minus
+int dereferenceResult: *ptr;  // Unary dereference
+int randomResult: ?5;  // Unary random operator
+
+int myFun1(char x, y; int z) {
+    // Function body
+   myFun1('z','y','z');
+}
+
+
+// Function declaration with parameters <parmIdList> ::= <parmIdList> ',' <parmId>  | <parmId>
+//int exampleFunction(int param1, param2) {
+    // Function body
+    // ...
+//}
+
+
+
+ 
+// Example function declaration with a parameter list
+int myFunction(int param1; char param2[]; bool param3) {
+    // Function body
+    // ...
+    myFun1(z,y,z);
+}
+
+
+myFun() {
+ int x,y;
+}
+// Main function declaration follows <funDecl> rule
+// int main(int argc, char* argv[]) {
+int main() {
+    static int result: 0;
+
+    // Assignment using '='
+    result = x :<: y;
+    result = x :>: y;
+    result = x % y;
+    result = x / y;
+    result = x - y;
+
+    
+    // Compound assignment operators
+    result += 5;
+    result -= 3;
+    result *= 2;
+    result /= 4;
+
+    // mutable INC and DEC
+    result++;
+    result--;
+
+    result = myFun('c', 'd', 5);
+
+    myFun();
+    // Conditional statement follows <matched> rule
+    if (x > 5) then {
+        // Array assignment follows <expstmt> rule
+        testChar[20] = "New Test";
+    } else {
+        // Increment statement follows <expstmt> rule
+        x++;
+    }
+
+    // While loop follows <matched> rule
+    while (not flag) do {
+        // Function call and assignment follow <expstmt> rule
+        x = add(x, 3);
+        // Nested conditional statement follows <matched> rule
+        if (x >= 20) then flag = false;
+    }
+      
+    
+
+    // Relational expression in the for loop
+    for i = 0 to 10 do {
+        if (i >= 5) then {
+            // Loop body follows <stmt> rule
+            number[i] = i * 2;
+        }
+        // EQ | NEQ
+        if (i == 0) then {
+            break;
+        }
+        if (i <= 0) then {
+            return 0;
+        }
+        if (i != 0) then {
+
+        }
+    }
+
+    // Array assignment and comparison follow <expstmt> rule
+    number[3] = 15;
+    isGreater = number[3] > x;
+    isGreater = number[4] < x;
+
+    // Compound statement with a local variable follows <compoundstmt> and <scopedVarDecl> rules
+
+    // Variable declaration follows <scopedVarDecl> rule
+    // STATIC int tempVar: 8;
+    // Assignment statement follows <expstmt> rule
+    x += tempVar;
+
+    // FOR loop follows <matched> rule
+    for i = 0 to et do {
+        // Loop body follows <stmt> rule
+        number[i] = i * 2;
+    }
+
+    for i = 0 to 10 by 2 do {
+        // Loop body
+    }
+
+    if (((number[0] == 1) and (number[1] == 2))
+        or ((number[0] == 3) and (number[1] == 4))
+    )
+        and (number[2] == -1) then {
+        number[2] = 2;
+    }
+
+    // String concatenation and assignment follow <expstmt> rule
+    testChar[10] = testChar[5] + " Concatenation";
+
+    // Empty statement
+    ;
+
+    // Return statement
+    return; // Testing returnStmt rule
+
+   //DRBC Rule 19 & 20 (66, 72 & 73)
+
+   for m = 0 to 100 do { // 19a
+
+      //20d, 19b, 20b, 20c
+
+      for n = 0 to 100 by 2 do
+
+         if (true == true) then {y += 2;}
+
+         else while (true == false) do
+
+             if (false != false) then y = -100;
+
+   }
+
+ 
+}
+

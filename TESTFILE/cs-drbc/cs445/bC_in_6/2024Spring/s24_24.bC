@@ -1,0 +1,53 @@
+#DRBC stuff
+#DRBC more stuff
+int pi : 3;
+int getatkHp(int atkHpSeed){
+    static int x : (atkHpSeed);
+    x = x++;
+    x /= 2;
+    for i = 1 to 1234 / 13 by 4 - 1 do
+        if i % 5 == 0 then
+            x *= 2;
+        else 
+            if i % 3 <= 1 then
+                x +=1;
+    while x > atkMaxHp do
+        x -= ?3;
+    return x;
+}
+int myfunc(int one; char izard, daword[]);
+int myfunc2();
+main(){
+    int atkHp, atkMaxHp:10, atk:2, defMaxHp:10, defHp, def:1;
+    bool defended : false;
+    char buffs[5] : "acmtw";
+    char defense : 'c';
+    int a,b,c,d,f,g;
+    char e;
+    
+    atkHp = getatkHp(1);
+    defHp = 10 + 2 * ?-5;
+
+    a = pi;
+    a--;
+    b = 1 :>: a;
+    c = 1 :<: a;
+    d = 4;
+    if b != 1 or c >= 1 and d < *buffs then
+        e = buffs[d];
+    else
+        e = buffs[0];
+
+    for i = 1 to 10 do
+        if(i == 5) then
+            break;
+        else ;
+
+    while d < 10 do
+        if not 1==2 then
+            break;
+
+    return;
+    myfunc2();
+    myfunc(a, defense, buffs);
+}

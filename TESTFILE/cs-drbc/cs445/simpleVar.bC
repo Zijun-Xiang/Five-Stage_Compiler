@@ -1,0 +1,4 @@
+#DRBC ./bC 5 > simple.tm
+int main() {
+   int x:4;
+}

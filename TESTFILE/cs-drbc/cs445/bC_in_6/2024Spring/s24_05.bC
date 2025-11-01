@@ -1,0 +1,102 @@
+//<precomList>
+#DRBC My first program
+#DRBC This program tests every production rule
+
+char name[20]:"Chris";
+char initial:'B';
+int temp1:32, temp2:75;
+bool huhh:0;
+
+int newfunction();
+int newfunction2(int young, old; char key[]; bool yn);
+
+emptyfunction()
+{
+   //empty
+   return;
+}
+
+main()
+{
+   int x:5;
+
+   //sumop,mulop
+   x = x+1;
+   x = x-2;
+   x = x*3;
+   x = x/4;
+   x = x%5;
+
+   x++;
+   x--;
+
+   //unaryop
+   x = -x;
+   x = *x;
+   x = ?x;
+
+   //assigned operators
+   x = 2;
+   x += 2;
+   x -= 2;
+   x *= 2;
+   x /= 2;
+
+   //simpleExp: simpleExp OR andExp
+   x = x or x;
+   //andExp: andExp AND unaryRelExp
+   x = x and x;
+   //unaryRelExp: NOT unaryRelExp
+   x = not x;
+
+   x = emptyfunction();
+}
+
+int newfunction()
+{
+   int y:10;
+   int a,b;
+   static int c:15;
+   bool d;
+
+   //relop
+   y = y < y;
+   y = y > y;
+   y = y >= y;
+   y = y <= y;
+   y = y == y;
+   y = y != y;
+
+   //minmaxop
+   y = y :>: y;
+   y = y :<: y;
+
+
+   while true do
+      if (y>0) then {y -= 3;} else {y += 3;}
+
+   for m=0 to 10 do
+   {
+      if (a<b) then {return;} else {break;}
+   }
+
+   for i=0 to 100 do
+   {
+      for j=0 to 100 by 2 do
+         if (true == true) then {a += 10;}
+         else
+            while (true == false) do
+               if (false != false) then {a -=10;}
+   }
+
+   //call
+   newfunction2(a,b);
+
+   return 0;
+}
+
+int newfunction2(int young, old; char key[]; bool yn)
+{
+   key[3]='X';
+   return young+old;
+}

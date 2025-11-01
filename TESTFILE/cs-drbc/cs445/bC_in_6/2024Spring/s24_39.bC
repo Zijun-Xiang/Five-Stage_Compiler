@@ -1,0 +1,127 @@
+#DRBC This is my first program
+#DRBC This is my Assignment 1 in cs445
+
+
+char zev[10]:"corgis";
+int x:42, y:666;
+int ant(int bat, cat[]; bool dog, elk; int fox; char gnu) {
+    myfunct();
+    ant(bat,cat,dog,elk,fox,gnu);
+    return 0;
+}
+
+empty(){
+    return;
+}
+
+int main(){ 
+static int hog; // hog in new scope 
+gnu = 'x'; 
+goat = hog[2] = 3**cat; // hog is 3 times the size of array passed 
+if (dog and elk or bat > cat[3]) then dog = not dog; 
+else fox++; 
+if bat <= fox then {
+   while dog do { 
+   hog = fox;
+         if hog>bat then break; 
+         else if fox !=0 then fox += 7;
+      }
+   }
+   if x==1 then cat[i] = bat; 
+   else if (x==2) then cat[i] = bat%17; 
+   else if (x==3) then cat[i] = 78; 
+   x++; 
+   return (fox+bat*cat[bat])/-fox;
+}
+
+int myfunct(){
+
+static int sta1:25;
+int arr[5]; 
+int a:10,b,c,d,e:5; 
+char ch:'A';
+char s[25]:"String";
+bool flag:true;
+
+b=20;
+c=a+b;
+a=-10;
+
+a=?10; 
+e=a%b; 
+flag=a>b; 
+flag=a<b; 
+flag=a>=b; 
+flag=a<=b; 
+flag=a!=b; 
+c=a-b; 
+b=a*b; 
+b=a/b; 
+a=a%b; 
+a+=5; 
+a-=5; 
+a*=5; 
+a/=5; 
+a++; 
+a--; 
+flag=not a>b;
+	if a>b then a=a+b; 	
+           else 
+           a=a-b;
+           for a=10 to 20 by 2 do 
+           e=a+b; 
+           break; 
+       	   while a>b do
+           a=55; 
+           sum(a,b); 
+           a=b++;
+           //a= b--;
+           //a=max a+b;
+           a= 5:>:10; 
+           a= 5:<:1;
+           flag=a>b and a>10; 
+           flag=a>b or a>10;
+}
+
+
+int function2(int x[]){ 
+int bat, cat[5]; 
+bool dog, elk; 
+int fox; 
+char gnu; 
+int goat, hog[100]; 
+char zev[10]:"corgis"; 
+int x:42, y:666;
+goat = hog[2]; 
+if dog and elk or bat > cat[3] then dog = not dog; 
+else fox++; 
+if bat <= fox then {
+      while dog do { 
+         static int hog; 
+         hog = fox; 
+         dog = fred(fox++, cat)>666; 
+         if hog>bat then break; 
+         else if fox !=0 then fox += 7;
+     }
+   }
+    for i=1 to 10 do { 
+    if x==1 then cat[i] = bat; 
+    else if (x==2) then cat[i] = bat%17; 
+    else if (x==3) then cat[i] = 78; 
+    else x++;;
+   }
+}
+
+int subNew(int a, b){
+//DRBC Rule 19 & 20 (66, 72 & 73)
+   for m = 0 to 100 do { // 19a
+      //20d, 19b, 20b, 20c
+      for n = 0 to 100 by 2 do 
+      if (true == true) then {y += 2;}
+         else while (true == false) do 
+         if (false != false) then y = -100;
+   }
+   return a+b;
+}
+
+

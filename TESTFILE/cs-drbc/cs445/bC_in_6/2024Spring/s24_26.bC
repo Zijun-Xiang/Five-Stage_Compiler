@@ -1,0 +1,125 @@
+#DRBC My first program
+#DRBC This program test every grammar production rule.
+
+int h[8];
+
+cats()
+{
+    test();
+
+    for i=3 to n by 2 do {
+              if i*i>n then break;
+              while n%i==0 do {
+                  output(i);
+                  n /= i;
+              }
+          }
+
+    for j=i+1 to *a do if a[j]<a[minloc] then minloc = j;
+}
+
+dogs(int h , t[])
+{
+
+}
+
+seagulls(bool u, o; int n, hi[])
+{
+
+}
+
+int main(int len; char roman[]) { //production rule 3
+    int x : 5, r: 7;
+    static int abc:123;
+    bool k;
+
+    bool j : true;
+    bool m : false;
+
+    int i, j;
+    int g, h[5];
+
+    i = 4;
+    j = i * 5;
+
+    if j>i then j = i;
+
+    if j < i then i--;
+    else i = i + j;
+
+    i++;
+    i--;
+    i >= j;
+
+    break;
+
+    return;
+
+    test();
+
+    return 1;
+
+    outputb(a <= 1);            // F
+    output(j += i);
+
+    if j == i then outputb(not true);
+
+    if j or m == true then output(true);
+
+    e = "alphonse;
+
+    r[0];
+
+    *r;
+    -r;
+    r% i;
+    ?r;
+
+    while x < j do if x < j then x++;
+
+    while (happy == 0) do {
+        if(goodvibes>0) then {
+            happy-=1;
+        }
+        else{
+        happy +=1;
+        }
+    }
+
+    for m = 0 to 100 do
+    {
+      for n = 0 to 100 by 2 do
+      {
+         if(true  == true) then happy /= 2;
+         else
+            while (true == false) do
+            {
+            if(false != false) then happy *= 100;
+            }
+      }
+    }
+
+    if (i > 0) and (j > 0) then x - i;
+    else if (1 > 0 ) and not(j > 0) then  x / 2 ;
+
+    "Alphonse"; "loves"; "CompSci";
+
+    'a';'l';
+
+    t = 2:>:12;
+    m = 2:<:12;
+
+    for i=3 to n by 2 do {
+              if i*i>n then break;
+              while n%i==0 do {
+                  output(i);
+                  n /= i;
+              }
+          }
+
+    for j=i+1 to *a do if a[j]<a[minloc] then minloc = j;
+
+    dogs(x, h);
+    ;
+}
+

@@ -1,0 +1,139 @@
+#DRBC Trying to get rule 2...
+
+int testIntA, testIntB; //3a, 4a, 5, 10a, 7a, 7b, 8, 9a
+
+int testing2(char c[]); // rule 16b (48)
+
+testing3(int a, b) if a<b then a++; // rule 11a (30) (no return type specified)
+
+testing4(int a, b; bool t); // rule 37
+
+
+
+int lottery(int f)
+{
+
+return ?100; //rule 85
+}
+
+int returnStmt()
+{
+return;
+}
+
+int main()  //production rule 3
+{
+
+int happy:1, goodvibes:1, test1, test2;
+bool t: true, f: false;
+static int zA;         //rule 13
+char woot[10]:"woot!", boot[10]:"boot..", a; //rule 28
+int rule143[10];
+a = 'A';
+
+// rule 34, 35
+   test = 5 :>: 4;
+   test2 = 5 :<: 4;
+
+happy--;
+happy = happy / 1;
+happy = happy % 1;
+
+happy = -10;
+happy = *10;
+
+
+happy * 10;
+
+zA = lottery(zA);
+
+if (zA >= 99) then //113
+{
+happy = zA * happy;  //sumOp...126&127
+}
+else
+{
+happy = happy + zA;
+}
+
+if (zA <= 35) then //116
+{
+happy = happy - zA;
+}
+
+//rule 18 (51&52)
+
+while (happy = 0) do
+{
+    if(goodvibes>0) then 
+     {
+	happy+=1;
+     }
+    else
+     {
+	happy-=1;
+     }
+}
+
+
+// Rule 99 100
+
+   test *= 10;
+
+   test /= 5;
+
+ 
+
+ 
+
+// Rule 143
+
+   rule43[0] = 'b'; //43b
+
+ 
+for m=0 to 6
+do
+{
+   if x<y   //rule 20...33
+   then y+=1;  
+   break;
+}
+
+//rule 19&20 (66, 72, 73)
+
+for m=0 to 100 do
+{
+  for n= 0 to 100 by 2 do
+  
+    if(t == t) then {happy += 20;}
+    else 
+    while(t == f) do
+    if(f != f) then {h -= 100;}
+    
+  
+}
+
+if ((goodvibes > 0) and (happy > 0)) then
+{
+// Woot!!!
+}
+
+if ((goodvibes > 0) or (happy > 0)) then
+{
+//Woot
+}
+
+if ((goodvibes > 0) and not (happy > 0)) then
+{
+//Woot
+}
+
+returnstmt();//rule 151
+
+argList(happy, goodvibes); //rule 152
+
+RETURN; //rule 25
+}
+
+
+

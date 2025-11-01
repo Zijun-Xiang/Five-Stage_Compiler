@@ -1,0 +1,4 @@
+int main() {
+   in x;
+   return 0;
+}

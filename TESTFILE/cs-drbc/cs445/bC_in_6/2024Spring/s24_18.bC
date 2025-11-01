@@ -1,0 +1,78 @@
+#DRBC  //rule 2 #2
+#DRBC  //rule 2 #3
+
+int hello(int hi); //rule 3 #5
+
+test(int trial, test ; bool attempt; int t[]); //rule 11 #30 #37 #43 #48
+
+int a,b;
+
+int main(){  //rule 17
+   char help: a; //rule 5 #28
+   bool answer: true; //rule 5 #27
+
+   int b:0,k; //rule 5 #10
+
+   int array[6]; //rule 9 #23
+
+   static int j:8; //rule 6 #13
+
+   int x:0;  
+   int m,n;
+   
+   m=10 :<: 5;
+
+   m=5 :>: 10;
+
+   m=1+1; //rule 28 #96 #97
+
+   m*=2; //rule 28 #99
+
+   m/=8; //rule 28 #100
+
+   //rule 18(51&52)
+   while(x<=0 and x>=0) do{//rule 18 #104 #113 #114
+      if(x>0 or not(x < 0)) then{ //rule 18 #101 #107 
+         x--; //#90
+         break; //rule 18 #64
+      }
+      else {
+         x++; //#89
+      }
+   }
+
+   //rules 19&20 (66,72,73)
+   for m=0 to 100 do{//19a
+      for n=0 to 100 by 2 do
+         if(true == true) then {x += 20;}
+         else
+            while(true == false) do
+            if(false!=false) then {x -= 100;} 
+   }
+   hello(1,2);//Rule 47 #150 #152
+   hello();// #151
+   return 0; //rule 18 #63  
+}
+
+int hello(int hi){
+   char j:'a'; //rule 48 #156
+   char stng[3] : "hi"; //rule 48 #157
+
+   stng[3]; //rule 43 #142
+
+   j=1*1;//rule 39 #131
+   j=1/2;// rule 39 #132
+   j=1%5;//rule 39 #133
+   j=1-1;//rule 37 #127
+
+   j=-1;//rule 41 #137
+   j=*1;//rule 41 #138
+   j=?1;//rule 41 #139 
+
+
+   if(hi==0)then{
+      return; //rule 18 #84
+   }else{
+      return hi;
+   }
+}

@@ -1,0 +1,137 @@
+#DRBC Testing all productions
+#DRBC Second line for precompile list
+
+int totalWeek;
+int addFunction(int importantTime, timeToTake; bool useMax);
+int mulFunction(int multiplicand, multiplier);
+printFunction(char stringToPrint[]);
+printSuccess();
+bool isEven(int number);
+
+int main()
+{
+   int freeTime:1, sleepTime:5, driveTime:25, studyTime:50;
+   bool useMin:false;
+   char desiredGrade: 'A';
+   char gradeString[15]: "Current Grade D";
+   int randomNum: ?*gradeString;
+   randomNum = -randomNum;
+   totalWeek = 168;
+
+   while (studyTime <= 100)
+   do
+   {
+      if (studyTime < ((driveTime * 2) + sleepTime + freeTime))
+      then
+      {
+         studyTime = addFunction(studyTime, sleepTime, useMin);
+      }
+      else
+      {
+         studyTime += 5;
+         break;
+      }
+   }
+
+   for i = 1 to 7 do freeTime += 1;
+   for i = 1 to 24 by 2 do sleepTime += 2;
+
+   for i = 0 to 7
+   do
+   
+      if (sleepTime > 42)
+      then
+      {
+         sleepTime = sleepTime / 2;
+         freeTime /= 2;
+         studyTime--;
+      }
+   
+   numArray[14] = 'C';
+
+   while (sleepTime < 10)
+   do
+   
+      if (studyTime >= 100 and freeTime >= 14)
+      then
+      {
+         sleepTime *= 2;
+         freeTime = freeTime - randomNum;
+      }
+      
+
+   if ((sleepTime + freeTime + studyTime + driveTime) >= totalWeek)
+   then
+   
+      if (sleepTime >= 21 or studyTime <= 100)
+      then
+      {
+         sleepTime = 21;
+      }
+      else
+      {
+         freeTime++;
+      }
+   
+   else
+   
+      if (not ((sleepTime + freeTime + studyTime + driveTime) != totalWeek))
+      then
+      {
+         freeTime -= 7;
+      }
+   
+
+   if (not isEven(studyTime)) then studyTime = 100;
+
+   gradeString[14] = 'A';
+   printFunction();
+   printSuccess();
+}
+
+int addFunction(int importantTime, timeToTake; bool useMax)
+{
+   static int numToAdd: 0;
+
+   if useMax then
+   {
+      numToAdd += 2;
+      return importantTime + (timeToTake :>: numToAdd);
+   }
+   else
+   {
+      numToAdd += 1;
+      return importantTime + (timeToTake :<: numToAdd);
+   }
+}
+
+int mulFunction(int multiplicand, multiplier)
+{
+   int product: multiplicand;
+   product *= multiplier;
+   return product;
+}
+
+printFunction(char stringToPrint[])
+{
+   // Print grade string
+
+   return;
+}
+
+printSuccess()
+{
+   // Print that program executed successfully
+
+   return;
+}
+
+bool isEven(int number)
+{
+   if ((number % 2) == 0)
+   then
+   {
+      return true;
+   }
+   return false;
+}

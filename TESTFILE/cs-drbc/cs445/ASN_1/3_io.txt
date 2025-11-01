@@ -1,0 +1,24 @@
+bC supports a limited number of i/o opertions
+based on the 3 typeSpec: int, bool and char
+
+// read/write an Integer
+int x;
+x = input(); 
+output(x);
+output(513);
+
+//read/write a Boolean
+bool x;
+x = inputb();
+outputb(true);
+outputb(513>512);
+
+//read/write a Char
+char x;
+inputc();
+outputc(x);
+outputc('A');
+
+// print a '\n'
+outnl();
+

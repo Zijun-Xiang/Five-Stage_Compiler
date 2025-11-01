@@ -1,0 +1,153 @@
+#DRBC My First Program // Rule 1
+#DRBC This Program tests every production rule. // Rule 2
+
+char state : 'R', states[4];
+char windowname[12] : "Application";
+
+Init(int pixels[]; int width, height);
+Clear(int pixels[]; int width, height, color);
+Static(int pixels[]; int width, height);
+DrawSomething(int pixels[]; int width, height, color, startposX, startposY, endposX, endposY);
+DrawPixel(int pixels[]; int width, height, posX, posY, color);
+
+int Max(int x, y);
+int Min(int x; int y);
+bool TestMinMax();
+
+int main() {
+	static bool running;
+	int clock : 0;
+	
+	int width : 400, height : 300;
+	// 400 * 300 = 120000
+	int pixels[120000];
+	int backgroundcolor : 16;
+
+	int startposX : 200;
+	int startposY : 100;
+	int endposX : 0;
+	int endposY : 200;
+
+	Init(pixels, width, height);
+
+	while running == true do {
+
+		if state == 'R' then {
+			Clear(pixels, width, height, backgroundcolor);
+			endposX += clock;
+			endposX = endposX % width;
+			DrawSomething(pixels, width, height, color, startposX, startposY, endposX, endposY);
+		}
+		else if state == 'S' then {
+			Clear(pixels, width, height, backgroundcolor);
+			Static(pixels, width, height);
+		}
+		else if state == 'C' then {
+			clock++;
+		}
+		else {
+			clock--;
+		}
+		
+	}
+
+}
+
+Init(int pixels[]; int width, height) {
+	int i;
+
+	for y=0 to height do
+		for x=0 to width do {
+
+			i = (width * y) + x;
+
+			pixels[i] = 0;
+
+		}
+
+	return;
+
+}
+
+Clear(int pixels[]; int width, height, color) {
+
+	for i=0 to *pixels do {
+		if (TestMinMax() == false) then {running = false; break;}
+
+		pixels[i] = Max(Min(color, 255), 0);
+
+	}
+
+	return;
+
+}
+
+Static(int pixels[]; int width, height) {
+
+	for i=0 to *pixels by 3 do {
+		pixels[i] = 1;
+		pixels[i] *= ?128;
+		pixels[i] -= -128;
+	}
+
+}
+
+DrawSomething(int pixels[]; int width, height, color, startposX, startposY, endposX, endposY) {
+	int i : 0;
+
+	while pixels[i] > 0 do if (pixels[i] > 255) then pixels[i] /= 4 / 2;
+
+	for y = 0 to width do
+		for x = 0 to height do 
+			if (pixels[((width * y) + x)] == 0) then 
+				DrawPixel(pixels, width, height, x, y, color);
+
+}
+
+DrawPixel(int pixels[]; int width, height, posX, posY, color) {
+
+	int i : (posY + 1) * width - (width - posX);
+	pixels[i] = Max(Min(color, 255), 0);
+
+}
+
+int Max(int x, y) { 
+
+	if a > b then {
+		return a; 
+	}
+	else {
+		if a < b then return b;
+	}
+
+}
+
+int Min(int x; int y) {
+
+	int min : 2147483647;
+
+	if x <= min and min != 0 then {
+		if x < y then {
+			min = x;
+		}
+		else {
+			min = y;
+		}
+	}
+	else if y >= min or y > x then min = x; else min = y;
+	
+	return min;
+
+}
+
+bool TestMinMax() {
+
+	bool result : true;
+
+	if (Max(30, 50) != (30 :>: 50)) then result = not result; 
+	else if (Min(30, 50) != (30 :<: 50)) then result = not result;
+
+	return result;
+
+}
+

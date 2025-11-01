@@ -1,0 +1,876 @@
+#include "codegen.h"
+#include <string>
+#include "parser.tab.h"
+//#include "semantics.h"
+
+extern int numErrors;
+extern int numWarnings;
+//extern void yyparse();
+extern int yydebug;
+extern TreeNode *syntaxTree;
+extern char **largerTokens;
+extern void initTokenStrings();
+
+
+FILE *code;
+static bool linenumFlag;
+static int breakloc;
+static SymbolTable *globals;
+int toffset; //t=temp
+static int paramnum = 1;
+#define OFPOFF 0
+#define RETURNOFFSET -1
+
+int offsetRegister(VarKind v);
+void commentLineNum(TreeNode *currnode);
+void initAGlobalSymbol(std::string sym, void *ptr);
+void initGlobalArraySizes();
+void codegenExpression(TreeNode *currnode);
+void codegenGeneral(TreeNode *currnode);
+void codegenDecl(TreeNode *currnode);
+void codegenFun(TreeNode *currnode);
+void codegenLibraryFun(TreeNode *currnode);
+void codegenInit(int initJump, int globalOffset);
+
+int offsetRegister(VarKind v){
+	switch(v){
+	  case Local: return FP;
+	  case Parameter: return FP;
+	  case Global: return GP;
+	  case LocalStatic: return GP;
+	  default:
+	    printf("ERROR(codegen): looking up offset register for a variable of type %d\n", v);
+	    return 666;
+	}
+}
+
+void commentLineNum(TreeNode *currnode){
+	char buf[16];
+	if(linenumFlag){
+	  sprintf(buf, "%d", currnode->lineno);
+	  emitComment((char *)"Line: ", buf);
+	}
+}
+
+
+void codegenHeader(char *srcFile){
+  emitComment((char *)"bC compiler version bC-2025");
+  emitComment((char *)"File compiled: ", srcFile);
+}
+
+void codegenStatement(TreeNode *currnode){
+	int skiploc = 0, skiploc2 = 0, currloc = 0;
+	int savedToffset;
+	TreeNode *loopindex = NULL;
+	commentLineNum(currnode);
+	switch(currnode->kind.stmt){
+	   case CompoundK:{
+                int savedToffset = toffset;
+                toffset = currnode -> size;
+                emitComment((char *)"COMPOUND");
+                emitComment((char *)"TOFF set:", toffset);////////////////////////////////////////////
+		//emitComment((char *)"Compound Body");
+                codegenGeneral(currnode->child[0]);
+                emitComment((char *)"Compound Body");
+                codegenGeneral(currnode->child[1]);
+                toffset = savedToffset;
+		//printf("yuyu");
+                emitComment((char *)"TOFF set:", toffset);/////////////////////////////////////////////
+                emitComment((char *)"END COMPOUND");
+           }
+                break;
+	   case  ForK:
+		int startoff, stopoff, stepoff;
+		savedToffset = toffset;
+		toffset = currnode->size;	
+		TreeNode *loopindex;
+		emitComment((char *)"TOFF set:", toffset);
+		emitComment((char *)"FOR");
+		loopindex = currnode->child[0];
+		//loopindex = currnode->child[0];
+         	if (loopindex == NULL) {
+            		printf("ERROR(codegen) loop index is null");
+            		break;
+        	}
+		startoff = loopindex->offset;
+		stopoff = startoff-1;
+         	stepoff = startoff-2;
+		if (currnode->child[1] == NULL) {
+            		printf("ERROR(codegen) no range in loop");
+            	break;
+         	} else {
+            	TreeNode *rangeNode = currnode->child[1];
+		startoff+=2;
+		stopoff+=2;
+		stepoff+=2;
+            	codegenExpression(rangeNode->child[0]);
+            	emitRM((char *)"ST", AC, startoff, FP, (char *)"save starting value in index variable");
+            	codegenExpression(rangeNode->child[1]);
+            	emitRM((char *)"ST", AC, stopoff, FP, (char *)"save stop value");
+		 // currloc = emitSkip(0);
+            	if (rangeNode->child[2] != NULL) {
+               		codegenExpression(rangeNode->child[2]);
+            	} else {
+               		emitRM((char *)"LDC", AC, 1, 6, (char *)"default increment by 1");
+            	}
+            emitRM((char *)"ST", AC, stepoff, FP, (char *)"save step value");
+         }
+		  currloc = emitSkip(0);
+
+
+/*		emitRM((char *)"LDC", AC,currnode->child[1]->child[0]->attr.value,AC,
+                       (char *)"Load integer constant");
+		emitRM((char *)"ST", AC, -2, FP, 
+			(char *)"save starting value");
+		emitRM((char *)"LDC", AC, 2,FP,
+                        (char *)"Load integer constant");
+		emitRM((char *)"ST", AC, RETURNOFFSET, FP, (char *)"save step value");	
+		 emitRM((char *)"LDC", AC, 2,FP,
+                        (char *)"Load integer constant");
+                emitRM((char *)"ST", AC, RETURNOFFSET, FP, (char *)"save step value");*/		
+		emitRM((char *)"LD", AC1, startoff, FP,(char *)"loop index");
+		emitRM((char *)"LD", AC2, stopoff, FP,(char *)"stop value");
+		emitRM((char *)"LD", AC, stepoff, FP,(char *)"step value");
+		emitRO((char *)"SLT", AC, AC1, AC2, (char *)"Op <");		
+		emitRM((char *)"JNZ", AC, 1, PC,(char *)"Jump to loop body");
+		skiploc = breakloc;
+         	breakloc = emitSkip(1);
+
+         	if (currnode->child[2] == NULL) {
+            		printf("ERROR(codegen) compound for statement empty\n");
+            	break;
+         	}
+		codegenGeneral(currnode->child[2]);			
+		emitComment((char *)"Bottom of loop increment and jump");
+
+         	emitRM((char *)"LD", AC, startoff, FP, (char *)"Load index");
+         	emitRM((char *)"LD", AC2, stepoff, FP, (char *)"Load step");
+
+         	emitRO((char *)"ADD", AC, AC, AC2, (char *)"increment");
+
+         	emitRM((char *)"ST", AC, startoff, FP, (char *)"store back to index");
+
+         	emitGotoAbs(currloc, (char *)"go to beginning of loop");
+         	backPatchAJumpToHere(breakloc, (char *)"Jump past loop [backpatch]");
+
+         	breakloc = skiploc;
+
+         	emitComment((char *)"END LOOP");
+
+		break;	  
+
+	   case IfK:
+	      emitComment((char *)"IF");
+	      codegenExpression(currnode->child[0]);    ///////////
+	      skiploc = emitSkip(1);
+	      emitComment((char *)"THEN");
+	      codegenStatement(currnode->child[1]);
+	   if(currnode->child[2]){
+		skiploc2 = emitSkip(1);
+		//backPatchAJumpToHere(skiploc, (char *)"111Jump around the THEN if false [backpatch]");
+		backPatchAJumpToHere((char *)"JZR", AC, skiploc, (char *)"Jump around the THEN if false [backpatch]");
+		emitComment((char *)"ELSE");
+		codegenStatement(currnode->child[2]);
+		backPatchAJumpToHere(skiploc2,(char *)"Jump around the ELSE [backpatch]");
+	   	// backPatchAJumpToHere(skiploc2, (char *)"Jump around the ELSE [backpatch]");
+	   }else{
+		//backPatchAJumpToHere(skiploc, (char *)"2222Jump around the THEN if false [backpatch]"); 
+	    	  backPatchAJumpToHere((char *)"JZR", AC, skiploc, (char *)"Jump around the THEN if false [backpatch]");
+	   }
+	   emitComment((char *)"END IF");
+	   break;
+	  
+	   case WhileK:
+		emitComment((char *)"WHILE");
+		currloc = emitSkip(0);
+		codegenExpression(currnode->child[0]);
+		emitRM((char *)"JNZ", AC, 1, PC,(char *)"Jump to while part");
+		emitComment((char *)"DO");
+		//emitComment((char *)"BREAK");
+		skiploc = breakloc;
+		breakloc = emitSkip(1);
+		codegenGeneral(currnode->child[1]);
+		//emitGoto(-2,PC,(char *)"break");
+		emitGotoAbs(currloc,(char *)"go to beginning of loop");
+		backPatchAJumpToHere(breakloc,(char *)"Jump past loop [backpatch]");
+		breakloc = skiploc;
+		emitComment((char *)"END WHILE");
+		break;
+	    case ReturnK:
+         	emitComment((char *)"RETURN");
+         	if (currnode->child[0] != NULL) {
+            	codegenExpression(currnode->child[0]);
+            	emitRM((char *)"LDA", 2, 0, AC, (char *)"Copy result to return register");
+         	}
+
+         	emitRM((char *)"LD", AC, -1, FP, (char *)"Load return address");
+         	emitRM((char *)"LD", FP, GP, FP, (char *)"Adjust fp");
+         	emitGoto(GP, AC, (char *)"Return");
+         	break;
+	    case BreakK:
+         	emitComment((char *)"BREAK");
+         	emitGotoAbs(breakloc, (char *)"break");
+	
+	   default:
+		break;
+      }//switch的收尾括号
+}
+
+void codegenExpression(TreeNode *currnode){
+	commentLineNum(currnode);
+	switch(currnode->kind.exp){
+		case AssignK:{
+			TreeNode *lhs = currnode->child[0];
+			//printf("五");
+			//codegenExpression(currnode->child[1]);
+			if(lhs->attr.op == '['){
+				printf("[");
+				int tempregister=1;
+                                if(currnode->child[1]){codegenExpression(lhs->child[1]);/*codegenExpression(currnode->child[1]);*/}///////////
+				if(lhs->child[0]->varKind==Global) tempregister = GP;
+				if(lhs->child[0]->varKind==Local) tempregister = FP; 
+				if(lhs->child[0]->varKind==LocalStatic) tempregister = GP;
+				switch(currnode->attr.op){
+					//printf("测");
+					case INC:
+					   emitRM((char *)"LDC", AC, lhs->child[1]->attr.value, AC3,
+                                           (char *)"Load integer constant");
+                                           emitRM((char *)"LDA", AC2, lhs->child[0]->offset,tempregister,
+						 (char *)"Load address of base of array", lhs->child[0]->attr.name);
+					   emitRO((char *)"SUB", AC2, AC2, AC, (char *)"Compute offset of value");
+					   emitRM((char *)"LD", AC, lhs->offset, AC2,(char *)"load lhs variable", lhs->child[0]->attr.name);
+					   emitRM((char *)"LDA", AC, 1, AC, (char *)"increment value of", lhs->child[0]->attr.name);
+					   emitRM((char *)"ST", AC, lhs->offset, AC2, (char *)"Store variable", lhs->child[0]->attr.name);	
+					break;
+
+					case DEC:
+					   emitRM((char *)"LDC", AC, lhs->child[1]->attr.value, AC3,
+                                           	 (char *)"Load integer constant");
+                                           emitRM((char *)"LDA", AC2, lhs->child[0]->offset, tempregister, 
+						(char *)"Load address of base of array", lhs->child[0]->attr.name);
+                                           emitRO((char *)"SUB", AC2, AC2, AC, (char *)"Compute offset of value");
+                                           emitRM((char *)"LD", AC, lhs->offset, AC2,(char *)"load lhs variable", lhs->child[0]->attr.name);
+                                           emitRM((char *)"LDA", AC, -1, AC, (char *)"decrement value of", lhs->child[0]->attr.name);
+                                           emitRM((char *)"ST", AC, lhs->offset, AC2, (char *)"Store variable", lhs->child[0]->attr.name);
+                                        break;
+
+					case '=':
+					   printf("=");
+					   emitRM((char *)"ST", AC, toffset, tempregister, (char *)"Push index");
+					   emitComment((char *)"TOFF dec:", --toffset);
+					   codegenExpression(currnode->child[1]);
+					   emitComment((char *)"TOFF inc:", ++toffset);
+					   emitRM((char *)"LD", AC1, toffset, tempregister, (char *)"Pop index");
+					   emitRM((char *)"LDA", AC2, lhs->child[0]->offset, tempregister,
+                                                (char *)"Load address of base of array", lhs->child[0]->attr.name);
+					   emitRO((char *)"SUB", AC2, AC2, AC1, (char *)"Compute offset of value");
+					   emitRM((char *)"ST", AC, lhs->offset, AC2, (char *)"Store variable", lhs->child[0]->attr.name);
+					   
+					break;
+
+					case MULASS:
+                                            emitRM((char *)"ST", AC, toffset, tempregister, (char *)"Push index");//ST  3,-7(1)    Push index
+                                            emitComment((char *)"TOFF dec:", toffset);
+                                            codegenExpression(currnode->child[1]);
+                                            emitComment((char *)"TOFF inc:", toffset);
+                                            emitRM((char *)"LD", AC1, toffset, tempregister, (char *)"Pop index");
+                                            emitRM((char *)"LDA", AC2, lhs->child[0]->offset, tempregister,
+                                                (char *)"Load address of base of array", lhs->child[0]->attr.name);
+                                            emitRO((char *)"SUB", AC2, AC2, AC1, (char *)"Compute offset of value");
+                                            emitRM((char *)"LD", AC1, lhs->offset, AC2,(char *)"load lhs variable", lhs->child[0]->attr.name);
+                                            emitRO((char *)"MUL", AC, AC1, AC, (char *)"op *=");
+                                            emitRM((char *)"ST", AC, lhs->offset, AC2, (char *)"Store variable", lhs->child[0]->attr.name);
+                                            break;
+
+					case DIVASS:
+					    emitRM((char *)"ST", AC, toffset, tempregister, (char *)"Push index");//ST  3,-7(1)    Push index
+                                            emitComment((char *)"TOFF dec:", toffset);
+                                            codegenExpression(currnode->child[1]);
+                                            emitComment((char *)"TOFF inc:", toffset);
+                                            emitRM((char *)"LD", AC1, toffset, tempregister, (char *)"Pop index");
+                                            emitRM((char *)"LDA", AC2, lhs->child[0]->offset, tempregister,
+                                                (char *)"Load address of base of array", lhs->child[0]->attr.name);
+                                            emitRO((char *)"SUB", AC2, AC2, AC1, (char *)"Compute offset of value");
+                                            emitRM((char *)"LD", AC1, lhs->offset, AC2,(char *)"load lhs variable", lhs->child[0]->attr.name);
+                                            emitRO((char *)"DIV", AC, AC1, AC, (char *)"op /=");
+                                            emitRM((char *)"ST", AC, lhs->offset, AC2, (char *)"Store variable", lhs->child[0]->attr.name);
+					    break;
+					case SUBASS:
+                                            emitRM((char *)"ST", AC, toffset, tempregister, (char *)"Push index");//ST  3,-7(1)    Push index
+                                            emitComment((char *)"TOFF dec:", toffset);
+                                            codegenExpression(currnode->child[1]);
+                                            emitComment((char *)"TOFF inc:", toffset);
+                                            emitRM((char *)"LD", AC1, toffset, tempregister, (char *)"Pop index");
+                                            emitRM((char *)"LDA", AC2, lhs->child[0]->offset, tempregister,
+                                                (char *)"Load address of base of array", lhs->child[0]->attr.name);
+                                            emitRO((char *)"SUB", AC2, AC2, AC1, (char *)"Compute offset of value");
+                                            emitRM((char *)"LD", AC1, lhs->offset, AC2,(char *)"load lhs variable", lhs->child[0]->attr.name);
+                                            emitRO((char *)"SUB", AC, AC1, AC, (char *)"op -=");
+                                            emitRM((char *)"ST", AC, lhs->offset, AC2, (char *)"Store variable", lhs->child[0]->attr.name);
+					    break;
+					
+					case ADDASS:
+					    emitRM((char *)"ST", AC, toffset, tempregister, (char *)"Push index");//ST  3,-7(1)    Push index
+					    emitComment((char *)"TOFF dec:", toffset);
+					    codegenExpression(currnode->child[1]);
+					    emitComment((char *)"TOFF inc:", toffset);
+					    emitRM((char *)"LD", AC1, toffset, tempregister, (char *)"Pop index");
+					    emitRM((char *)"LDA", AC2, lhs->child[0]->offset, tempregister,
+                                                (char *)"Load address of base of array", lhs->child[0]->attr.name);
+					    emitRO((char *)"SUB", AC2, AC2, AC1, (char *)"Compute offset of value");
+					    emitRM((char *)"LD", AC, lhs->offset, AC1,(char *)"load lhs variable", lhs->child[0]->attr.name);
+					    emitRO((char *)"ADD", AC, AC1, AC, (char *)"op +=");
+					    emitRM((char *)"ST", AC, lhs->offset, AC2, (char *)"Store variable", lhs->child[0]->attr.name);
+							    //emitRO((char *)"SUB", AC, AC1, AC, (char *)"op -=");
+					  //   codegenExpression(lhs->child[0]);
+					    //codegenExpression(lhs->child[0]->child[0]);
+					   //emitRM((char *)"LDC", AC, lhs->child[0]->offset,  tempregister,
+                                           //	 (char *)"load integer constant");
+                                           //emitRO((char *)"ADD", AC, AC1, AC, (char *)"op +=");
+                                           //emitRM((char *)"ST", AC, lhs->offset, offReg, (char *)"Store variable", lhs->attr.name);
+                                        break;
+					
+					default:
+						break;
+
+				}
+			}else{
+				int offReg = offsetRegister(lhs->varKind);
+				if(currnode->child[1]){codegenExpression(currnode->child[1]);}
+				switch(currnode->attr.op){
+					case '=':
+					   emitRM((char *)"ST", AC, lhs->offset, offReg, (char *)"Store variable", lhs->attr.name);
+					break;
+
+					case DEC:
+					   emitRM((char *)"LD", AC, lhs->offset, offReg,
+                                           (char *)"load lhs variable", lhs->attr.name);
+					   emitRM((char *)"LDA", AC, -1, AC, (char *)"decrement value of", lhs->attr.name);
+					   emitRM((char *)"ST", AC, lhs->offset, offReg, (char *)"Store variable", lhs->attr.name);					   
+					break;
+						
+					case INC:
+					    emitRM((char *)"LD", AC, lhs->offset, offReg,
+                                           (char *)"load lhs variable", lhs->attr.name);
+                                           emitRM((char *)"LDA", AC, 1, AC, (char *)"increment value of", lhs->attr.name);
+                                           emitRM((char *)"ST", AC, lhs->offset, offReg, (char *)"Store variable", lhs->attr.name);
+                                        break;
+
+					case 287: //ADDASS
+					   emitRM((char *)"LD", AC1, lhs->offset, offReg,
+                                           (char *)"load lhs variable", lhs->attr.name);
+                                	   emitRO((char *)"ADD", AC, AC1, AC, (char *)"op +=");
+                                	   emitRM((char *)"ST", AC, lhs->offset, offReg, (char *)"Store variable", lhs->attr.name);
+					break;
+					
+					case MULASS:
+					   
+					   emitRM((char *)"LD", AC1, lhs->offset, offReg,
+                                           (char *)"load lhs variable", lhs->attr.name);
+                                           emitRO((char *)"MUL", AC, AC1, AC, (char *)"op *=");
+                                           emitRM((char *)"ST", AC, lhs->offset, offReg, (char *)"Store variable", lhs->attr.name);
+					break; 
+
+					case DIVASS:
+					   //printf("除");
+					   emitRM((char *)"LD", AC1, lhs->offset, offReg,
+                                           (char *)"load lhs variable", lhs->attr.name);
+					   emitRO((char *)"DIV", AC, AC1, AC, (char *)"op /=");
+					   emitRM((char *)"ST", AC, lhs->offset, offReg, (char *)"Store variable", lhs->attr.name);
+					   
+					break;
+					case SUBASS:
+					   emitRM((char *)"LD", AC1, lhs->offset, offReg,
+                                           (char *)"load lhs variable", lhs->attr.name);
+                                           emitRO((char *)"SUB", AC, AC1, AC, (char *)"op -=");
+                                           emitRM((char *)"ST", AC, lhs->offset, offReg, (char *)"Store variable", lhs->attr.name);
+					break;
+					}
+				
+				
+			}
+		}
+		break;
+		
+		case OpK:
+			//printf("op");
+			if (currnode->child[0]){
+			printf("op");
+			codegenExpression(currnode->child[0]);
+			}
+			commentLineNum(currnode);////
+		  if(currnode->child[1]){//双元操作符
+			 // codegenExpression(currnode->child[0]);
+			  emitRM((char *)"ST", AC, toffset, FP, (char *)"Push left side");
+			  toffset--;
+			  emitComment((char *)"TOFF dec:", toffset);
+			  codegenExpression(currnode->child[1]);
+			  toffset++;
+			  emitComment((char *)"TOFF inc:", toffset);
+			  emitRM((char *)"LD", AC1, toffset, FP, (char *)"Pop left into ac1");
+			  if (currnode->isArray) {
+               			emitRO((char *)"SUB", AC, AC1, AC, (char *)"compute location from index");
+               			emitRM((char *)"LD", AC, GP, AC, (char *)"Load array element");
+            		  }			  
+
+			  switch(currnode->attr.op){
+			    case '%':
+               			emitRO((char *)"MOD", AC, AC1, AC, (char*)"Op %");
+               			break;
+			    case '/':
+               			emitRO((char *)"DIV", AC, AC1, AC, (char*)"Op /");
+               			break;
+
+			    case '-':
+                                emitRO((char *)"SUB", AC, AC1, AC, (char *)"Op -");
+                                break;
+			    case '+':
+				emitRO((char *)"ADD", AC, AC1, AC, (char *)"Op +");
+				break;
+			    case '[':
+				emitRO((char *)"SUB", AC, AC1, AC, (char *)"compute location from index");
+				emitRM((char *)"LD", AC, currnode->offset, 3, (char *)"Load array element");
+				break;
+			    case MIN:
+               			emitRO((char *)"SWP", AC, AC1, AC, (char*)"Op :<:");
+               			break;
+	
+            		    case MAX:
+               			emitRO((char *)"SWP", AC1, AC, AC, (char*)"Op :>:");
+               			break;
+			    case AND:
+               			emitRO((char *)"AND", AC, AC1, AC, (char*)"Op AND");
+               			break;
+			    case '*':
+               			emitRO((char *)"MUL", AC, AC1, AC, (char*)"Op *");
+               			break;
+            		    case OR:
+               			emitRO((char *)"OR", AC, AC1, AC, (char*)"Op OR");
+               			break;
+			    case '<':
+               			emitRO((char *)"TLT", AC, AC1, AC, (char*)"Op <");
+               			break;
+
+            		    case '>':
+               			emitRO((char *)"TGT", AC, AC1, AC, (char*)"Op >");
+               			break;
+			    case NEQ:
+               			emitRO((char *)"TNE", AC, AC1, AC, (char*)"Op !=");
+               			break;
+
+            		    case EQ:
+               			emitRO((char *)"TEQ", AC, AC1, AC, (char*)"Op ==");
+               			break;
+
+            		    case GEQ:
+               			emitRO((char *)"TGE", AC, AC1, AC, (char*)"Op >=");
+               			break;
+
+            		    case LEQ:
+               			emitRO((char *)"TLE", AC, AC1, AC, (char*)"Op <=");
+               			break;
+ 			   //case ADDASS:         ADDASS是属于AssignK这个case里面的
+			   //	emitRO((char *)"ADD", AC, AC1, AC, (char *)"Op +");
+			  }
+		  } else {// 单元操作符
+			  //codegenExpression(currnode->child[0]);
+			  switch(currnode->attr.op){
+			    case CHSIGN:
+               			emitRO((char *)"NEG", AC, AC, AC, (char *)"Op unary -");
+               			break;
+			    case NOT:
+               			emitRM((char *)"LDC", AC1, 1, 6, (char *)"Load 1");
+               			emitRO((char *)"XOR", AC, AC, AC1, (char *)"Op XOR to get logical not");
+               			break;
+			    case '?':
+               			emitRO((char *)"RND", AC, AC, 6, (char *)"Op ?");
+               			break;
+			    case SIZEOF:
+               			emitRM((char *)"LD", AC, 1, AC, (char *)"Load array size");
+               			break;
+			    //case '-':
+				//emitRO((char *)"NEG", AC, AC, AC, (char *)"Op unary -");
+				//break;
+			  }
+			}
+			break;
+		case ConstantK:
+//			printf("数");
+/*			if (currnode->type == Char) {
+            			if (currnode->isArray) {
+               				emitStrLit(currnode->offset, currnode->attr.string);
+               				emitRM((char *)"LDA", AC, currnode->offset, GP, (char *)"Load address of char array");
+            			} else {
+               				emitRM((char *)"LDC", AC, int(currnode->attr.cvalue), AC3, (char *)"Load char constant");
+            			}
+         		} else if (currnode->type == Boolean) {
+         				   emitRM((char *)"LDC", AC, currnode->attr.value, AC3, (char *)"Load Boolean constant");
+         		} else if (currnode->type == Integer) {
+            			emitRM((char *)"LDC", AC, currnode->attr.value, AC3, (char *)"Load integer constant");
+         		}
+*/
+			switch(currnode->type){
+			  case Integer:
+			    //emitComment((char *)currnode->attr.value);
+			    emitRM((char *)"LDC", AC, atoi(currnode->attr.name), 6, (char *)"Load integer constant");
+			    break;
+			  case Boolean:
+			if(strcmp(currnode->attr.name, "true") == 0) emitRM((char *)"LDC", AC, 1 , 6, (char *)"Load Boolean constant");
+			if(strcmp(currnode->attr.name,"false") == 0) emitRM((char *)"LDC", AC, 0 , 6, (char *)"Load Boolean constant");
+			    break;
+			  case Char:
+			    if(currnode->isArray){
+				emitStrLit(currnode->offset, currnode->attr.string);
+				emitRM((char *)"LDA", AC, currnode->offset, 0, (char *)"Load address of char array");
+			    }else{
+				emitRM((char *)"LDC", AC, currnode->attr.cvalue, 6, (char *)"Load char constant");
+			    }
+			    break;
+			  default:
+			    break;
+				
+			}
+			break;
+		
+		case IdK:
+			//printf("身份");
+			if(currnode->isArray && !currnode->child[0]){
+			//printf("时");
+			  emitRM((char *)"LDA", AC, currnode->offset, offsetRegister(currnode->varKind),
+				 (char *)"Load address of base of array", currnode->attr.name);
+			}else if(currnode->child[0]){
+				
+			}else{
+			  emitRM((char *)"LD", AC, currnode->offset, offsetRegister(currnode->varKind),
+                                 (char *)"Load variable", currnode->attr.name);
+			}
+			break;
+		case CallK:{
+			int tempoffset;
+			int callLoc;
+			tempoffset = toffset;
+			paramnum = 1;
+			//callLoc = funcNode->offset;
+			emitComment((char *)"CALL",currnode->attr.name);
+			TreeNode *funcNode = (TreeNode *)globals->lookup(currnode->attr.name);
+			callLoc = funcNode->offset;
+			emitRM((char *)"ST", FP, toffset, FP,
+                                (char *)"Store fp in ghost frame for", currnode->attr.name);
+			emitComment((char *)"TOFF dec:", --toffset);
+			emitComment((char *)"TOFF dec:", --toffset);
+			codegenGeneral(currnode->child[0]);
+			emitComment((char *)"Param end", currnode->attr.name);
+			emitRM((char *)"LDA", FP, tempoffset, FP, (char *)"Ghost frame becomes new active frame");
+			emitRM((char *)"LDA", AC, FP, PC, (char *)"Return address in ac");
+			//emitGoto(callLoc, PC, (char *)"CALL", (char *)currnode->attr.name);
+			 emitRMAbs((char *)"JMP3333", PC, callLoc, (char *)"CALL", currnode->attr.name);
+			emitRM((char *)"LDA", AC, currnode->offset, RT, (char *)"Save the result in ac");
+			emitComment((char *)"Call end",currnode->attr.name);
+			toffset = tempoffset;
+			emitComment((char *)"TOFF set:", toffset);
+			}
+			break;
+		default:
+			break;
+	}
+}
+
+void codegenDecl(TreeNode *currnode){
+	commentLineNum(currnode);
+	int tempint=toffset;
+	switch(currnode->kind.decl){
+	   case VarK:
+		//printf("一");
+		if(currnode->isArray)
+		{	 //emitRM((char *)"LDC", AC, currnode->, AC, (char *)"size of rhs");
+                               // emitRM((char *)"LD", AC, , AC1, (char *)"size of lhs");
+		  
+		   switch (currnode->varKind) {
+			case Local:
+				emitRM((char *)"LDC", AC, currnode->size-1, 6, (char *)"load size of array", currnode->attr.name);
+				emitRM((char *)"ST", AC, currnode->offset+1, offsetRegister(currnode->varKind),
+				(char *)"save size of array", currnode->attr.name);
+			break;
+
+			case LocalStatic:
+			case Parameter:
+			case Global:
+			// do nothing here
+			break;
+			
+			case None:
+			break;//可去除
+			// Error Condition
+			}
+			// ARRAY VALUE initialization
+			if (currnode->child[0]) {
+				codegenExpression(currnode->child[0]);
+				emitRM((char *)"LDA", AC1, currnode->offset, offsetRegister(currnode->varKind), (char *)"address of lhs");
+				emitRM((char *)"LD", AC2, 1, AC, (char *)"size of rhs");
+				emitRM((char *)"LD", AC3, 1, AC1, (char *)"size of lhs");
+				emitRO((char *)"SWP", AC2, AC3, 6, (char *)"pick smallest size");
+				emitRO((char *)"MOV", AC1, AC, AC2, (char *)"array op =");
+			}			
+		}else{  
+			//emitRM((char *)"LD", AC1, currnode->offset, FP,
+                        //      (char *)"load lhs variable", currnode->attr.name);
+    			//emitRM((char *)"LDA", AC, currnode->offset, FP, (char *)"decrement", currnode->attr.name);
+			//emitRM((char *)"ST", AC1, currnode->offset, FP, (char *)"Store variable", currnode->attr.name);
+			if (currnode->child[0]) {
+				switch (currnode->varKind) {
+					case Local:
+					// compute rhs -> AC;
+					codegenExpression(currnode->child[0]);
+					// save it
+					emitRM((char *)"ST", AC, currnode->offset, FP, (char *)"Store variable", currnode->attr.name);
+					case LocalStatic:
+					case Parameter:
+					case Global:
+					// do nothing here
+					break;
+		
+					case None:
+					break;
+					///Error condition!!
+				}
+			}
+//			if (currnode->child[0]) {
+//                                codegenExpression(currnode->child[0]);
+                          /*      emitRM((char *)"LDA", AC1, currnode->offset, offsetRegister(currnode->varKind), (char *)"address of lhs");
+                                emitRM((char *)"LD", AC2, 1, AC, (char *)"size of rhs");
+                                emitRM((char *)"LD", AC3, 1, AC1, (char *)"size of lhs");
+                                emitRO((char *)"SWP", AC2, AC3, 6, (char *)"pick smallest size");
+                                emitRO((char *)"MOV", AC1, AC, AC2, (char *)"array op =");*/
+                    //    }
+                }		   
+		break;
+
+	   case FuncK:
+		if(currnode->lineno==-1){
+		   codegenLibraryFun(currnode);                //////////////////////////////////
+		}else{
+		   codegenFun(currnode);                       //////////////////////////////////
+		}
+		break;
+	   
+	   case ParamK:
+		//int tempint=toffset;
+		 //if (currnode->nodekind == ExpK && currnode->kind.exp == ConstantK) {
+		switch(currnode->type){                                                                                                                     
+			case Integer:
+				tempint=atoi(currnode->attr.name);	
+				//emitRM((char *)"LDC", AC, tempint,6,(char *)"Load Integer constant");
+			break;
+
+			case Char:
+				if(currnode->isArray){
+					tempint=currnode->offset;
+				}else{tempint=currnode->attr.cvalue;}
+				//emitRM((char *)"LDC", AC, tempint,6,(char *)"Load Char constant");
+			break;
+	
+			case Boolean:
+				 if(strcmp(currnode->attr.name, "true") == 0) tempint=1;
+				 if(strcmp(currnode->attr.name, "false") == 0) tempint=0;
+				//emitRM((char *)"LDC", AC, tempint,6,(char *)"Load Boolean constant");
+			break;
+		}
+		//}//else{
+			//codegenExpression(currnode);
+		//}
+		emitComment((char *)"Param",paramnum);
+                paramnum+=1;
+		//if (currnode->nodekind == ExpK && currnode->kind.exp == ConstantK) {
+		switch(currnode->type){  
+                        case Integer:
+                                emitRM((char *)"LDC", AC, tempint,6,(char *)"Load integer constant");
+                        break;
+
+                        case Char:
+                            if (currnode->isArray) {
+				  emitStrLit(currnode->offset, currnode->attr.string);
+            			  emitRM((char *)"LDA", AC, currnode->offset, GP, 
+				(char *)"Load address of char array");
+            		    } else {
+				emitRM((char *)"LDC", AC, tempint,6,(char *)"Load char constant");
+			    }
+                        break;
+
+                        case Boolean:
+                                emitRM((char *)"LDC", AC, tempint,6,(char *)"Load Boolean constant");
+                        break;
+			default:                                                                                                                                       
+			break;
+                }
+		//}else{
+                //  if (currnode->nodekind != ExpK || currnode->kind.exp != ConstantK)      codegenExpression(currnode);
+                //}
+		//emitComment((char *)"Param",paramnum);
+		//paramnum+=1;
+		//emitRM((char *)"LDC额", AC, tempint,6,(char *)"Load integer constant");
+		emitRM((char *)"ST", AC, toffset, FP, (char *)"Push parameter");
+		emitComment((char *)"TOFF dec:", --toffset);
+        	//emitComment((char *)"Param end",currnode->attr.name);
+		break;
+	   default:
+		break;
+	}
+}
+
+void codegenFun(TreeNode *currnode){
+	emitComment((char *)"");
+	emitComment((char *)"** ** ** ** ** ** ** ** ** ** ** **");
+	emitComment((char *)"FUNCTION",currnode->attr.name);
+	toffset = currnode->size;
+	emitComment((char *)"TOFF set:", toffset);     //////////////////////////////////////////
+	currnode->offset = emitSkip(0);
+	emitRM((char *)"ST", AC, RETURNOFFSET, FP, (char *)"Store return address");
+	codegenGeneral(currnode->child[1]);
+	emitComment((char *)"Add standard closing in case there is no return statement");
+	emitRM((char *)"LDC", RT, 0,6,(char *)"Set return value to 0");
+	emitRM((char *)"LD", AC, RETURNOFFSET, FP, (char *)"Load return address");
+	emitRM((char *)"LD", FP, OFPOFF, FP, (char *)"Adjust fp");
+	emitGoto(0,AC,(char *)"Return");
+	emitComment((char *)"END FUNCTION", currnode->attr.name);
+}
+
+
+void codegenLibraryFun(TreeNode *currnode){
+	emitComment((char *)"");
+	emitComment((char *)"** ** ** ** ** ** ** ** ** ** ** **");
+	emitComment((char *)"FUNCTION",currnode->attr.name);
+	currnode->offset = emitSkip(0);
+	emitRM((char *)"ST", AC, RETURNOFFSET, FP, (char *)"Store return address");
+	if(strcmp(currnode->attr.name, (char *)"input")==0){
+	   emitRO((char *)"IN", RT, RT, RT,(char *)"Grab int input");
+	}else if(strcmp(currnode->attr.name, (char *)"inputb")==0){
+	   emitRO((char *)"INB", RT, RT, RT,(char *)"Grab bool input");
+	}else if(strcmp(currnode->attr.name, (char *)"inputc")==0){
+	   emitRO((char *)"INC", RT, RT, RT,(char *)"Grab char input");
+	}else if(strcmp(currnode->attr.name, (char *)"output")==0){
+           emitRM((char *)"LD", AC, -2, FP,(char *)"Load parameter");
+	   emitRO((char *)"OUT", AC, AC, AC,(char *)"Output integer");
+	}else if(strcmp(currnode->attr.name, (char *)"outputb")==0){
+           emitRM((char *)"LD", AC, -2, FP,(char *)"Load parameter");
+           emitRO((char *)"OUTB", AC, AC, AC,(char *)"Output bool");
+        }else if(strcmp(currnode->attr.name, (char *)"outputc")==0){
+           emitRM((char *)"LD", AC, -2, FP,(char *)"Load parameter");
+           emitRO((char *)"OUTC", AC, AC, AC,(char *)"Output char");
+        }else if(strcmp(currnode->attr.name, (char *)"outnl")==0){
+           //emitRM((char *)"LD", AC, -2, FP,(char *)"Load parameter");
+           emitRO((char *)"OUTNL", AC, AC, AC,(char *)"Output a newline");
+        }
+	
+	emitRM((char *)"LD", AC, RETURNOFFSET, FP, (char *)"Load return address");
+	emitRM((char *)"LD", FP, OFPOFF, FP, (char *)"Adjust fp");
+	emitGoto(0, AC, (char *)"Return");
+	emitComment((char *)"END FUNCTION",currnode->attr.name);
+}
+/*
+void initGlobalArraySizes(){
+	emitComment((char *)"INIT GLOBALS AND STATICS");
+	globals->applyToAllGlobal(initAGlobalSymbol);
+	emitComment((char *)"END INIT GLOBALS AND STATICS"); 
+}
+*/
+void initAGlobalSymbol(std::string sym, void *ptr){
+	
+	TreeNode *currnode;
+	currnode = (TreeNode *)ptr;
+	
+	if(currnode->lineno != -1){
+	   if(currnode->isArray){
+		 emitRM((char *)"LDC", AC, currnode->size-1,6,
+			(char *)"load size of array",currnode->attr.name);
+		 emitRM((char *)"ST", AC, currnode->offset+1, GP,
+			(char *)"save size of array", currnode->attr.name);
+	}
+	//emitRM((char *)"LDC", AC, 0, AC3, (char *)"Load integer constant");
+        //emitRM((char *)"ST", AC, 0,GP,(char *)"Store variable",currnode->child[1]->attr.name);
+  	//	emitComment((char *)currnode->child[0]);
+	   if(currnode->kind.decl == VarK &&
+	     (currnode->varKind == Global || currnode->varKind == LocalStatic)){
+	     if(currnode->child[0]){
+		codegenExpression(currnode->child[0]);
+		 emitRM((char *)"ST", AC, currnode->offset,GP,
+			(char *)"Store variable", currnode->attr.name);
+	     }
+	   }
+	}
+}
+
+void initGlobalArraySizes(){
+        emitComment((char *)"INIT GLOBALS AND STATICS");
+        globals->applyToAllGlobal(initAGlobalSymbol);
+        emitComment((char *)"END INIT GLOBALS AND STATICS");
+}
+
+void codegenInit(int initJump, int globalOffset){
+	backPatchAJumpToHere(initJump,(char *)"Jump to init [backpatch]");
+	emitComment((char *)"INIT");
+	emitRM((char *)"LDA", FP, globalOffset, GP, (char *)"set first frame at end of globals");
+	emitRM((char *)"ST", FP, 0, FP, (char *)"store old fp (point to self)");
+	initGlobalArraySizes();
+	emitRM((char *)"LDA",AC, 1, PC, (char *)"Return address in ac");
+	TreeNode *funcNode = (TreeNode *)(globals->lookup((char *)"main"));
+	if(funcNode){
+		emitGotoAbs(funcNode->offset,(char *)"Jump to main");
+	}else{
+		printf("ERROR(LINKER): Procedure main is not defined.\n");
+	}
+	emitRO((char *)"HALT", 0, 0, 0,(char *)"DONE!");
+	emitComment((char *)"END INIT");
+}
+
+
+void codegenGeneral(TreeNode *currnode)
+{ while (currnode) {
+	//if(currnode->nodekind==StmtK) printf("语句");
+        //if(currnode->nodekind==ExpK) printf("表达式");
+	//if(currnode->kind.decl==VarK) printf("变");
+	//if(currnode->nodekind==DeclK) printf("量");
+	//if(currnode->kind.decl==VarK) printf("变");
+	//if(currnode->kind.decl==VarK) printf("变");
+	//if(currnode->kind.decl==FuncK) printf("方程");
+	//if(currnode->kind.exp==OpK) printf("操");
+	//if(currnode->kind.exp==AssignK) printf("等");
+	switch (currnode->nodekind) {	
+	   case StmtK:
+		//printf("S");
+		codegenStatement(currnode);
+		break;
+
+	   case ExpK:
+		
+		emitComment((char *)"EXPRESSION");
+		//if(currnode->kind.exp==OpK) printf("操");
+        	//if(currnode->kind.exp==AssignK) printf("等");
+		//if(currnode->kind.exp==ConstantK) printf("常");
+		codegenExpression(currnode);
+		break;
+
+	   case DeclK:
+		 //if(currnode->kind.exp==VarK) printf("量");
+		codegenDecl(currnode);
+		break;
+	}
+	currnode = currnode->sibling;
+	}
+}
+
+
+void codegen(FILE *codeIn, char *srcFile, TreeNode *syntaxTree,
+        SymbolTable *globalsIn, int globalOffset, bool linenumFlagIn){
+  int initJump;
+  code = codeIn;
+  globals = globalsIn;
+  linenumFlag = linenumFlagIn;
+  breakloc = 0;
+  
+  initJump = emitSkip(1);
+  codegenHeader(srcFile);
+  codegenGeneral(syntaxTree);
+  codegenInit(initJump, globalOffset);
+}
+
+

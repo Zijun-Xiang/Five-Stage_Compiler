@@ -1,0 +1,578 @@
+#DRBC ./bc w01.bC w01.tm
+#DRBCRUN test
+int board1[4],board2[4],board3[4],board4[4];
+char direction;
+
+foot(int a, ac ,bc; char b){
+bool test;
+int ml;
+test = false;
+ml = 10;
+for i = 1 to 4 by 2 do{
+	ml += i;
+}
+ml--;
+ml++;
+ml += (10+10)/2;
+ml /= 2;
+ -2;
+ml -= (10+10)/2;
+ml % 2;
+if ml == 1 and ml != 0 then{
+	ml *= 2;
+}
+ml :>: 6;
+ml :<: 9;
+if ml < 3 and ml >1 then{
+	ml++;
+}
+if ml <= 3 and ml >= 1 then{
+        ml++;
+}
+for i = 1 to 4 by 2 do
+	if true then{}
+	
+while false do
+        if true then{}	
+if not true then{}
+else 
+        if true then{}	
+return;;	
+foot(1,2,3,'b');
+}
+initboard(){
+static int xl;
+int i:0;
+int random;
+xl=5;
+random=0;
+	if i == 0 then {
+		for j = 0 to 4 do{
+			random =? 8;
+			board1[j] = 2;
+			for k = 0 to random do{
+				board1[j] *= 2;
+			}
+			random = 0;
+		}
+			i++;	
+	}
+  	if i == 1 then {
+                for j = 0 to 4 do{
+                        random =? 8;
+                        board2[j] = 2;
+                        for k = 0 to random do{
+                                board2[j] *= 2;
+                        }
+                        random = 0;
+                }
+                        i++;
+        }
+	if i == 2 then {
+                for j = 0 to 4 do{
+                        random =? 8;
+                        board3[j] = 2;
+                        for k = 0 to random do{
+                                board3[j] *= 2;
+                        }
+                        random = 0;
+                }
+                        i++;
+        }
+	if i == 3 then {
+                for j = 0 to 4 do{
+                        random =? 8;
+                        board4[j] = 2;
+                        for k = 0 to random do{
+                                board4[j] *= 2;
+                        }
+                        random = 0;
+                }
+                        i++;
+        }
+}
+
+
+printstr(char m[]){
+	for j = 0 to *m do
+		outputc(m[j]);
+}
+
+
+
+printboard(){
+for j = 0 to 4 do{
+	output(board1[j]);
+	outputc(' ');
+	}
+	outnl();     
+
+        for j = 0 to 4 do{
+                output(board2[j]);
+                outputc(' ');
+                }
+                outnl();
+
+        for j = 0 to 4 do{
+                output(board3[j]);
+                outputc(' ');
+                }
+                outnl();
+
+        for j = 0 to 4 do{
+                output(board4[j]);
+                outputc(' ');
+                }
+                outnl();
+}
+
+timenumber(){
+int row,column;
+row = input();
+column = input();
+	if row == 0 then{
+		board1[column]=2*board1[column];	
+	}
+	if row == 1 then{
+                board2[column]=2*board2[column];
+        }
+	if row == 2 then{
+                board3[column]=2*board3[column];
+        }
+	if row == 3 then{
+                board4[column]=2*board4[column];
+        }
+}
+
+dnumber(){
+int row,column;
+row = input();
+column = input();
+        if row == 0 then{
+                board1[column]=board1[column]/2;
+        }
+        if row == 1 then{
+                board2[column]=board2[column]/2;
+        }
+        if row == 2 then{
+                board3[column]=board3[column]/2;
+        }
+        if row == 3 then{
+                board4[column]=board4[column]/2;
+        }
+}
+
+Move(char dir){
+int temp1[4],temp2[4],temp3[4],temp4[4];
+if dir == 'a' then {
+	for i = 0 to 3 do{
+		if board1[i]==board1[i+1] then{
+                        board1[i]+=board1[i+1];
+                                for j=i+1 to 3 do{
+                                	board1[j]=board1[j+1];
+                                }
+                        board1[3]=0;
+                        break;
+                }
+		else{
+		if  board1[i] == 0 then{
+                        for j=i to 3 do {
+                        	board1[j]=board1[j+1];
+                        }
+                        board1[3]=0;
+                        break;
+                }//if{
+		}//else{
+	}
+	for i = 0 to 3 do{
+                if board2[i]==board2[i+1] then{
+                        board2[i]+=board2[i+1];
+                                for j=i+1 to 3 do{
+                                        board2[j]=board2[j+1];
+                                }
+                        board2[3]=0;
+                        break;
+                }
+                else{
+                if  board2[i] == 0 then{
+                        for j=i to 3 do {
+                                board2[j]=board2[j+1];
+                        }
+                        board2[3]=0;
+                        break;
+                }//if{
+                }//else{
+        }
+	for i = 0 to 3 do{
+                if board3[i]==board3[i+1] then{
+                        board3[i]+=board3[i+1];
+                                for j=i+1 to 3 do{
+                                        board3[j]=board3[j+1];
+                                }
+                        board3[3]=0;
+                        break;
+                }
+                else{
+                if  board3[i] == 0 then{
+                        for j=i to 3 do {
+                                board3[j]=board3[j+1];
+                        }
+                        board3[3]=0;
+                        break;
+                }//if{
+                }//else{
+        }
+	for i = 0 to 3 do{
+                if board4[i]==board4[i+1] then{
+                        board4[i]+=board4[i+1];
+                                for j=i+1 to 3 do{
+                                        board4[j]=board4[j+1];
+                                }
+                        board4[3]=0;
+                        break;
+                }
+                else{
+                if  board4[i] == 0 then{
+                        for j=i to 3 do {
+                                board4[j]=board4[j+1];
+                        }
+                        board4[3]=0;
+                        break;
+                }//if{
+                }//else{
+        }
+
+}
+
+if dir == 'd' then {
+	for i = 0 to 3 do{
+                if board1[3-i]==board1[3-i-1] then{
+                        board1[3-i]+=board1[3-i-1];
+                                for j=i+1 to 3 do{
+                                        board1[3-j]=board1[3-j-1];
+                                }
+                        board1[0]=0;
+                        break;
+                }
+                else{
+                if  board1[3-i] == 0 then{
+                        for j=i to 3 do {
+                                board1[3-j]=board1[3-j-1];
+                        }
+                        board1[0]=0;
+                        break;
+                }//if{
+                }//else{
+        }
+	for i = 0 to 3 do{
+                if board2[3-i]==board2[3-i-1] then{
+                        board2[3-i]+=board2[3-i-1];
+                                for j=i+1 to 3 do{
+                                        board2[3-j]=board2[3-j-1];
+                                }
+                        board2[0]=0;
+                        break;
+                }
+                else{
+                if  board2[3-i] == 0 then{
+                        for j=i to 3 do {
+                                board2[3-j]=board2[3-j-1];
+                        }
+                        board2[0]=0;
+                        break;
+                }//if{
+                }//else{
+        }
+	for i = 0 to 3 do{
+                if board3[3-i]==board3[3-i-1] then{
+                        board3[3-i]+=board3[3-i-1];
+                                for j=i+1 to 3 do{
+                                        board3[3-j]=board3[3-j-1];
+                                }
+                        board3[0]=0;
+                        break;
+                }
+                else{
+                if  board3[3-i] == 0 then{
+                        for j=i to 3 do {
+                                board3[3-j]=board3[3-j-1];
+                        }
+                        board3[0]=0;
+                        break;
+                }//if{
+                }//else{
+        }
+	for i = 0 to 3 do{
+                if board4[3-i]==board4[3-i-1] then{
+                        board4[3-i]+=board4[3-i-1];
+                                for j=i+1 to 3 do{
+                                        board4[3-j]=board4[3-j-1];
+                                }
+                        board4[0]=0;
+                        break;
+                }
+                else{
+                if  board4[3-i] == 0 then{
+                        for j=i to 3 do {
+                                board4[3-j]=board4[3-j-1];
+                        }
+                        board4[0]=0;
+                        break;
+                }//if{
+                }//else{
+        }
+}
+
+if dir == 'w' then {
+temp1[0]=board4[0];
+temp1[1]=board3[0];
+temp1[2]=board2[0];
+temp1[3]=board1[0];
+temp2[0]=board4[1];
+temp2[1]=board3[1];
+temp2[2]=board2[1];
+temp2[3]=board1[1];
+temp3[0]=board4[2];
+temp3[1]=board3[2];
+temp3[2]=board2[2];
+temp3[3]=board1[2];
+temp4[0]=board4[3];
+temp4[1]=board3[3];
+temp4[2]=board2[3];
+temp4[3]=board1[3];
+	for i = 0 to 3 do{
+                if temp1[3-i]==temp1[3-i-1] then{
+                        temp1[3-i]+=temp1[3-i-1];
+                                for j=i+1 to 3 do{
+                                        temp1[3-j]=temp1[3-j-1];
+                                }
+                        temp1[0]=0;
+                        break;
+                }
+                else{
+                if  temp1[3-i] == 0 then{
+                        for j=i to 3 do {
+                                temp1[3-j]=temp1[3-j-1];
+                        }
+                        temp1[0]=0;
+                        break;
+                }//if{
+                }//else{
+        }
+        for i = 0 to 3 do{
+                if temp2[3-i]==temp2[3-i-1] then{
+                        temp2[3-i]+=temp2[3-i-1];
+                                for j=i+1 to 3 do{
+                                        temp2[3-j]=temp2[3-j-1];
+                                }
+                        temp2[0]=0;
+                        break;
+                }
+                else{
+                if  temp2[3-i] == 0 then{
+                        for j=i to 3 do {
+                                temp2[3-j]=temp2[3-j-1];
+                        }
+                        temp2[0]=0;
+                        break;
+                }//if{
+                }//else{
+        }
+	for i = 0 to 3 do{
+                if temp3[3-i]==temp3[3-i-1] then{
+                        temp3[3-i]+=temp3[3-i-1];
+                                for j=i+1 to 3 do{
+                                        temp3[3-j]=temp3[3-j-1];
+                                }
+                        temp3[0]=0;
+                        break;
+                }
+                else{
+                if  temp3[3-i] == 0 then{
+                        for j=i to 3 do {
+                                temp3[3-j]=temp3[3-j-1];
+                        }
+                        temp3[0]=0;
+                        break;
+                }//if{
+                }//else{
+        }
+	for i = 0 to 3 do{
+                if temp4[3-i]==temp4[3-i-1] then{
+                        temp4[3-i]+=temp4[3-i-1];
+                                for j=i+1 to 3 do{
+                                        temp4[3-j]=temp4[3-j-1];
+                                }
+                        temp4[0]=0;
+                        break;
+                }
+                else{
+                if  temp4[3-i] == 0 then{
+                        for j=i to 3 do {
+                                temp4[3-j]=temp4[3-j-1];
+                        }
+                        temp4[0]=0;
+                        break;
+                }//if{
+                }//else{
+        }
+board4[0]=temp1[0];
+board3[0]=temp1[1];
+board2[0]=temp1[2];
+board1[0]=temp1[3];
+board4[1]=temp2[0];
+board3[1]=temp2[1];
+board2[1]=temp2[2];
+board1[1]=temp2[3];
+board4[2]=temp3[0];
+board3[2]=temp3[1];
+board2[2]=temp3[2];
+board1[2]=temp3[3];
+board4[3]=temp4[0];
+board3[3]=temp4[1];
+board2[3]=temp4[2];
+board1[3]=temp4[3];
+}
+
+if dir == 's' then {
+temp1[0]=board4[0];
+temp1[1]=board3[0];
+temp1[2]=board2[0];
+temp1[3]=board1[0];
+temp2[0]=board4[1];
+temp2[1]=board3[1];
+temp2[2]=board2[1];
+temp2[3]=board1[1];
+temp3[0]=board4[2];
+temp3[1]=board3[2];
+temp3[2]=board2[2];
+temp3[3]=board1[2];
+temp4[0]=board4[3];
+temp4[1]=board3[3];
+temp4[2]=board2[3];
+temp4[3]=board1[3];
+	for i = 0 to 3 do{
+                if board1[i]==board1[i+1] then{
+                        board1[i]+=board1[i+1];
+                                for j=i+1 to 3 do{
+                                        board1[j]=board1[j+1];
+                                }
+                        board1[3]=0;
+                        break;
+                }
+                else{
+                if  board1[i] == 0 then{
+                        for j=i to 3 do {
+                                board1[j]=board1[j+1];
+                        }
+                        board1[3]=0;
+                        break;
+                }//if{
+                }//else{
+        }
+        for i = 0 to 3 do{
+                if board2[i]==board2[i+1] then{
+                        board2[i]+=board2[i+1];
+                                for j=i+1 to 3 do{
+                                        board2[j]=board2[j+1];
+                                }
+                        board2[3]=0;
+                        break;
+                }
+                else{
+                if  board2[i] == 0 then{
+                        for j=i to 3 do {
+                                board2[j]=board2[j+1];
+                        }
+                        board2[3]=0;
+                        break;
+                }//if{
+                }//else{
+        }
+	for i = 0 to 3 do{
+                if board3[i]==board3[i+1] then{
+                        board3[i]+=board3[i+1];
+                                for j=i+1 to 3 do{
+                                        board3[j]=board3[j+1];
+                                }
+                        board3[3]=0;
+                        break;
+                }
+                else{
+                if  board3[i] == 0 then{
+                        for j=i to 3 do {
+                                board3[j]=board3[j+1];
+                        }
+                        board3[3]=0;
+                        break;
+                }//if{
+                }//else{
+        }
+        for i = 0 to 3 do{
+                if board4[i]==board4[i+1] then{
+                        board4[i]+=board4[i+1];
+                                for j=i+1 to 3 do{
+                                        board4[j]=board4[j+1];
+                                }
+                        board4[3]=0;
+                        break;
+                }
+                else{
+                if  board4[i] == 0 then{
+                        for j=i to 3 do {
+                                board4[j]=board4[j+1];
+		 }
+                        board4[3]=0;
+                        break;
+                }//if{
+                }//else{
+        }			
+board4[0]=temp1[0];
+board3[0]=temp1[1];
+board2[0]=temp1[2];
+board1[0]=temp1[3];
+board4[1]=temp2[0];
+board3[1]=temp2[1];
+board2[1]=temp2[2];
+board1[1]=temp2[3];
+board4[2]=temp3[0];
+board3[2]=temp3[1];
+board2[2]=temp3[2];
+board1[2]=temp3[3];
+board4[3]=temp4[0];
+board3[3]=temp4[1];
+board2[3]=temp4[2];
+board1[3]=temp4[3];
+}
+}
+
+bool CheckWinCondition(){
+	for i=0 to 4 do{
+		if board1[i]==2048 or board2[i]==2048 or board3[i]==2048 or board4[i]==2048 then{
+		//	printstr("CONGRATULATION!YOU WIN 2048 GAME");
+			return false;
+		} 
+	}
+	return true;
+}
+int main(){	
+	initboard();
+	printboard();
+	while CheckWinCondition() do{
+		direction = inputc();
+		if direction == 'q'then {
+			break;
+		}
+		if direction == 'o' then{
+			dnumber();
+		}
+		if direction == 'm' then{
+                        timenumber();
+                }
+		Move(direction);
+		printboard();
+	}
+	printstr("CONGRATULATION!YOU WIN 2048 GAME");
+	return 0;
+}
+

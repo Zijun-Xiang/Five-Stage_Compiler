@@ -1,0 +1,12 @@
+//a ( bool b; c);
+a ( ; );
+
+
+//int a ( bool b; c);
+//int a ( bool b; int,); // 19 & 20
+
+int main() {
+   a();
+   return 0;
+}
+

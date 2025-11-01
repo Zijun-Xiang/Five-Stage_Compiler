@@ -1,0 +1,101 @@
+#DRBC Assignment 1
+#DRBC Required Precompiler List
+
+//Global variable
+char dumb[7]:"me";
+
+int pointlesswapper(int num) output(num);
+
+int pointlessmath(int num1, num2) {
+   	output(num1*num2);
+}
+
+int morepointlessmath(int x, y;char z) {
+	x++;
+	x--;
+	x+=2;
+	x-=2;
+	x*=2;
+	x/=2;
+
+	x=x+2;
+	x=x-3;
+	x=x*4;
+	x=x/2;
+	x=x%2;
+	x=?10;  //random number generstion [0-9]
+	x=5:>:10; //Max op
+	x=5:<:10; //min op
+	x=-3; //Unary negation
+	return x;
+}
+
+mostuseless() {
+	return;
+}
+
+int rulenum48(int x[]){
+	int aa, bb[4];
+	aa = bb[2];
+}
+
+bool boolreturn() {
+   int y;
+   //DRBC Rule 19 & 20 (66, 72 & 73)
+   for m = 0 to 100 do { // 19a
+      //20d, 19b, 20b, 20c
+      for n = 0 to 100 by 2 do
+         if (true == true) then {y += 2;}
+         else while (true == false) do
+             if (false != false) then y = -100;
+   }
+   return true;
+}
+//Rules 19 & 20 (66,72 & 73)
+int main() {
+	int x:3 , y:4;
+	int a,b;
+	char z[1]:'q';
+	//LINE 13
+	static int i,j,k;
+
+	//pointer to the char'dumb'
+	char x;
+
+	//line 78
+	x=*dumb;;
+
+	pointlessmath(x,y);
+
+	morepointlessmath(x,y,z);
+
+	mostuseless();
+
+	boolreturn();
+
+	for m = 0 to 100 do {
+   		for n = 0 to 100 by 2 do {
+			if(true == true ) then {happy += 20;}
+//			if(true == true) then break;
+			else {
+	     			while (true == false) do
+	        			if(false != false) then {happy -= 100;}
+			}
+   		}
+	}
+
+//line 113-116
+	if(a<b) then { a++ ;}
+	if(a>b) then { b-- ;}
+	if(a>b or a==b) then { a*a ;}
+	if(a<=b and b>=a) then { a+=b ;}
+	if(not(true)) then { a=b ;}
+//line 52
+	while (a >= b) do {
+ 		a+=b;
+//line 64
+		break;
+	}
+//To use "not equals to": not(x=y)
+
+}

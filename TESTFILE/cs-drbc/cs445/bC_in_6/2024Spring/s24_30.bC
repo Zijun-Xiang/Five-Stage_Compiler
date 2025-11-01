@@ -1,0 +1,96 @@
+#DRBC My First Program
+#DRBC This Program Tests Every Production Rule
+
+int b[10], c;
+bool c;
+char hold[2]: "At";
+
+int MathOperation(int a, b; int x) {
+   a = a + b - c;
+   a = 10 + 2;
+   a = 10 * 2;
+   a = 10 * -2;
+   a = -10 / 2;
+   a = 10 % 2;
+   a = 10 - 2;
+   a = 2 / 10;
+   a = -2;
+
+   a += 10;
+   a -= 10;
+   a *= 10;
+   a /= 10;
+   a = b++;
+   a = b--;
+   a = ? 10;
+   return a;
+}
+
+char ReturnChar(char c) {
+   return c;
+}
+
+int ReturnZero() {
+   return 0;
+}
+
+Buffer() {
+}
+
+int ArrayTest(int a[]) {
+}
+int main() { // Production Rule 3
+   int x;
+   int x : 10;
+   static int y : 5;
+   char a;
+   int test[10];
+   test[1] = 10;
+
+   MathOperation(1, 2, 3);
+   ReturnChar('a');
+   ReturnZero();
+   Buffer();
+
+   point = *x;
+   ;
+
+   a = 10 :>: 5;
+   a = 10 :<: 5;
+
+   while(x == 0) do {
+      if(x >= 0) then {
+         x -= 1;
+      }
+      else {
+         x += 1;
+      }
+   }
+
+   for m = 0 to 100 do {
+      for n = 0 to 100 by 2 do
+         if (true == true) then {x += 20;}
+         else
+            while (true == false) do
+            if (false != false) then {x -= 100;}
+   }
+
+   if (x == z or  x+1 > z) then {
+      x = z;
+   }
+
+   if (x == z and  x+1 <  z) then {
+      x = z;
+   }
+
+   if (not x <= z) then {
+      x = z;
+   }
+
+
+   b[0] = 1;
+
+   return;
+   return x;
+   break;
+}

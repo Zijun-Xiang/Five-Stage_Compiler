@@ -1,0 +1,166 @@
+#DRBC First program
+#DRBC This program tests every production rule !
+
+
+// This program should be somewhat coherent
+
+int yourLife;
+
+int random(int x; bool rand);
+test(int x[], y[]);
+
+int healthCheck()
+{
+   return yourLife;
+}
+
+// Random number generator from given value
+int random(int x; bool rand)
+{
+   int result : 0;
+
+   if (rand != true) then {return result;}
+
+   result = ?x;
+
+   result = result % 20;
+
+   result++;
+
+   return result;
+}
+
+int main() // Productions from rule 3
+{
+   char name[10]:"Conner";
+   char test : '\;';
+   
+   int scoreboard[10];
+   int yourRoll, enemyRoll;
+   int enemyLife : 20;
+   int lives : 3;
+
+   int damage : 0;
+   int max : 0;
+   int min : 0;
+   int score : 0;
+   int d20 : 20;
+   int d6 : 6;
+   int goodRoll : 0;
+
+   bool alive : true;
+   bool win : false;
+
+   yourLife = 20;
+   r = random(r, true);
+
+   for k=0 to 1 do
+   {
+      static bool forever : true;
+
+      if (forever == false) then
+      {
+         yourRoll = 0;
+      }
+   }
+
+   if (yourRoll and enemyRoll != 0) then
+   {
+      yourRoll = 0;
+      enemyRoll = 0;
+   }
+
+   if (enemyLife and yourLife < 0) or (lives < 1) then {alive = false;}
+
+   while (yourLife > 0) do    // rule 18
+   {
+      if (lives < 0) then break;
+
+      // Roll from 1 to 20
+      yourRoll = random(d20, true);
+
+      // Enemy rolls from 1 to 20
+      enemyRoll = random(d20, true);
+
+      max = yourRoll :>: enemyRoll;
+      min = yourRoll :<: enemyRoll;
+
+      if (yourRoll = 20) then score * 4;
+      if (yourRoll = 1) then score / 2;
+
+      if (yourRoll != enemyRoll) then
+      {
+
+         if (yourRoll == max) then
+         {
+            damage = random(d6, true);
+            damage = damage * 2;
+
+            score += damage;
+
+            enemyLife = enemyLife - damage; 
+         }
+         else
+         {
+            damage = random(d6, true);
+            damage = damage * 2;
+            damage = -damage;
+
+            score += damage;
+            score--;
+
+            yourLife = yourLife + damage;
+         }
+      }
+      
+      if (0 >= enemyLife) then 
+      {  
+         score *= 2;
+         break;
+      }
+
+      if (yourLife <= 0) then
+      {
+         score /= 2;
+
+         for n=0 to lives by 1 do 
+         {
+            yourRoll = random(d20, true);
+
+            if (yourRoll < 15) then
+            {
+               lives-=1;
+            }
+            else
+               if (yourRoll > 14) then {yourLife = 10;}
+         }
+      }
+
+      for n=0 to 10 do
+      {
+         for m=0 to 10 by 2 do
+         {
+            if (score < 42) then {win = false;}
+            else while (win == true) do
+               if (win = true) then {score += 100;}
+         }
+      }
+   }   
+
+   for n=0 to 10 do
+      if (score < 100) then {score++;}
+
+   if (score < 42) then {win = false;}
+   else while (win == true) do
+      if (win = true) then {score += 100;}
+
+   healthCheck();
+   * yourRoll;
+
+   if (not win) then {return;}
+
+   score += lives(score++, yourRoll)>10;
+   scoreboard[0] = score;
+
+   return;
+}

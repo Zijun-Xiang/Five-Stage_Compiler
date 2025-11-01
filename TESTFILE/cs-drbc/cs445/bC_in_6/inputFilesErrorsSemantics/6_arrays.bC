@@ -1,0 +1,32 @@
+int main()
+{
+    int x:1;
+    char y:'b';
+    bool z:true;
+
+    int xx[1], aa[1];
+    char yy[1], bb[1];
+    bool zz[1], cc[1];
+
+    xx[0] = x;
+    yy[0] = y;
+    zz[0] = z;
+    aa[0] = x;
+    bb[0] = y;
+    cc[0] = z;
+
+    x[0];
+    y[0];
+    z[0];
+
+    xx[x];
+    xx[y];
+    xx[z];
+
+    xx[aa];
+    xx[bb];
+    xx[cc];
+
+  
+    return x;
+}

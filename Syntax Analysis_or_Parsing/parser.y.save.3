@@ -1,0 +1,397 @@
+ssh xian7710@cs-445.cs.uidaho.edu%{
+
+#include <cstdio>
+#include <iostream>
+#include <unistd.h>
+#include "scanType.h"
+#include "treeNodes.h"
+#include "treeUtils.h"
+using namespace std;
+
+extern "C" int yylex();
+extern "C" int yyparse();
+extern "C" FILE *yyin;
+
+void yyerror(const char *msg);
+
+void printToken(TokenData myData, string tokenName, int type = 0) {
+   cout << "Line: " << myData.linenum << " Type: " << tokenName;
+   if(type==0)
+     cout << " Token: " << myData.tokenstr;
+   if(type==1)
+     cout << " Token: " << myData.nvalue;
+   if(type==2)
+     cout << " Token: " << myData.cvalue;
+   cout << endl;
+}
+	TreeNode *syntaxTree;  //超级重要，定义treeNode类型的结构体指针，用来存储生成出来的语法树
+%}
+%union
+{
+   struct TokenData *tinfo ;     //for C language, you need to add struct befors the TokenData struct class
+  	TreeNode *tree;
+  	ExpType type;
+}
+
+%type <tree>  program
+%type <tree>  precomList
+%type <tree>  declList
+%type <tree>  decl       
+%type <tree>  varDecl
+%type <tree>  scopedVarDecl
+%type <tree>  varDeclList
+%type <tree>  varDeclInit
+%type <tree>  varDeclId
+%type <tree>  funDecl 
+%type <tree>  parms
+%type <tree>  parmList
+%type <tree>  parmTypeList
+%type <tree>  parmIdList
+%type <tree>  parmId
+%type <tree>  stmt
+%type <tree>  matched
+%type <tree>  iterRange
+%type <tree>  unmatched
+%type <tree>  expStmt
+%type <tree>  compoundStmt
+%type <tree>  localDecls
+%type <tree>  stmtList
+%type <tree>  returnStmt
+%type <tree>  breakStmt
+%type <tree>  exp
+%type <tree>  simpleExp
+%type <tree>  andExp
+%type <tree>  unaryRelExp
+%type <tree>  relExp
+%type <tree>  minmaxExp
+%type <tree>  sumExp
+%type <tree>  mulExp
+%type <tree>  unaryExp
+%type <tree>  factor 
+%type <tree>  mutable
+%type <tree>  immutable
+%type <tree>  call
+%type <tree>  args
+%type <tree>  argList
+%type <tree>  constant
+%type <type>  typeSpec  //
+%type <tinfo> relop
+%type <tinfo> sumop
+%type <tinfo> mulop
+%type <tinfo> unaryop
+%type <tinfo>  minmaxop
+%type <tinfo>  assignop
+%token   <tinfo>  ';' ',' '(' ')' '{' '}' '[' ']' '-' '+' '*' '/' '%' '=' '>' '<' ':' '?'
+%token   <tinfo>  WHILE
+%token   <tinfo>  MIN
+%token   <tinfo>  MAX
+%token   <tinfo>  FALSE
+%token   <tinfo>  FOR
+%token   <tinfo>  INT
+%token   <tinfo>  STRINGCONST
+%token   <tinfo>  NOT
+%token   <tinfo>  STATIC
+%token   <tinfo>  TO
+%token   <tinfo>  LEQ
+%token   <tinfo>  TRUE
+%token   <tinfo>  BOOLCONST
+%token   <tinfo>  OR
+%token   <tinfo>  RETURN 
+%token   <tinfo>  NEQ
+%token   <tinfo>  DO 
+%token   <tinfo>  AND
+%token   <tinfo>  PRECOMPILER
+%token   <tinfo>  NUMCONST
+%token   <tinfo>  IF
+%token   <tinfo>  BOOL
+%token   <tinfo>  BY
+%token   <tinfo>  BREAK
+%token   <tinfo>  REPEAT
+%token   <tinfo>  UNTIL
+%token   <tinfo>  ASSIGN
+%token   <tinfo>  MULASS
+%token   <tinfo>  INC
+%token   <tinfo>  ADDASS
+%token   <tinfo>  EQ
+%token   <tinfo>  GEQ
+%token   <tinfo>  SUBASS
+%token   <tinfo>  DIVASS
+%token   <tinfo>  ELSE
+%token   <tinfo>  DEC
+%token   <tinfo>  THEN
+%token   <tinfo>  CHAR
+%token   <tinfo>  ID
+%token   <tinfo>  CHARCONST
+%%
+program    : precomList declList                    { syntaxTree = $2;}
+           ;
+
+precomList : precomList PRECOMPILER                   {$$ = NULL; printf("%s\n", yylval.tinfo->tokenstr);}
+             | PRECOMPILER                                 {$$ = NULL; printf("%s\n", yylval.tinfo->tokenstr);}
+             | /* empty */                                 { $$ = NULL; }
+           ;
+
+declList   : declList decl                          {$$ = addSibling($1,$2);/* addSibling*/ }
+             | decl				    {$$ = $1; }
+           ;
+
+decl       : varDecl    				{$$ = $1;}
+             | funDecl					{$$ = $1;}	
+           ;
+
+varDecl    : typeSpec varDeclList ';'               { /* DRBC Note: Be careful! And setType.*/}
+           ;
+
+
+scopedVarDecl : STATIC typeSpec varDeclList ';'     {/* DRBC Note: Be careful! And setType.*/}
+                | typeSpec varDeclList ';'             {/* DRBC Note: Be careful! And setType.*/}
+              ;
+
+
+varDeclList  : varDeclList ',' varDeclInit          {/* addSibling */}
+               | varDeclInit
+             ;
+
+varDeclInit  : varDeclId
+               | varDeclId ':' simpleExp               {/* DRBC Note: $$ = $1; if ($$ != NULL) $$->child[0] = $3; */}
+             ;
+
+varDeclId   : ID                                         {/* newDeclNode */}
+             | ID '[' NUMCONST ']'                         {/* newDeclNode; $$->size = $3->nvalue + 1; */}
+             ;
+
+typeSpec   : INT                                        {/* Integer*/ }
+             | BOOL                                        {/* Boolean*/}
+             | CHAR                                        {/* Char */}
+           ;
+
+funDecl    : typeSpec ID '(' parms ')' stmt       { $$ = newDeclNode(FuncK,$1,$2,$4,$6); }
+             | ID '(' parms ')' stmt                   { $$ = newDeclNode(FuncK,Void,$1,$3,$5); }
+           ;
+parms      : parmList					{ $$ = $1; }
+             | /* empty */                                { $$ = NULL; }
+           ;
+
+parmList   : parmList ';' parmTypeList              { $$ = addSibling($1, $3);}
+             | parmTypeList                         { $$ = $1; }  //只有一个参数时 
+           ;
+
+parmTypeList : typeSpec parmIdList                  {/* DRBC Note: Be careful! And setType.*/}
+             ;
+
+parmIdList   : parmIdList ',' parmId                 {$$ = addSibling($1, $3);/* addSibling*/}
+             | parmId					{$$ = $1;}
+             ;
+
+parmId     : ID                                          {$$ = newDeclNode(VarK, UndefinedType, $1, nullptr, nullptr, nullptr);/* newDeclNode*/}
+             | ID '[' ']'                                   {$$ = newDeclNode(VarK, UndefinedType, $1, nullptr, nullptr, nullptr); $$->isArray = true;/* newDeclNode*/}
+           ;
+
+stmt       : matched
+             | unmatched
+           ;
+
+
+matched    : IF simpleExp THEN matched ELSE matched   {
+		$$ = newStmtNode(IfK, $1); 
+                $$->child[0] = $2; // 条件
+                $$->child[1] = $4; // IF 语句体
+                $$->child[2] = $6; // ELSE 语句体
+		/* newStmtNode*/}
+             | WHILE simpleExp DO matched                  {
+		$$ = newStmtNode(WhileK, $1);
+                $$->child[0] = $2; // 条件
+                $$->child[1] = $4; // 循环体
+		/* newStmtNode*/}
+             | FOR ID '=' iterRange DO matched             {
+		$$ = newStmtNode(ForK, $1);
+		TreeNode *varNode = newDeclNode(VarK, Integer, $2, nullptr, nullptr, nullptr);
+                $$->child[0] = varNode;  // 迭代变量
+                $$->child[1] = $4;       // 迭代范围
+                $$->child[2] = $6;       // 循环体
+		/* newStmtNode(newDeclNode)*/}
+             | expStmt			{ $$ = $1; }
+             | compoundStmt		{ $$ = $1; }
+             | returnStmt		{ $$ = $1; }
+             | breakStmt		{ $$ = $1; }
+           ;
+
+iterRange  : simpleExp TO simpleExp                  {/* newStmtNode*/}
+             | simpleExp TO simpleExp BY simpleExp    {/* newStmtNode*/}
+           ;
+
+unmatched  : IF simpleExp THEN stmt                     {
+		$$ = newStmtNode(IfK, $1);
+                $$->child[0] = $2; // 条件
+                $$->child[1] = $4; // IF 语句体
+		/* newStmtNode*/}
+             | IF simpleExp THEN matched ELSE unmatched  {
+		$$ = newStmtNode(IfK, $1);
+                $$->child[0] = $2; // 条件
+                $$->child[1] = $4; // THEN 语句体
+                $$->child[2] = $6; // ELSE 语句体
+		/* newStmtNode*/}
+             | WHILE simpleExp DO unmatched                {
+		$$ = newStmtNode(WhileK, $1);
+                $$->child[0] = $2; // 条件
+                $$->child[1] = $4; // 循环体
+		/* newStmtNode*/}
+             | FOR ID '=' iterRange DO unmatched           {
+		TreeNode *varNode = newDeclNode(VarK, Integer , $2, nullptr, nullptr, nullptr);
+                $$ = newStmtNode(ForK, $1);
+                $$->child[0] = varNode;  // 迭代变量
+                $$->child[1] = $4;       // 迭代范围
+                $$->child[2] = $6;       // 循环体
+		/* newStmtNode(newDeclNode)*/}
+           ;
+
+expStmt    : exp ';'
+             | ';'                                        {/* NULL*/}
+           ;
+
+compoundStmt : '{' localDecls stmtList '}'         {/* newStmtNode*/}
+             ;
+localDecls : localDecls scopedVarDecl              {/* addSibling*/}
+             | /* empty */                               { /* NULL*/}
+             ;
+
+stmtList   : stmtList stmt                         {/* addSibling DRBC Note: $2 might legitamately be empty here. If so $$ = $1;*/}
+             | /* empty */                               { /* NULL*/}
+           ;
+
+returnStmt : RETURN ';'                                {/* newStmtNode*/}
+             | RETURN exp ';'                           {/* newStmtNode*/}
+           ;
+
+breakStmt  : BREAK ';'                                 {/* newStmtNode*/}
+           ;
+
+exp        : mutable assignop exp                {/* newExpNode*/}
+             | mutable INC                              {/* newExpNode*/}
+             | mutable DEC                              {/* newExpNode*/}
+             | simpleExp
+           ;
+assignop  : '='
+            | ADDASS
+            | SUBASS
+            | MULASS
+            | DIVASS
+          ;
+
+simpleExp  : simpleExp OR andExp                 {/* newExpNode*/}
+             | andExp
+           ;
+
+andExp     : andExp AND unaryRelExp              {/* newExpNode*/}
+             | unaryRelExp
+           ;
+
+unaryRelExp : NOT unaryRelExp                      {/* newExpNode*/}
+              | relExp
+            ;
+
+relExp     : minmaxExp relop minmaxExp          {/* newExpNode*/}
+             | minmaxExp
+           ;
+relop      : LEQ
+             | '<'
+             | '>'
+             | GEQ
+             | EQ
+             | NEQ
+           ;
+
+minmaxExp  : minmaxExp minmaxop sumExp              {/* newExpNode*/}
+             | sumExp
+           ;
+
+minmaxop   : MAX
+             | MIN
+           ;
+
+sumExp     : sumExp sumop mulExp              {/* newExpNode*/}
+             | mulExp
+           ;
+
+sumop      : '+'
+             | '-'
+           ;
+
+mulExp     : mulExp mulop unaryExp           {/* newExpNode*/}
+             | unaryExp
+           ;
+mulop      : '*'
+             | '/'
+             | '%'
+           ;
+
+unaryExp   : unaryop unaryExp                   {/* newExpNode*/}
+             | factor
+           ;
+
+unaryop    : '-'                                     {/*$1->tokenclass=CHSIGN; $$=$1;*/}
+             | '*'                                      {/*$1->tokenclass=SIZEOF; $$=$1;*/}
+             | '?'
+             ;
+           ;
+
+factor     : immutable
+             | mutable
+           ;
+
+mutable    : ID                                       {/* newExpNode*/}
+             | ID '[' exp ']'                          {/* newExpNode*/}
+           ;
+immutable  : '(' exp ')'                            {/* DRBC Note: Be careful!*/}
+             | call
+             | constant
+           ;
+
+call       : ID '(' args ')'                        {/*newExpNode*/}
+           ;
+
+args       : argList					{$$=$1;}
+             | /* empty */                                { $$=NULL; }
+           ;
+
+argList    : argList ',' exp                       {/* addSibling*/}
+             | exp
+           ;
+
+constant   : NUMCONST                                   {/* newExpNode:  also set type and attr.string*/}
+             | CHARCONST                                   {/* newExpNode;  also set type and attr.string*/}
+             | STRINGCONST                                 {/* newExpNode; $$->size = $1->nvalue + 1; $$->isArray = true; also set type and attr.string*/}
+             | BOOLCONST                                   {/* newExpNode;  also set type and attr.string*/}
+           ;
+
+%%
+
+void yyerror (const char *msg)
+{ 
+   cout << "Error: " <<  msg << endl;
+}
+
+int main(int argc, char **argv) {
+   int option, index;
+   char *file = NULL;
+   extern FILE *yyin;
+   while ((option = getopt (argc, argv, "")) != -1)
+      switch (option)
+      {
+      default:
+         ;
+      }
+   if ( optind == argc ) yyparse();
+   for (index = optind; index < argc; index++) 
+   {
+      yyin = fopen (argv[index], "r");
+      yyparse();
+      fclose (yyin);
+   }
+   //printTree(stdout,syntaxTree);
+   printf("Number of warnings: 0\n");
+    printf("Number of errors: 0\n");
+	
+   return 0;
+}
+

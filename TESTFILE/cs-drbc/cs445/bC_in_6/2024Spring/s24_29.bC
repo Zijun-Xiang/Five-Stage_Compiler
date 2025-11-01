@@ -1,0 +1,154 @@
+#DRBC first assignment
+#DRBC this line would be an extra precompiler info
+int global:5;
+main() {
+    // *** Examples for Variables ***
+    //declaring single variable
+    int counter : 0;
+    //declaring multiple variables
+    int x : 5, y : 4, z : 7;
+    //declaring an array
+    int array[5];
+    static bool condition : true;
+    //char variable
+    char initial;
+    initial = 'c';
+    // Double For Loop
+    for m = 0 to 100
+    do {
+       for n=0 to 20 by 2
+       do{
+          if(condition == true) then {counter++;}
+          else //while loop
+             while (condition == false) do {
+                if(alwaysTrue(counter)) then {break;}
+             }
+       }
+    }
+    if(alwaysFalse(x, y, z) or alwaysTrue(counter)) then {counter += 5;}
+    UniaryOperations();
+}
+
+//example of a sub function
+bool alwaysTrue(int counter)
+{
+    return true;
+}
+
+bool alwaysFalse(int x, y, z)
+{
+    int new : x + y;
+    z = z - new;
+    if((z < new) and (z < x)) then {z++;}
+    else if(x > y) then {z = z*3;}
+    else {z = z/2;}
+    return false;
+}
+
+doNothing()
+{
+    int x : 5, y : 17;
+    if((x <= y) and not((x-2)%3 == 1)) then
+    {
+        if(x+y >= (y-2)*2) then
+        {
+            y = 5;
+        }
+        else
+        {
+            y = y%3;
+        }
+    }
+    else
+    {
+        if(y == x) then {return;}
+    }
+    return;
+}
+
+Umatched(int array[]; int helpie)
+{
+    int x : 5;
+    bool loopVar : true;
+    //IF <simpleExp> THEN <matched> ELSE <unmatched>
+    if(x == 5) then
+    {
+        x++;
+        ;
+    }
+    else
+        if(x>5) then
+        {
+            x--;
+        }
+    for i = 0 to 10 do
+    {
+        for j = 2 to 10 do
+        {
+            if(5 != 4) then {x++;}
+            else
+                while(true == false) do
+                    if(x == 4) then {x--;}
+        }
+    }
+    for i = 2 to 20 do
+        if(x == 10) then {x++;}
+    return;
+}
+
+
+//uniary test
+UniaryOperations()
+{
+    int x;
+    int z[5]; //int pointer
+    x = 0;
+    x -= 2; //minus equals
+    x = -x;
+    x *= ?4; //x is multiplied by a rand. number 0 to 3
+    x /= ?5;
+    x**2; //exponent
+}
+
+//strings
+Strings()
+{
+    char name[5] : "hello";
+    name[0] = 'c';
+}
+
+//Min Max UniaryOperations
+maxmin()
+{
+   int x, y;
+   x = 10 :<: 5;
+   y = 4 :>: 10;
+}
+2024 $ vi n;
+UniaryOperations()
+{
+    int x;
+    int z[5]; //int pointer
+    x = 0;
+    x -= 2; //minus equals
+    x = -x;
+    x *= ?4; //x is multiplied by a rand. number 0 to 3
+    x /= ?5;
+    x**2; //exponent
+}
+
+//strings
+Strings()
+{
+    char name[5] : "hello";
+    name[0] = 'c';
+}
+
+//Min Max UniaryOperations
+maxmin()
+{
+   int x, y;
+   x = 10 :<: 5;
+   y = 4 :>: 10;
+}
+

@@ -1,0 +1,85 @@
+#DRBC My first program
+#DRBC This program tests every production rule.
+
+int global;
+int globalInit : 1;
+int test1, test2 : 1; 
+
+int main() { // Production rule 3
+   int x : 5;
+   int y, z : 10;
+   int a;
+   int array[1];
+
+   ant(2);
+
+   doggie(true, 17);
+
+   for m=0 to 6 do {
+      if x < y or x > y and z != 4 //rule 20, 33
+      then y += 1;  //rule 28
+         break;
+   }
+
+   //Rules 19 and 20 (66, 72, & 73)
+   for m=0 to 100 do { // 19a
+      for n=0 to 100 by 2 do {
+         if(true == true) then {y *= 20;}
+         else  
+            while ( true == false ) do 
+               if(false != false) then { y /= 1;}
+      }
+   }
+
+   if(true and not ?x <= (-5 :<: (9 - 3)) and (x :>: (4 + (*10 * y))) >= 20) then;
+
+   if('a' and "Hello World" and arr [9-3]) then;
+
+   //Rule 18 (51 & 52)
+   while ( y == 0 ) do {
+      if(x>0) then {
+         x -= 1;
+      }
+      else {
+         x += 1;
+      }
+   }
+
+   if (true == true) then;
+
+   z = 5;
+   z += 1;
+   z -= 1;
+   z *= 1;
+   z /= 1;
+   z++;
+   z--;
+   z = 20 / 5;
+   z = 50 % 6;
+
+   noArgs();
+
+   return;
+}
+   
+int max(int a, b) if a>b then return a; else return b;
+nothing(int a[]);
+noArgs() {
+   for m=0 to 20 do while (true == false) do if (false != false) then; // Rule 73
+}
+
+int ant(int bat) {
+   int goat, hog[100];
+
+   return bat;
+}
+
+bool doggie(bool bark; int age) {
+   if bark then {
+      static char letter;
+   }
+
+   return bark;
+}
+
+

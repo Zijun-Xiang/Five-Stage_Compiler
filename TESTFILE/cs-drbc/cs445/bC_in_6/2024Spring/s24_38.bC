@@ -1,0 +1,140 @@
+#DRBC Assignment 1   // PR 2a
+
+int main()  // PR 1, 4b, 6b, 10a, 11a, 17a, 18e, 22, 23a
+{
+   bool greaterThan : false;  // PR 5, 7b, 8b, 9a, 10b,
+                              // 29b, 30b, 31b, 32b, 34b,
+                              // 36b, 38b, 40b, 42a, 44c, 48d
+
+   int x : 15, y : 36;  // PR 6b, 7a, 8b, 9a, 10a,
+                        // 23a, 29b, 30b, 31b, 32b,
+                        // 34b, 36b, 38b, 40b, 42a,
+                        // 44c, 48a
+
+                        // Variable declaration productions not specified
+   int sum : add(x, y); // PR 22, 24ab, 17a, 18d, 21a,
+                        // 27d, 29b, 30b, 31b, 32b,
+                        // 34b, 36b, 38b, 40b, 42a,
+                        // 43a, 44b, 45, 46ab, 47ab,
+
+   if (sum % 2) == 0 then {   // PR 18ade, 21a, 29b, 30b, 31b,
+                              // 32a, 34b, 36b, 38ab, 39c, 40b,
+                              // 42ab, 43a, 44ac, 48a
+      // do nothing
+      ;  // PR 21b
+   } else {
+      sum++;   // PR 27b
+   }
+
+   {
+      int clockSignal : 0;
+      static int rateOfChange : 1;
+
+      while clockSignal != 100 do {
+         if (clockSignal % 4) == 0 then {
+            clock();
+            clockSignal += rateOfChange;
+         }
+
+
+         if clockSignal == 0 then {
+            break;
+         } else if clockSignal == 24 then {
+               clockSignal -= rateOfChange;
+         }
+
+         if clockSignal != 24 then {
+            clockSignal += rateOfChange;
+         }
+      }
+   }
+
+   {
+      char name1[5];
+      char name2[5];
+      char myName[3] : "jennaluz";
+
+      int i : 0;
+
+      for i = 0 to 4 do {
+         name1[i] = 'a';
+      }
+
+      for i = 0 to 4 do  {
+         name2[i] = 'b';
+      }
+   }
+
+   // operations
+   {
+      int a : 2;
+      int b : 10;
+
+      a *= b;
+      b /= a;
+
+      {
+         int c : a * 3;
+         int d : b / 5;
+         int e : c - d;
+
+         e--;
+         d :>: e;
+         c :<: e;
+      }
+
+      ?a;
+
+      {
+         bool g : a <= b;
+         bool h : a >= b;
+         bool i : not i;
+         bool j : g and h;
+         bool j : g or h;
+      }
+   }
+
+   // unmatched
+   {
+      int f : 0;
+
+      for f = 0 to 100 do if f < 50 then {
+         -f;
+      }
+
+      f = 0;
+      while f < 100 do if f > 50 then {
+         *f;
+      }
+   }
+}
+
+int add(int operand1; int operand2) // PR 3a, 4b, 10a, 11a, 12a,
+                                    // 13ab, 14, 15ab, 16a, 17a,
+                                    // 18e, 22, 23a
+{
+   int summand : 0;
+
+   summand = operand1 + operand2;   // PR 22, 23a, 27ad, 28a, 29b,
+                                    // 30b, 31b, 32b, 34b, 36ab,
+                                    // 37a, 38b, 40b, 42b, 43a
+
+   return summand;   // PR 17a, 18f, 22, 24a, 25b,
+                     // 27d, 29b, 30b, 31b, 32b,
+                     // 34b, 36b, 38b, 40b, 42b, 43b
+}
+
+char greaterName(char name1[], name2[]; int nameLength)
+{
+   int idx : 0;
+   for idx = 0 to nameLength by 1 do {
+      ;
+   }
+}
+
+int time : 14700; // PR 4a,
+clock()
+{
+   time++;
+   return;
+}

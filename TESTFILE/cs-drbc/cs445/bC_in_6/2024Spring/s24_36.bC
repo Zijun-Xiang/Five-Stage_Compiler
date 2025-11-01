@@ -1,0 +1,96 @@
+#DRBC precompile
+#DRBC precompile list
+
+// global variables = varDecl
+int numAnimals;
+
+// functions and parameters
+int add(int cat, dog)
+{
+    return cat+dog;
+}
+
+// parm list
+int add2(int age1, age2; char catName, dogName)
+{
+    return age1 + age2;
+}
+
+breed()
+{
+    return;
+}
+
+rename(char name[]);
+
+int main()
+{
+    // declarations
+    int cats, dogs;
+    static int maxAnimals: 10;
+    bool haveCat, haveDog;
+    char names[10];
+    int happy;
+    // varDeclList ??
+    int ages[2]: 2 and 3;
+    int i:1 ,j:0;
+
+    // constants
+    names[0] = 'c';
+    names[1] = "FLUFFY";
+
+    // in class rule 19 and 20
+    for i=0 to 10 do {
+        for j=0 to 10 by 2 do
+            if(haveCat == true) then happy += 20;
+            else while(haveDog == true) do
+                    if(haveCat != false) then happy -= 10;
+        break;
+    }
+
+    // matched
+    while(haveCat == true) do {
+        if(havedog == true) then {
+            happy += 100;
+        }
+    }
+
+    // matched and relation, assignment op
+    if(cats < dogs or cats == dogs)
+    then happy -= 10;
+    else happy *= 10;
+
+    if(cats > dogs and cats == happy)
+    then dogs /= 2;
+
+    if(cats <= dogs or cats >= dogs)
+    then dogs -= 1;
+
+    if(cats != dogs)
+    then happy = 10;
+
+    // operators
+    happy = cats + dogs;
+    happy = cats - dogs;
+    happy = cats/dogs;
+    happy = 3*2;
+    happy = cats%dogs;
+    happy--;
+    happy++;
+
+    // unary ops
+    happy = -dogs;
+    happy = *dogs;
+    happy = ?dogs;
+
+    // min max - not working
+    happy = cats :>: dogs;
+    happy = cats*dogs :<: cats-dogs;
+    happy = not (cats :<: dogs);
+
+    // function calls
+    happy = add(cats, dogs);
+    happy = breed();        // empty arg list
+
+    return 0;
+}

@@ -1,0 +1,5 @@
+myFun(char a[]) {
+   a = "cool";
+}
+main() {
+}

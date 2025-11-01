@@ -1,0 +1,29 @@
+#include "codegen.h"
+#include <string>
+
+FILE *code;
+static bool linenumFlag;
+static int breakloc;
+static SymbolTable *globals;
+int toffset; //t=temp
+#define OFPOFF 0
+#define RETURNOFFSET -1
+
+int offsetRegister(VarKind v);
+void commentLineNum(TreeNode *currnode);
+void initAGlobalSymbol(std::string sym, void *ptr);
+void initGlobalArraySizes();
+
+//main function
+void codegen(FILE *codeIn, char *srcFile, TreeNode *syntaxTree,
+		SymbolTable *globalsIn, int globalOffset, bool linenumFlagIn);
+
+void codegenHeader(char *srcFile);
+
+void codegenInit(int initJump, int globalOffset);
+
+void codegenGeneral(TreeNode *currnode);
+
+void codehenStatement(TreeNode *currnode);
+
+void codegenExpression(TreeNode *currnode);

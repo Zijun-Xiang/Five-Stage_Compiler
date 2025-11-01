@@ -1,0 +1,9 @@
+int dog(int , y; bool z){
+   if z then return y;
+   return 4; 
+}
+
+int main() {
+   dog(1, true);
+   return 0;
+}

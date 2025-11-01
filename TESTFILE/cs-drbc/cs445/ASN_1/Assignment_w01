@@ -1,0 +1,10 @@
+Create a video game using every production rule in 0_bC_Context_Free_Grammar.txt
+
+You will demo this game to the class and answer questions.
+
+Notes:
+  1. It is OK to have a function called uselesStuff that does not contribute 
+     to the game if you are having trouble hitting every rule, so long a no 
+     more that 40% of the production rules are hit exclusivly in this funciton.
+  2. Your game can not be just the same one I show you how to make in class.
+     Be creative!

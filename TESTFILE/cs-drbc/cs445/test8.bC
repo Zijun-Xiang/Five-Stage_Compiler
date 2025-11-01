@@ -1,0 +1,66 @@
+#DRBC full test case
+//parmlist compoundstmt returnstmt
+int add()
+{
+return 4 + 7;
+}
+int a[10];
+fun(int h){
+}
+fun2(int d[]){}
+fun3(int cd[], x, y)
+{
+}
+//varDeclinit
+int g:888;
+bool f,t;
+main(){
+//exp vardeclList vardecl
+int x, y;
+//scopedVarDecl
+static int q;
+x=10;
+y=0;
+//assinop unmatched iterRange stmt breakstmt
+while y<10 do {
+y++;
+y+=1;
+x-=1;
+x++;
+x/=2;
+x+= 1;
+x *= 4;
+break;
+}
+//relop varDeclId relexp
+for y = 0 to *a do {
+if y == 1 then x--;
+if y <= 2 then x = 10;
+if y >= 3 then x = 9;
+if y > 5 then x = 5;
+if y < 8 then x = 7;
+}
+//sumop sumExp mulop mulexp
+a[0] = x - y;
+a[1] = x + y;
+a[2] = x + y;
+a[3] = x / y;
+a[4] = y % x;
+//argslist
+x = add();
+//unaryop
+x = ?3;
+//simpleexp andexp unaryrelexp minmaxexp
+f = false;
+t = true;
+f = not t;
+if x < 0 or y < 0 then{
+x = y;
+}
+if x ==0 and y == 0 then{
+x =5;
+}
+//returnStmt
+return;
+}
+

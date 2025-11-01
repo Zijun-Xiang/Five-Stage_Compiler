@@ -1,0 +1,5 @@
+int mainn()
+{
+    mainn();
+    return 0;
+}

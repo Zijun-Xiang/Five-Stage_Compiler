@@ -1,0 +1,144 @@
+#DRBC My first program
+#DRBC comment
+char zev[10]:"corgis";
+int x:42, y:666;
+int ant(int bat, cat[]; bool dog, elk; int fox; char gnu)
+{
+ int goat, hog[100];
+ gnu = 'W';
+ goat = hog[2] = 3**cat; // hog is 3 times the size of array passed to cat 
+ if dog and elk or bat > cat[3] then dog = dog;
+ else fox++;
+ if bat <= fox then {
+ while dog do {
+ static int hog; // hog in new scope
+ hog = fox;
+ dog = fred(fox++, cat)>666;
+ if hog>bat then break;
+ else if fox !=0 then fox += 7;
+ }
+ }
+}
+// note that functions are defined using a statement 
+int max(int a, b) if a>b then return a; else return b;
+
+void(){}
+int main(){
+ while i < 20 do k++;
+}
+int main(){
+ for i = 0 to 10 by 2 do j++;
+}
+int main(){
+ for i = 0 to 10 do j++;
+}
+int main(){
+ return 0;
+}
+int main(){
+ a-=b;
+}
+int main(){
+ a*=b;
+}
+int main(){
+ a/=b;
+}
+int main(){
+ a--;
+}
+int main(){
+ return;
+}
+int main(){
+ a+b-c/d%e;
+}
+int main(){
+ b=max(a,c);
+}
+int main(){
+ b=min(a,c);
+}
+int main(){
+ -5;
+}
+int main(){
+ a=? 5;
+}
+int main(){
+ a==b;
+}
+int main(){
+ a>=b;
+}
+int main(){
+ ('a');
+}
+
+int main(){
+;
+}
+
+int main(){
+ (10);
+}
+int main(){
+ not(a == b);
+}
+int main();
+int main(){
+ for m = 0 to 100 do {
+  for n = 0 to 100 by 2 do 
+   if (true==true) then {y+=2;}
+   else while(true == false)do
+	if (false!=false)then y=-100;
+}
+}
+
+int main(){
+ x=10:<:5;
+ y=10:<:5;
+}
+int main(){
+ x=10 :>:5;
+ y=10 :>:5;
+}
+
+void(){}
+int main(){
+void();
+}//%empty
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

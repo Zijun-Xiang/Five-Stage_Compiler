@@ -1,0 +1,72 @@
+#DRBC My first program
+#DRBC exercise some rule 
+
+int a;
+int b, c, result;
+char d;
+bool e;
+int arr[20];
+
+int x:10, y:123;
+char str[20]:"hello";
+
+int alpha(int beta, gamma[]; bool delta, epsilon; int zeta; char eta) {
+    int theta, iota[100];
+    eta = 'Z';
+    theta = iota[2] = 2**gamma;
+    if delta and epsilon or beta > gamma[3] then delta = delta;
+    else zeta++;
+    if not delta then delta = delta;
+    else delta = delta;
+    if beta <= zeta then {
+        while delta do {
+            static int iota;
+            iota = zeta;
+            zeta +=10;
+            zeta -=5;
+            zeta /=1;
+            zeta *=25;
+            delta = myFunc(zeta++, gamma)>123;
+            if iota>beta then break;
+            else if zeta !=0 then zeta += 7;
+        }
+    }
+    if x==1 then gamma[a] = beta;
+    if (x==2) then gamma[a] = beta%17;
+    else x++;
+
+    return (zeta+gamma[beta])/-zeta;
+}
+
+int max(int p, q) if p>q then return p; else return q;
+int test(int r, s) if r>=s then return;
+int main() {
+    for b = 1 to 5 by 2 do {
+        if not e then c++;
+        result = c + 1;
+        result = c - 1;
+        result = c / 2;
+        result = c * 2;
+        result--;
+        result = max(b, c);
+        result = min(b, c);
+        result = -b;
+        result = b%c;
+
+        b = 10:>:5;
+        c = 5:<:10;
+        return;
+    }
+    for b = 1 to 5 do c++;
+    while b < 20 do c++;
+    ;
+    customFunc();
+    return b + c;
+}
+
+customFunc() {
+    while a < 10 do if a>1 then b++;
+    for a = 1 to 10 do if a == 1 then b = ?20;
+    result = (b + c);
+}
+     	

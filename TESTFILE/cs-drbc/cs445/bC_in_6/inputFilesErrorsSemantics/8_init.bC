@@ -1,0 +1,37 @@
+int dog() { return 1;}
+
+int main()
+{
+    int a:1;
+    int b:'c';
+    int c:true;
+
+    char d:1;
+    char e:'c';
+    char f:true;
+
+    bool g:1;
+    bool h:'c';
+    bool i:true;
+
+    int j:dog();
+    char k[10]:"corgis";
+    char l[10]:'c';
+    char m[10]:true;
+    char n[10]:1;
+     
+    char o:"corgis";
+    int p:"corgis";
+    bool q:"corgis";
+
+    a=b; c=j;
+    d=e; o=f; p=e;
+    g=h; h=i; q=g;
+
+    k[0] = 'c';
+    l[0] = 'c';
+    m[0] = 'c';
+    n[0] = 'c';
+
+    return 0;
+}

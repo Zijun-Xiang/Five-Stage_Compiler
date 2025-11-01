@@ -1,0 +1,6 @@
+goodfun(int x);
+
+int main() {
+   goodfun(1);
+   return 0;
+}

@@ -1,0 +1,115 @@
+#DRBC Test Case assignment
+
+int add(int a, b);
+int subtract(int a; int b);
+int multiply(int a, b);
+int divide(int a, b);
+int modulo(int a, b);
+bool checkContinuous(int a[]);
+
+finalPrint();
+
+int operations: 0;
+
+int main() {
+   char op;
+   int temp;
+   int inArr[2];
+   
+   //not sure what unary questionmark does
+   temp = ? 3;
+
+   //max and min operators
+   if ((5 :<: 2) :>: 3) then temp = 4;
+   
+   while ((4 < 5) or (5 >= 4)) and ((3 <= 5) or not (5 > 5)) do {
+      output("Input an operation");
+      output("q is quit");
+      output("+ is add");
+      output("- is subtract");
+      output("* is multiply");
+      output("/ is divide");
+      output("% is modulo");
+      output("c is check continuous");
+      op = input();
+
+      if op == 'q' then break;
+      
+      output("Input two integer operands");
+      for i = 0 to 1 do inArr[i] = input();
+
+      if op == '+' then add(inArr[0], inArr[1]); else {
+         if op == '-' then subtract(inArr[0], inArr[1]); else
+         if op == '*' then multiply(inArr[0], inArr[1]);
+         if op == '/' then divide(inArr[0], inArr[1]);
+         for i = 0 to 0 do if op == '%' then modulo(inArr[0], inArr[1]);
+         temp = operations;
+         while temp == operations and op == 'c' do if true then checkContinuous(inArr); 
+      }
+
+      
+
+   }
+   
+   
+
+}
+
+int add(int a, b) {
+   operations += 3;
+   operations--;
+   operations += -1;
+   return(a + b);
+}
+
+int subtract(int a; int b) {
+   int result: a;
+   result -= b;
+   operations++;
+   operations = operations - 0;
+   return(result);
+}
+
+int multiply(int a, b) {
+   int result: a * 1;
+   result *= b;
+   operations++;
+   return(result);
+}
+
+int divide(int a, b) {
+   static int result;
+   operations++;
+   
+   result = a;
+   if b == 0 then result = 0 / 1;
+   else result /= b;
+
+   return result;
+}
+
+int modulo(int a, b) {
+   operations++;
+   return(a % b);
+}
+
+bool checkContinuous(int a[]) {
+   int last, size;
+   last = a[0];
+   size = *a;
+
+   operations++;
+
+   for i = 1 to size by 1 do {
+      if last + 1 != a[i] then return;
+      last = a[i];
+   }
+
+   return true;
+}
+
+finalPrint() {
+   output("Total operations performed:");
+   output(operations);
+}
+

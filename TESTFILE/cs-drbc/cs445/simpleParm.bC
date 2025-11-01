@@ -1,0 +1,5 @@
+#DRBC ./bC 5 > simple.tm
+int funWithParms(int x,y,z){
+}
+int main() {
+}

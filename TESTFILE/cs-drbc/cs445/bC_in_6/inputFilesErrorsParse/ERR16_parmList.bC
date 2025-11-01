@@ -1,0 +1,6 @@
+int dog(int x, y; ) {return 1;}
+
+int main() {
+   dog();
+   return 0;
+}

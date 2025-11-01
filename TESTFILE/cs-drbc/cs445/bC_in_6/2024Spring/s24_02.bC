@@ -1,0 +1,115 @@
+#DRBC My First Program
+#DRBC This program tests every production rule
+
+
+char slay[5] : "sappy";
+
+int findEmotions(bool feelings){
+   if (feelings == happy) then return 0;
+   else return 1;}
+
+int someThing(int a){
+   int b : 40;
+   return a + b;}
+
+int newId(int a, b; char c){
+   while(a>0)
+      do{
+         printf("%d\n", a);
+         if (a == 4)
+            then break;
+         else a--;
+         printf("newID = %d\n", a);
+      }
+}
+
+int newSomething(){
+   return 5;
+}
+
+int sum(int a, b){
+   return a + b;}
+
+int maxNum(int arr[], size){
+   int nMax : 0;
+   int i;
+   for i=0 to size by 2 do
+      if (arr[i] > nMax)
+         then nMax = arr[i];
+   for i=0 to size do
+      if (arr[i] > nMax)
+         then nMax = arr[i];
+   return max;
+}
+
+newFunction(){
+   return;
+}
+
+int main() {
+   int j : 5;
+   int x, y, z;
+   static int a : 10;
+   static int b : 40;
+   static int n;
+   char c : 'n';
+   char arr[4] : "slay";
+   int size : 4;
+   bool d : true;
+   //int* h : &u;
+   //int g : *h;
+   int u;
+   char feelings[5];
+   *feelings;
+
+   if (a != b or a <= b)
+      then a = b;
+   if (b%a == 0 or a >= b)
+     then  b = a;
+
+   x = ? 10;;
+    
+   //u = (j != 6) ? 19 : 91; 
+    
+
+   for i=0 to j
+      do{
+         y = y + i;
+         y = y - i;
+         y = y * i;
+         y = y / i;
+         y *= 6;
+         y /= 6;
+         y += 6;
+         y -= 6;
+         y++;
+         y--;
+      }
+
+   x  = 10 :>: 5;
+   y  = 7 :<: 3;
+   if (j == 5 and d == true) then z=8; 
+   if (j > y or j < y or j<= 10) then j+=1;
+   else while (d == true) do 
+      if (true == true) then y-=1;
+   printf("x = %d\n", x);      
+   feelings = "happy";
+
+   n = findEmotions(feelings);
+   c = -findEmotions(feelings);
+   //b:maxNum(arr[], size);
+   //z:someThing(j);
+
+   newID;
+
+   newSomething();
+   
+   if (j>5 and 5>j )
+     then  y = 9;
+
+   if (not false)
+      then y = 7;
+
+  // x : newID(a, float g, char s);
+    return;
+}

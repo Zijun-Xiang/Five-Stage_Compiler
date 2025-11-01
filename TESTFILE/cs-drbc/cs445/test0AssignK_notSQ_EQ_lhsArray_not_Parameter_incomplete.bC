@@ -1,0 +1,8 @@
+#DRBC Func: main returns type void [mem: Global loc: 0 size: -2] [line: 1]
+#DRBC .   Child: 1  Compound [mem: None loc: 0 size: -8] [line: 2]
+#DRBC .   .   Child: 0  Var: a of array of type char [mem: Local loc: -3 size: 6] [line: 3]
+#DRBC .   .   .   Child: 0  Const "acid" of array of type char [mem: Global loc: -1 size: 5] [line: 3]
+main()
+{
+   char a[5]:"acid";
+}   

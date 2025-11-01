@@ -1,0 +1,10 @@
+int main()
+{
+    for i=3 to 15 by 2 do {i++;}
+    for i='c' to 15 by 2 do {i++;}
+    for i=3 to true by 2 do {i++;}
+    for i="three" to 15 by 2 do {i++;}
+    for i=3 to "five" by 2 do {i++;}
+    for i=3 to 15 by "two" do {i++;}
+    return 0;
+}

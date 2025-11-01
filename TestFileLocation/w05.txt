@@ -1,0 +1,550 @@
+[xian7710@cs-course87 w05]$ /home/xiang/Documents/cs-drbc/submit4145 w05
+Welcome xian7710
+Attempting to submit your code directory
+Compiling
+/bin/rm *~ parser.tab.o lex.yy.o treeUtils.o semantics.o symbolTable.o codegen.o emitcode.o  bC lex.yy.c parser.tab.h parser.tab.c parser.tar parser.output  
+/bin/rm: cannot remove '*~': No such file or directory
+/bin/rm: cannot remove 'parser.tar': No such file or directory
+make: *** [makefile:53: clean] Error 1
+bison -v -t -d parser.y  
+parser.y: warning: 1 shift/reduce conflict [-Wconflicts-sr]
+g++  -O3       -c -o parser.tab.o parser.tab.c
+flex parser.l
+g++  -O3       -c -o lex.yy.o lex.yy.c
+g++  -O3       -c -o treeUtils.o treeUtils.cpp
+g++  -O3       -c -o semantics.o semantics.cpp
+g++  -O3       -c -o symbolTable.o symbolTable.cpp
+g++  -O3       -c -o codegen.o codegen.cpp
+g++  -O3       -c -o emitcode.o emitcode.cpp
+g++ -O3      parser.tab.o lex.yy.o treeUtils.o semantics.o symbolTable.o codegen.o emitcode.o  -lm  -o bC
+Targeted Testing: /home/xiang/Documents/cs-drbc/cs445/bC_in_5/*.bC
+Passed /home/xiang/Documents/cs-drbc/cs445/bC_in_5/test00.bC
+Passed /home/xiang/Documents/cs-drbc/cs445/bC_in_5/test01Compound.bC
+Passed /home/xiang/Documents/cs-drbc/cs445/bC_in_5/test03ConstantK_Boolean.bC
+Passed /home/xiang/Documents/cs-drbc/cs445/bC_in_5/test03ConstantK_Char.bC
+Passed /home/xiang/Documents/cs-drbc/cs445/bC_in_5/test03ConstantK_Integer.bC
+Passed /home/xiang/Documents/cs-drbc/cs445/bC_in_5/test07IdK_noArray_noChild0.bC
+Passed /home/xiang/Documents/cs-drbc/cs445/bC_in_5/test07OpK0.bC
+Passed /home/xiang/Documents/cs-drbc/cs445/bC_in_5/test0AssignK_NonArray.bC
+Passed /home/xiang/Documents/cs-drbc/cs445/bC_in_5/test0AssignK_notSQ_ADDASS.bC
+Passed /home/xiang/Documents/cs-drbc/cs445/bC_in_5/test0AssignK_notSQ_DEC.bC
+Passed /home/xiang/Documents/cs-drbc/cs445/bC_in_5/test0AssignK_notSQ_DIVASS.bC
+Passed /home/xiang/Documents/cs-drbc/cs445/bC_in_5/test0AssignK_notSQ_EQ_lhsNotArray.bC
+Passed /home/xiang/Documents/cs-drbc/cs445/bC_in_5/test0AssignK_notSQ_INC.bC
+Passed /home/xiang/Documents/cs-drbc/cs445/bC_in_5/test0AssignK_notSQ_MULASS.bC
+Passed /home/xiang/Documents/cs-drbc/cs445/bC_in_5/test0AssignK_notSQ_rhs_GLOBAL_ASSIGN.bC
+Passed /home/xiang/Documents/cs-drbc/cs445/bC_in_5/test0AssignK_notSQ_rhs_LOCALSTATIC_ASSIGN.bC
+Passed /home/xiang/Documents/cs-drbc/cs445/bC_in_5/test0AssignK_notSQ_SUBASS.bC
+Passed /home/xiang/Documents/cs-drbc/cs445/bC_in_5/test0AssignK_SQ_lhs_GLOBAL_INC.bC
+Passed /home/xiang/Documents/cs-drbc/cs445/bC_in_5/test0AssignK_SQ_lhs_LOCAL_DEC.bC
+Passed /home/xiang/Documents/cs-drbc/cs445/bC_in_5/test0AssignK_SQ_lhs_LOCAL_INC.bC
+Passed /home/xiang/Documents/cs-drbc/cs445/bC_in_5/test0AssignK_SQ_lhs_LOCALSTATIC_INC.bC
+Passed /home/xiang/Documents/cs-drbc/cs445/bC_in_5/test0AssignK_SQ_lhs_PARAMETER_INC.bC
+Passed /home/xiang/Documents/cs-drbc/cs445/bC_in_5/test0AssignK_SQ_rhs_ADDASS.bC
+Passed /home/xiang/Documents/cs-drbc/cs445/bC_in_5/test0AssignK_SQ_rhs_DIVASS.bC
+Passed /home/xiang/Documents/cs-drbc/cs445/bC_in_5/test0AssignK_SQ_rhs_MULASS.bC
+Passed /home/xiang/Documents/cs-drbc/cs445/bC_in_5/test0AssignK_SQ_rhs_SUBASS.bC
+Passed /home/xiang/Documents/cs-drbc/cs445/bC_in_5/test0BreakK.bC
+Passed /home/xiang/Documents/cs-drbc/cs445/bC_in_5/test0Call.bC
+Passed /home/xiang/Documents/cs-drbc/cs445/bC_in_5/test0CallParams.bC
+Passed /home/xiang/Documents/cs-drbc/cs445/bC_in_5/test0CallParamsMulti.bC
+Passed /home/xiang/Documents/cs-drbc/cs445/bC_in_5/test0ForK_Increment.bC
+Passed /home/xiang/Documents/cs-drbc/cs445/bC_in_5/test0ForK_No_Increment.bC
+Passed /home/xiang/Documents/cs-drbc/cs445/bC_in_5/test0IdK_isArray_notParameter.bC
+Passed /home/xiang/Documents/cs-drbc/cs445/bC_in_5/test0IdK_isArray_parameter.bC
+Passed /home/xiang/Documents/cs-drbc/cs445/bC_in_5/test0IfK.bC
+Passed /home/xiang/Documents/cs-drbc/cs445/bC_in_5/test0IfK_Else.bC
+Passed /home/xiang/Documents/cs-drbc/cs445/bC_in_5/test0OpK_ArrayIndex.bC
+Passed /home/xiang/Documents/cs-drbc/cs445/bC_in_5/test0OpK_BooleanBinaryOperators.bC
+Passed /home/xiang/Documents/cs-drbc/cs445/bC_in_5/test0OpK_IntegerBinaryOperators.bC
+Passed /home/xiang/Documents/cs-drbc/cs445/bC_in_5/test0OpK_IntegerBinaryOperators_MIN_MAX.bC
+Passed /home/xiang/Documents/cs-drbc/cs445/bC_in_5/test0OpK_Not.bC
+Passed /home/xiang/Documents/cs-drbc/cs445/bC_in_5/test0OpK_Random.bC
+Passed /home/xiang/Documents/cs-drbc/cs445/bC_in_5/test0OpK_SizeOf.bC
+Passed /home/xiang/Documents/cs-drbc/cs445/bC_in_5/test0OpK_UnaryNeg.bC
+Passed /home/xiang/Documents/cs-drbc/cs445/bC_in_5/test0ReturnK.bC
+Passed /home/xiang/Documents/cs-drbc/cs445/bC_in_5/test0ReturnK_NoChild0.bC
+Passed /home/xiang/Documents/cs-drbc/cs445/bC_in_5/test0VarK_arrays_NoChild0_Local.bC
+Passed /home/xiang/Documents/cs-drbc/cs445/bC_in_5/test0VarK_nonArrays_Child0_Local.bC
+Passed /home/xiang/Documents/cs-drbc/cs445/bC_in_5/test0VarK_nonArrays_noChild0.bC
+Passed /home/xiang/Documents/cs-drbc/cs445/bC_in_5/test0While.bC
+Passed /home/xiang/Documents/cs-drbc/cs445/bC_in_5/test0WhileK.bC
+Passed /home/xiang/Documents/cs-drbc/cs445/bC_in_5/test1.bC
+Passed /home/xiang/Documents/cs-drbc/cs445/bC_in_5/test2_global.bC
+Passed /home/xiang/Documents/cs-drbc/cs445/bC_in_5/test3_global.bC
+Passed /home/xiang/Documents/cs-drbc/cs445/bC_in_5/test4_global.bC
+Passed /home/xiang/Documents/cs-drbc/cs445/bC_in_5/test5_global.bC
+Passed /home/xiang/Documents/cs-drbc/cs445/bC_in_5/testMultipleStatic.bC
+Passed /home/xiang/Documents/cs-drbc/cs445/bC_in_5/tictactoe.bC
+0 Files skipped.
+58/58 Passed.
+100/100 Points.
+Unit Testing: /home/xiang/Documents/cs-drbc/cs445/testsUnit/*.bC
+Passed /home/xiang/Documents/cs-drbc/cs445/testsUnit/a001.bC
+Passed /home/xiang/Documents/cs-drbc/cs445/testsUnit/a002.bC
+Passed /home/xiang/Documents/cs-drbc/cs445/testsUnit/a00.bC
+Passed /home/xiang/Documents/cs-drbc/cs445/testsUnit/a01.bC
+Passed /home/xiang/Documents/cs-drbc/cs445/testsUnit/a02.bC
+Passed /home/xiang/Documents/cs-drbc/cs445/testsUnit/a03.bC
+Passed /home/xiang/Documents/cs-drbc/cs445/testsUnit/a045.bC
+Passed /home/xiang/Documents/cs-drbc/cs445/testsUnit/a04.bC
+Passed /home/xiang/Documents/cs-drbc/cs445/testsUnit/a05.bC
+Passed /home/xiang/Documents/cs-drbc/cs445/testsUnit/a06.bC
+Passed /home/xiang/Documents/cs-drbc/cs445/testsUnit/a07.bC
+Failed: 
+diff -y <(./bC /home/xiang/Documents/cs-drbc/cs445/testsUnit/a08.bC) <(/home/xiang/Documents/cs-drbc/cs445/bC 5  /home/xiang/Documents/cs-drbc/cs445/testsUnit/a08.bC)
+Passed /home/xiang/Documents/cs-drbc/cs445/testsUnit/a09.bC
+Passed /home/xiang/Documents/cs-drbc/cs445/testsUnit/b01.bC
+Passed /home/xiang/Documents/cs-drbc/cs445/testsUnit/b02.bC
+Passed /home/xiang/Documents/cs-drbc/cs445/testsUnit/b03.bC
+Passed /home/xiang/Documents/cs-drbc/cs445/testsUnit/b04.bC
+Passed /home/xiang/Documents/cs-drbc/cs445/testsUnit/b05.bC
+Passed /home/xiang/Documents/cs-drbc/cs445/testsUnit/b06.bC
+Passed /home/xiang/Documents/cs-drbc/cs445/testsUnit/b07.bC
+Failed: 
+diff -y <(./bC /home/xiang/Documents/cs-drbc/cs445/testsUnit/b08.bC) <(/home/xiang/Documents/cs-drbc/cs445/bC 5  /home/xiang/Documents/cs-drbc/cs445/testsUnit/b08.bC)
+Failed: 
+diff -y <(./bC /home/xiang/Documents/cs-drbc/cs445/testsUnit/b09.bC) <(/home/xiang/Documents/cs-drbc/cs445/bC 5  /home/xiang/Documents/cs-drbc/cs445/testsUnit/b09.bC)
+Failed: 
+diff -y <(./bC /home/xiang/Documents/cs-drbc/cs445/testsUnit/b0a.bC) <(/home/xiang/Documents/cs-drbc/cs445/bC 5  /home/xiang/Documents/cs-drbc/cs445/testsUnit/b0a.bC)
+Failed: 
+diff -y <(./bC /home/xiang/Documents/cs-drbc/cs445/testsUnit/b0b.bC) <(/home/xiang/Documents/cs-drbc/cs445/bC 5  /home/xiang/Documents/cs-drbc/cs445/testsUnit/b0b.bC)
+Failed: 
+diff -y <(./bC /home/xiang/Documents/cs-drbc/cs445/testsUnit/b0c.bC) <(/home/xiang/Documents/cs-drbc/cs445/bC 5  /home/xiang/Documents/cs-drbc/cs445/testsUnit/b0c.bC)
+Passed /home/xiang/Documents/cs-drbc/cs445/testsUnit/c01.bC
+Failed: 
+diff -y <(./bC /home/xiang/Documents/cs-drbc/cs445/testsUnit/c02.bC) <(/home/xiang/Documents/cs-drbc/cs445/bC 5  /home/xiang/Documents/cs-drbc/cs445/testsUnit/c02.bC)
+Failed: 
+diff -y <(./bC /home/xiang/Documents/cs-drbc/cs445/testsUnit/c03.bC) <(/home/xiang/Documents/cs-drbc/cs445/bC 5  /home/xiang/Documents/cs-drbc/cs445/testsUnit/c03.bC)
+Passed /home/xiang/Documents/cs-drbc/cs445/testsUnit/c04.bC
+Passed /home/xiang/Documents/cs-drbc/cs445/testsUnit/c05.bC
+Passed /home/xiang/Documents/cs-drbc/cs445/testsUnit/c06.bC
+Failed: 
+diff -y <(./bC /home/xiang/Documents/cs-drbc/cs445/testsUnit/c07.bC) <(/home/xiang/Documents/cs-drbc/cs445/bC 5  /home/xiang/Documents/cs-drbc/cs445/testsUnit/c07.bC)
+Failed: 
+diff -y <(./bC /home/xiang/Documents/cs-drbc/cs445/testsUnit/c08.bC) <(/home/xiang/Documents/cs-drbc/cs445/bC 5  /home/xiang/Documents/cs-drbc/cs445/testsUnit/c08.bC)
+Passed /home/xiang/Documents/cs-drbc/cs445/testsUnit/c09.bC
+Failed: 
+diff -y <(./bC /home/xiang/Documents/cs-drbc/cs445/testsUnit/c0a.bC) <(/home/xiang/Documents/cs-drbc/cs445/bC 5  /home/xiang/Documents/cs-drbc/cs445/testsUnit/c0a.bC)
+Failed: 
+diff -y <(./bC /home/xiang/Documents/cs-drbc/cs445/testsUnit/c0b.bC) <(/home/xiang/Documents/cs-drbc/cs445/bC 5  /home/xiang/Documents/cs-drbc/cs445/testsUnit/c0b.bC)
+Failed: 
+diff -y <(./bC /home/xiang/Documents/cs-drbc/cs445/testsUnit/c0c2.bC) <(/home/xiang/Documents/cs-drbc/cs445/bC 5  /home/xiang/Documents/cs-drbc/cs445/testsUnit/c0c2.bC)
+Failed: 
+diff -y <(./bC /home/xiang/Documents/cs-drbc/cs445/testsUnit/c0c3.bC) <(/home/xiang/Documents/cs-drbc/cs445/bC 5  /home/xiang/Documents/cs-drbc/cs445/testsUnit/c0c3.bC)
+Failed: 
+diff -y <(./bC /home/xiang/Documents/cs-drbc/cs445/testsUnit/c0c4.bC) <(/home/xiang/Documents/cs-drbc/cs445/bC 5  /home/xiang/Documents/cs-drbc/cs445/testsUnit/c0c4.bC)
+Failed: 
+diff -y <(./bC /home/xiang/Documents/cs-drbc/cs445/testsUnit/c0c.bC) <(/home/xiang/Documents/cs-drbc/cs445/bC 5  /home/xiang/Documents/cs-drbc/cs445/testsUnit/c0c.bC)
+Failed: 
+diff -y <(./bC /home/xiang/Documents/cs-drbc/cs445/testsUnit/c0d.bC) <(/home/xiang/Documents/cs-drbc/cs445/bC 5  /home/xiang/Documents/cs-drbc/cs445/testsUnit/c0d.bC)
+Failed: 
+diff -y <(./bC /home/xiang/Documents/cs-drbc/cs445/testsUnit/c0e.bC) <(/home/xiang/Documents/cs-drbc/cs445/bC 5  /home/xiang/Documents/cs-drbc/cs445/testsUnit/c0e.bC)
+Failed: 
+diff -y <(./bC /home/xiang/Documents/cs-drbc/cs445/testsUnit/c0f.bC) <(/home/xiang/Documents/cs-drbc/cs445/bC 5  /home/xiang/Documents/cs-drbc/cs445/testsUnit/c0f.bC)
+Failed: 
+diff -y <(./bC /home/xiang/Documents/cs-drbc/cs445/testsUnit/c0g.bC) <(/home/xiang/Documents/cs-drbc/cs445/bC 5  /home/xiang/Documents/cs-drbc/cs445/testsUnit/c0g.bC)
+Failed: 
+diff -y <(./bC /home/xiang/Documents/cs-drbc/cs445/testsUnit/c0h.bC) <(/home/xiang/Documents/cs-drbc/cs445/bC 5  /home/xiang/Documents/cs-drbc/cs445/testsUnit/c0h.bC)
+Passed /home/xiang/Documents/cs-drbc/cs445/testsUnit/c13.bC
+Passed /home/xiang/Documents/cs-drbc/cs445/testsUnit/c14.bC
+Passed /home/xiang/Documents/cs-drbc/cs445/testsUnit/c15.bC
+Passed /home/xiang/Documents/cs-drbc/cs445/testsUnit/c16.bC
+Passed /home/xiang/Documents/cs-drbc/cs445/testsUnit/c17.bC
+Passed /home/xiang/Documents/cs-drbc/cs445/testsUnit/c18.bC
+Failed: 
+diff -y <(./bC /home/xiang/Documents/cs-drbc/cs445/testsUnit/c19.bC) <(/home/xiang/Documents/cs-drbc/cs445/bC 5  /home/xiang/Documents/cs-drbc/cs445/testsUnit/c19.bC)
+Failed: 
+diff -y <(./bC /home/xiang/Documents/cs-drbc/cs445/testsUnit/c20.bC) <(/home/xiang/Documents/cs-drbc/cs445/bC 5  /home/xiang/Documents/cs-drbc/cs445/testsUnit/c20.bC)
+Failed: 
+diff -y <(./bC /home/xiang/Documents/cs-drbc/cs445/testsUnit/c21.bC) <(/home/xiang/Documents/cs-drbc/cs445/bC 5  /home/xiang/Documents/cs-drbc/cs445/testsUnit/c21.bC)
+Failed: 
+diff -y <(./bC /home/xiang/Documents/cs-drbc/cs445/testsUnit/d015.bC) <(/home/xiang/Documents/cs-drbc/cs445/bC 5  /home/xiang/Documents/cs-drbc/cs445/testsUnit/d015.bC)
+Failed: 
+diff -y <(./bC /home/xiang/Documents/cs-drbc/cs445/testsUnit/d01.bC) <(/home/xiang/Documents/cs-drbc/cs445/bC 5  /home/xiang/Documents/cs-drbc/cs445/testsUnit/d01.bC)
+Passed /home/xiang/Documents/cs-drbc/cs445/testsUnit/d02.bC
+Passed /home/xiang/Documents/cs-drbc/cs445/testsUnit/d03.bC
+Failed: 
+diff -y <(./bC /home/xiang/Documents/cs-drbc/cs445/testsUnit/d045.bC) <(/home/xiang/Documents/cs-drbc/cs445/bC 5  /home/xiang/Documents/cs-drbc/cs445/testsUnit/d045.bC)
+Failed: 
+diff -y <(./bC /home/xiang/Documents/cs-drbc/cs445/testsUnit/d04.bC) <(/home/xiang/Documents/cs-drbc/cs445/bC 5  /home/xiang/Documents/cs-drbc/cs445/testsUnit/d04.bC)
+Failed: 
+diff -y <(./bC /home/xiang/Documents/cs-drbc/cs445/testsUnit/d05.bC) <(/home/xiang/Documents/cs-drbc/cs445/bC 5  /home/xiang/Documents/cs-drbc/cs445/testsUnit/d05.bC)
+Passed /home/xiang/Documents/cs-drbc/cs445/testsUnit/e01.bC
+Passed /home/xiang/Documents/cs-drbc/cs445/testsUnit/e02.bC
+Passed /home/xiang/Documents/cs-drbc/cs445/testsUnit/e03.bC
+Passed /home/xiang/Documents/cs-drbc/cs445/testsUnit/e04.bC
+Passed /home/xiang/Documents/cs-drbc/cs445/testsUnit/e05.bC
+Passed /home/xiang/Documents/cs-drbc/cs445/testsUnit/e06.bC
+Passed /home/xiang/Documents/cs-drbc/cs445/testsUnit/e07.bC
+Passed /home/xiang/Documents/cs-drbc/cs445/testsUnit/e08.bC
+Passed /home/xiang/Documents/cs-drbc/cs445/testsUnit/e09.bC
+Passed /home/xiang/Documents/cs-drbc/cs445/testsUnit/e0a.bC
+Passed /home/xiang/Documents/cs-drbc/cs445/testsUnit/e0b.bC
+Passed /home/xiang/Documents/cs-drbc/cs445/testsUnit/e0c.bC
+Passed /home/xiang/Documents/cs-drbc/cs445/testsUnit/e0d.bC
+Passed /home/xiang/Documents/cs-drbc/cs445/testsUnit/f01.bC
+Passed /home/xiang/Documents/cs-drbc/cs445/testsUnit/f02.bC
+Passed /home/xiang/Documents/cs-drbc/cs445/testsUnit/f03.bC
+Passed /home/xiang/Documents/cs-drbc/cs445/testsUnit/f04.bC
+Failed: 
+diff -y <(./bC /home/xiang/Documents/cs-drbc/cs445/testsUnit/f05.bC) <(/home/xiang/Documents/cs-drbc/cs445/bC 5  /home/xiang/Documents/cs-drbc/cs445/testsUnit/f05.bC)
+Failed: 
+diff -y <(./bC /home/xiang/Documents/cs-drbc/cs445/testsUnit/f06.bC) <(/home/xiang/Documents/cs-drbc/cs445/bC 5  /home/xiang/Documents/cs-drbc/cs445/testsUnit/f06.bC)
+Failed: 
+diff -y <(./bC /home/xiang/Documents/cs-drbc/cs445/testsUnit/f07.bC) <(/home/xiang/Documents/cs-drbc/cs445/bC 5  /home/xiang/Documents/cs-drbc/cs445/testsUnit/f07.bC)
+Passed /home/xiang/Documents/cs-drbc/cs445/testsUnit/f08.bC
+Passed /home/xiang/Documents/cs-drbc/cs445/testsUnit/f09.bC
+Passed /home/xiang/Documents/cs-drbc/cs445/testsUnit/f0a.bC
+Passed /home/xiang/Documents/cs-drbc/cs445/testsUnit/f0b.bC
+Passed /home/xiang/Documents/cs-drbc/cs445/testsUnit/f0c.bC
+Passed /home/xiang/Documents/cs-drbc/cs445/testsUnit/f0d.bC
+Passed /home/xiang/Documents/cs-drbc/cs445/testsUnit/g00.bC
+Passed /home/xiang/Documents/cs-drbc/cs445/testsUnit/g01.bC
+Passed /home/xiang/Documents/cs-drbc/cs445/testsUnit/g02.bC
+Failed: 
+diff -y <(./bC /home/xiang/Documents/cs-drbc/cs445/testsUnit/g03.bC) <(/home/xiang/Documents/cs-drbc/cs445/bC 5  /home/xiang/Documents/cs-drbc/cs445/testsUnit/g03.bC)
+Failed: 
+diff -y <(./bC /home/xiang/Documents/cs-drbc/cs445/testsUnit/g04.bC) <(/home/xiang/Documents/cs-drbc/cs445/bC 5  /home/xiang/Documents/cs-drbc/cs445/testsUnit/g04.bC)
+Failed: 
+diff -y <(./bC /home/xiang/Documents/cs-drbc/cs445/testsUnit/g05.bC) <(/home/xiang/Documents/cs-drbc/cs445/bC 5  /home/xiang/Documents/cs-drbc/cs445/testsUnit/g05.bC)
+Failed: 
+diff -y <(./bC /home/xiang/Documents/cs-drbc/cs445/testsUnit/g06.bC) <(/home/xiang/Documents/cs-drbc/cs445/bC 5  /home/xiang/Documents/cs-drbc/cs445/testsUnit/g06.bC)
+Failed: 
+diff -y <(./bC /home/xiang/Documents/cs-drbc/cs445/testsUnit/g07.bC) <(/home/xiang/Documents/cs-drbc/cs445/bC 5  /home/xiang/Documents/cs-drbc/cs445/testsUnit/g07.bC)
+Failed: 
+diff -y <(./bC /home/xiang/Documents/cs-drbc/cs445/testsUnit/g08.bC) <(/home/xiang/Documents/cs-drbc/cs445/bC 5  /home/xiang/Documents/cs-drbc/cs445/testsUnit/g08.bC)
+Failed: 
+diff -y <(./bC /home/xiang/Documents/cs-drbc/cs445/testsUnit/g09.bC) <(/home/xiang/Documents/cs-drbc/cs445/bC 5  /home/xiang/Documents/cs-drbc/cs445/testsUnit/g09.bC)
+Passed /home/xiang/Documents/cs-drbc/cs445/testsUnit/g0a.bC
+Passed /home/xiang/Documents/cs-drbc/cs445/testsUnit/g0b.bC
+Failed: 
+diff -y <(./bC /home/xiang/Documents/cs-drbc/cs445/testsUnit/g0c.bC) <(/home/xiang/Documents/cs-drbc/cs445/bC 5  /home/xiang/Documents/cs-drbc/cs445/testsUnit/g0c.bC)
+Failed: 
+diff -y <(./bC /home/xiang/Documents/cs-drbc/cs445/testsUnit/g0d.bC) <(/home/xiang/Documents/cs-drbc/cs445/bC 5  /home/xiang/Documents/cs-drbc/cs445/testsUnit/g0d.bC)
+Failed: 
+diff -y <(./bC /home/xiang/Documents/cs-drbc/cs445/testsUnit/g0e.bC) <(/home/xiang/Documents/cs-drbc/cs445/bC 5  /home/xiang/Documents/cs-drbc/cs445/testsUnit/g0e.bC)
+Passed /home/xiang/Documents/cs-drbc/cs445/testsUnit/g0f.bC
+Passed /home/xiang/Documents/cs-drbc/cs445/testsUnit/h01.bC
+Passed /home/xiang/Documents/cs-drbc/cs445/testsUnit/h02.bC
+Failed: 
+diff -y <(./bC /home/xiang/Documents/cs-drbc/cs445/testsUnit/h03.bC) <(/home/xiang/Documents/cs-drbc/cs445/bC 5  /home/xiang/Documents/cs-drbc/cs445/testsUnit/h03.bC)
+Failed: 
+diff -y <(./bC /home/xiang/Documents/cs-drbc/cs445/testsUnit/h04.bC) <(/home/xiang/Documents/cs-drbc/cs445/bC 5  /home/xiang/Documents/cs-drbc/cs445/testsUnit/h04.bC)
+Failed: 
+diff -y <(./bC /home/xiang/Documents/cs-drbc/cs445/testsUnit/h05.bC) <(/home/xiang/Documents/cs-drbc/cs445/bC 5  /home/xiang/Documents/cs-drbc/cs445/testsUnit/h05.bC)
+Failed: 
+diff -y <(./bC /home/xiang/Documents/cs-drbc/cs445/testsUnit/h06.bC) <(/home/xiang/Documents/cs-drbc/cs445/bC 5  /home/xiang/Documents/cs-drbc/cs445/testsUnit/h06.bC)
+Failed: 
+diff -y <(./bC /home/xiang/Documents/cs-drbc/cs445/testsUnit/h07.bC) <(/home/xiang/Documents/cs-drbc/cs445/bC 5  /home/xiang/Documents/cs-drbc/cs445/testsUnit/h07.bC)
+Failed: 
+diff -y <(./bC /home/xiang/Documents/cs-drbc/cs445/testsUnit/h08.bC) <(/home/xiang/Documents/cs-drbc/cs445/bC 5  /home/xiang/Documents/cs-drbc/cs445/testsUnit/h08.bC)
+Passed /home/xiang/Documents/cs-drbc/cs445/testsUnit/i00.bC
+Passed /home/xiang/Documents/cs-drbc/cs445/testsUnit/i01.bC
+Failed: 
+diff -y <(./bC /home/xiang/Documents/cs-drbc/cs445/testsUnit/i02.bC) <(/home/xiang/Documents/cs-drbc/cs445/bC 5  /home/xiang/Documents/cs-drbc/cs445/testsUnit/i02.bC)
+Passed /home/xiang/Documents/cs-drbc/cs445/testsUnit/i03.bC
+Passed /home/xiang/Documents/cs-drbc/cs445/testsUnit/i04.bC
+Failed: 
+diff -y <(./bC /home/xiang/Documents/cs-drbc/cs445/testsUnit/i05.bC) <(/home/xiang/Documents/cs-drbc/cs445/bC 5  /home/xiang/Documents/cs-drbc/cs445/testsUnit/i05.bC)
+Failed: 
+diff -y <(./bC /home/xiang/Documents/cs-drbc/cs445/testsUnit/i06.bC) <(/home/xiang/Documents/cs-drbc/cs445/bC 5  /home/xiang/Documents/cs-drbc/cs445/testsUnit/i06.bC)
+Failed: 
+diff -y <(./bC /home/xiang/Documents/cs-drbc/cs445/testsUnit/i07.bC) <(/home/xiang/Documents/cs-drbc/cs445/bC 5  /home/xiang/Documents/cs-drbc/cs445/testsUnit/i07.bC)
+Passed /home/xiang/Documents/cs-drbc/cs445/testsUnit/i08.bC
+Passed /home/xiang/Documents/cs-drbc/cs445/testsUnit/i09.bC
+Passed /home/xiang/Documents/cs-drbc/cs445/testsUnit/i0a.bC
+Passed /home/xiang/Documents/cs-drbc/cs445/testsUnit/i0b.bC
+Failed: 
+diff -y <(./bC /home/xiang/Documents/cs-drbc/cs445/testsUnit/i0c.bC) <(/home/xiang/Documents/cs-drbc/cs445/bC 5  /home/xiang/Documents/cs-drbc/cs445/testsUnit/i0c.bC)
+Failed: 
+diff -y <(./bC /home/xiang/Documents/cs-drbc/cs445/testsUnit/j00.bC) <(/home/xiang/Documents/cs-drbc/cs445/bC 5  /home/xiang/Documents/cs-drbc/cs445/testsUnit/j00.bC)
+Failed: 
+diff -y <(./bC /home/xiang/Documents/cs-drbc/cs445/testsUnit/k00.bC) <(/home/xiang/Documents/cs-drbc/cs445/bC 5  /home/xiang/Documents/cs-drbc/cs445/testsUnit/k00.bC)
+Failed: 
+diff -y <(./bC /home/xiang/Documents/cs-drbc/cs445/testsUnit/k01.bC) <(/home/xiang/Documents/cs-drbc/cs445/bC 5  /home/xiang/Documents/cs-drbc/cs445/testsUnit/k01.bC)
+Failed: 
+diff -y <(./bC /home/xiang/Documents/cs-drbc/cs445/testsUnit/k02.bC) <(/home/xiang/Documents/cs-drbc/cs445/bC 5  /home/xiang/Documents/cs-drbc/cs445/testsUnit/k02.bC)
+Failed: 
+diff -y <(./bC /home/xiang/Documents/cs-drbc/cs445/testsUnit/k03.bC) <(/home/xiang/Documents/cs-drbc/cs445/bC 5  /home/xiang/Documents/cs-drbc/cs445/testsUnit/k03.bC)
+Failed: 
+diff -y <(./bC /home/xiang/Documents/cs-drbc/cs445/testsUnit/k04.bC) <(/home/xiang/Documents/cs-drbc/cs445/bC 5  /home/xiang/Documents/cs-drbc/cs445/testsUnit/k04.bC)
+Failed: 
+diff -y <(./bC /home/xiang/Documents/cs-drbc/cs445/testsUnit/k05.bC) <(/home/xiang/Documents/cs-drbc/cs445/bC 5  /home/xiang/Documents/cs-drbc/cs445/testsUnit/k05.bC)
+Failed: 
+diff -y <(./bC /home/xiang/Documents/cs-drbc/cs445/testsUnit/k06.bC) <(/home/xiang/Documents/cs-drbc/cs445/bC 5  /home/xiang/Documents/cs-drbc/cs445/testsUnit/k06.bC)
+Failed: 
+diff -y <(./bC /home/xiang/Documents/cs-drbc/cs445/testsUnit/k07.bC) <(/home/xiang/Documents/cs-drbc/cs445/bC 5  /home/xiang/Documents/cs-drbc/cs445/testsUnit/k07.bC)
+Failed: 
+diff -y <(./bC /home/xiang/Documents/cs-drbc/cs445/testsUnit/k08.bC) <(/home/xiang/Documents/cs-drbc/cs445/bC 5  /home/xiang/Documents/cs-drbc/cs445/testsUnit/k08.bC)
+Passed /home/xiang/Documents/cs-drbc/cs445/testsUnit/mod.bC
+Passed /home/xiang/Documents/cs-drbc/cs445/testsUnit/s00.bC
+Failed: 
+diff -y <(./bC /home/xiang/Documents/cs-drbc/cs445/testsUnit/s013.bC) <(/home/xiang/Documents/cs-drbc/cs445/bC 5  /home/xiang/Documents/cs-drbc/cs445/testsUnit/s013.bC)
+Failed: 
+diff -y <(./bC /home/xiang/Documents/cs-drbc/cs445/testsUnit/s015.bC) <(/home/xiang/Documents/cs-drbc/cs445/bC 5  /home/xiang/Documents/cs-drbc/cs445/testsUnit/s015.bC)
+Failed: 
+diff -y <(./bC /home/xiang/Documents/cs-drbc/cs445/testsUnit/s01.bC) <(/home/xiang/Documents/cs-drbc/cs445/bC 5  /home/xiang/Documents/cs-drbc/cs445/testsUnit/s01.bC)
+Failed: 
+diff -y <(./bC /home/xiang/Documents/cs-drbc/cs445/testsUnit/s025.bC) <(/home/xiang/Documents/cs-drbc/cs445/bC 5  /home/xiang/Documents/cs-drbc/cs445/testsUnit/s025.bC)
+Failed: 
+diff -y <(./bC /home/xiang/Documents/cs-drbc/cs445/testsUnit/s02.bC) <(/home/xiang/Documents/cs-drbc/cs445/bC 5  /home/xiang/Documents/cs-drbc/cs445/testsUnit/s02.bC)
+Failed: 
+diff -y <(./bC /home/xiang/Documents/cs-drbc/cs445/testsUnit/s02e.bC) <(/home/xiang/Documents/cs-drbc/cs445/bC 5  /home/xiang/Documents/cs-drbc/cs445/testsUnit/s02e.bC)
+Passed /home/xiang/Documents/cs-drbc/cs445/testsUnit/s03.bC
+Passed /home/xiang/Documents/cs-drbc/cs445/testsUnit/s04.bC
+Failed: 
+diff -y <(./bC /home/xiang/Documents/cs-drbc/cs445/testsUnit/s05.bC) <(/home/xiang/Documents/cs-drbc/cs445/bC 5  /home/xiang/Documents/cs-drbc/cs445/testsUnit/s05.bC)
+Passed /home/xiang/Documents/cs-drbc/cs445/testsUnit/t00.bC
+Failed: 
+diff -y <(./bC /home/xiang/Documents/cs-drbc/cs445/testsUnit/t01.bC) <(/home/xiang/Documents/cs-drbc/cs445/bC 5  /home/xiang/Documents/cs-drbc/cs445/testsUnit/t01.bC)
+Passed /home/xiang/Documents/cs-drbc/cs445/testsUnit/t02.bC
+Passed /home/xiang/Documents/cs-drbc/cs445/testsUnit/t03.bC
+Passed /home/xiang/Documents/cs-drbc/cs445/testsUnit/u00.bC
+Passed /home/xiang/Documents/cs-drbc/cs445/testsUnit/u01.bC
+Passed /home/xiang/Documents/cs-drbc/cs445/testsUnit/u02.bC
+Passed /home/xiang/Documents/cs-drbc/cs445/testsUnit/u03.bC
+0 Files skipped.
+82/153 Passed.
+13/25 Points.
+Broad Testing: /home/xiang/Documents/cs-drbc/cs445/testBroad/*.bC
+Passed /home/xiang/Documents/cs-drbc/cs445/testBroad/aamain2.bC
+Failed: 
+diff -y <(./bC /home/xiang/Documents/cs-drbc/cs445/testBroad/array0.bC) <(/home/xiang/Documents/cs-drbc/cs445/bC 5  /home/xiang/Documents/cs-drbc/cs445/testBroad/array0.bC)
+Failed: 
+diff -y <(./bC /home/xiang/Documents/cs-drbc/cs445/testBroad/array1.bC) <(/home/xiang/Documents/cs-drbc/cs445/bC 5  /home/xiang/Documents/cs-drbc/cs445/testBroad/array1.bC)
+Failed: 
+diff -y <(./bC /home/xiang/Documents/cs-drbc/cs445/testBroad/array2.bC) <(/home/xiang/Documents/cs-drbc/cs445/bC 5  /home/xiang/Documents/cs-drbc/cs445/testBroad/array2.bC)
+Failed: 
+diff -y <(./bC /home/xiang/Documents/cs-drbc/cs445/testBroad/array.bC) <(/home/xiang/Documents/cs-drbc/cs445/bC 5  /home/xiang/Documents/cs-drbc/cs445/testBroad/array.bC)
+Failed: 
+diff -y <(./bC /home/xiang/Documents/cs-drbc/cs445/testBroad/arraysize.bC) <(/home/xiang/Documents/cs-drbc/cs445/bC 5  /home/xiang/Documents/cs-drbc/cs445/testBroad/arraysize.bC)
+Failed: 
+diff -y <(./bC /home/xiang/Documents/cs-drbc/cs445/testBroad/assign1.bC) <(/home/xiang/Documents/cs-drbc/cs445/bC 5  /home/xiang/Documents/cs-drbc/cs445/testBroad/assign1.bC)
+Failed: 
+diff -y <(./bC /home/xiang/Documents/cs-drbc/cs445/testBroad/assign2.bC) <(/home/xiang/Documents/cs-drbc/cs445/bC 5  /home/xiang/Documents/cs-drbc/cs445/testBroad/assign2.bC)
+Passed /home/xiang/Documents/cs-drbc/cs445/testBroad/assign3.bC
+Passed /home/xiang/Documents/cs-drbc/cs445/testBroad/assign4.bC
+Passed /home/xiang/Documents/cs-drbc/cs445/testBroad/assign5.bC
+Failed: 
+diff -y <(./bC /home/xiang/Documents/cs-drbc/cs445/testBroad/assign6.bC) <(/home/xiang/Documents/cs-drbc/cs445/bC 5  /home/xiang/Documents/cs-drbc/cs445/testBroad/assign6.bC)
+Failed: 
+diff -y <(./bC /home/xiang/Documents/cs-drbc/cs445/testBroad/break2.bC) <(/home/xiang/Documents/cs-drbc/cs445/bC 5  /home/xiang/Documents/cs-drbc/cs445/testBroad/break2.bC)
+Failed: 
+diff -y <(./bC /home/xiang/Documents/cs-drbc/cs445/testBroad/call2.bC) <(/home/xiang/Documents/cs-drbc/cs445/bC 5  /home/xiang/Documents/cs-drbc/cs445/testBroad/call2.bC)
+Failed: 
+diff -y <(./bC /home/xiang/Documents/cs-drbc/cs445/testBroad/call5.bC) <(/home/xiang/Documents/cs-drbc/cs445/bC 5  /home/xiang/Documents/cs-drbc/cs445/testBroad/call5.bC)
+Failed: 
+diff -y <(./bC /home/xiang/Documents/cs-drbc/cs445/testBroad/call.bC) <(/home/xiang/Documents/cs-drbc/cs445/bC 5  /home/xiang/Documents/cs-drbc/cs445/testBroad/call.bC)
+Passed /home/xiang/Documents/cs-drbc/cs445/testBroad/charout.bC
+Failed: 
+diff -y <(./bC /home/xiang/Documents/cs-drbc/cs445/testBroad/comb.bC) <(/home/xiang/Documents/cs-drbc/cs445/bC 5  /home/xiang/Documents/cs-drbc/cs445/testBroad/comb.bC)
+Failed: 
+diff -y <(./bC /home/xiang/Documents/cs-drbc/cs445/testBroad/combslow.bC) <(/home/xiang/Documents/cs-drbc/cs445/bC 5  /home/xiang/Documents/cs-drbc/cs445/testBroad/combslow.bC)
+Failed: 
+diff -y <(./bC /home/xiang/Documents/cs-drbc/cs445/testBroad/compare.bC) <(/home/xiang/Documents/cs-drbc/cs445/bC 5  /home/xiang/Documents/cs-drbc/cs445/testBroad/compare.bC)
+Passed /home/xiang/Documents/cs-drbc/cs445/testBroad/control2.bC
+Passed /home/xiang/Documents/cs-drbc/cs445/testBroad/e.bC
+Failed: 
+diff -y <(./bC /home/xiang/Documents/cs-drbc/cs445/testBroad/examplearray3.bC) <(/home/xiang/Documents/cs-drbc/cs445/bC 5  /home/xiang/Documents/cs-drbc/cs445/testBroad/examplearray3.bC)
+Failed: 
+diff -y <(./bC /home/xiang/Documents/cs-drbc/cs445/testBroad/exp3.bC) <(/home/xiang/Documents/cs-drbc/cs445/bC 5  /home/xiang/Documents/cs-drbc/cs445/testBroad/exp3.bC)
+Failed: 
+diff -y <(./bC /home/xiang/Documents/cs-drbc/cs445/testBroad/factor2.bC) <(/home/xiang/Documents/cs-drbc/cs445/bC 5  /home/xiang/Documents/cs-drbc/cs445/testBroad/factor2.bC)
+Passed /home/xiang/Documents/cs-drbc/cs445/testBroad/factor.bC
+Passed /home/xiang/Documents/cs-drbc/cs445/testBroad/factorial2.bC
+Passed /home/xiang/Documents/cs-drbc/cs445/testBroad/factorial.bC
+Passed /home/xiang/Documents/cs-drbc/cs445/testBroad/factorialr.bC
+Failed: 
+diff -y <(./bC /home/xiang/Documents/cs-drbc/cs445/testBroad/fib.bC) <(/home/xiang/Documents/cs-drbc/cs445/bC 5  /home/xiang/Documents/cs-drbc/cs445/testBroad/fib.bC)
+Failed: 
+diff -y <(./bC /home/xiang/Documents/cs-drbc/cs445/testBroad/fromroman.bC) <(/home/xiang/Documents/cs-drbc/cs445/bC 5  /home/xiang/Documents/cs-drbc/cs445/testBroad/fromroman.bC)
+Passed /home/xiang/Documents/cs-drbc/cs445/testBroad/gcd.bC
+Failed: 
+diff -y <(./bC /home/xiang/Documents/cs-drbc/cs445/testBroad/gcdsm.bC) <(/home/xiang/Documents/cs-drbc/cs445/bC 5  /home/xiang/Documents/cs-drbc/cs445/testBroad/gcdsm.bC)
+Failed: 
+diff -y <(./bC /home/xiang/Documents/cs-drbc/cs445/testBroad/globalArray.bC) <(/home/xiang/Documents/cs-drbc/cs445/bC 5  /home/xiang/Documents/cs-drbc/cs445/testBroad/globalArray.bC)
+Failed: 
+diff -y <(./bC /home/xiang/Documents/cs-drbc/cs445/testBroad/global.bC) <(/home/xiang/Documents/cs-drbc/cs445/bC 5  /home/xiang/Documents/cs-drbc/cs445/testBroad/global.bC)
+Failed: 
+diff -y <(./bC /home/xiang/Documents/cs-drbc/cs445/testBroad/if.bC) <(/home/xiang/Documents/cs-drbc/cs445/bC 5  /home/xiang/Documents/cs-drbc/cs445/testBroad/if.bC)
+Failed: 
+diff -y <(./bC /home/xiang/Documents/cs-drbc/cs445/testBroad/inc.bC) <(/home/xiang/Documents/cs-drbc/cs445/bC 5  /home/xiang/Documents/cs-drbc/cs445/testBroad/inc.bC)
+Failed: 
+diff -y <(./bC /home/xiang/Documents/cs-drbc/cs445/testBroad/initbig.bC) <(/home/xiang/Documents/cs-drbc/cs445/bC 5  /home/xiang/Documents/cs-drbc/cs445/testBroad/initbig.bC)
+Failed: 
+diff -y <(./bC /home/xiang/Documents/cs-drbc/cs445/testBroad/io.bC) <(/home/xiang/Documents/cs-drbc/cs445/bC 5  /home/xiang/Documents/cs-drbc/cs445/testBroad/io.bC)
+Failed: 
+diff -y <(./bC /home/xiang/Documents/cs-drbc/cs445/testBroad/localArray.bC) <(/home/xiang/Documents/cs-drbc/cs445/bC 5  /home/xiang/Documents/cs-drbc/cs445/testBroad/localArray.bC)
+Failed: 
+diff -y <(./bC /home/xiang/Documents/cs-drbc/cs445/testBroad/local.bC) <(/home/xiang/Documents/cs-drbc/cs445/bC 5  /home/xiang/Documents/cs-drbc/cs445/testBroad/local.bC)
+Failed: 
+diff -y <(./bC /home/xiang/Documents/cs-drbc/cs445/testBroad/logic2.bC) <(/home/xiang/Documents/cs-drbc/cs445/bC 5  /home/xiang/Documents/cs-drbc/cs445/testBroad/logic2.bC)
+Failed: 
+diff -y <(./bC /home/xiang/Documents/cs-drbc/cs445/testBroad/logic.bC) <(/home/xiang/Documents/cs-drbc/cs445/bC 5  /home/xiang/Documents/cs-drbc/cs445/testBroad/logic.bC)
+Passed /home/xiang/Documents/cs-drbc/cs445/testBroad/main2.bC
+Failed: 
+diff -y <(./bC /home/xiang/Documents/cs-drbc/cs445/testBroad/mastermind.bC) <(/home/xiang/Documents/cs-drbc/cs445/bC 5  /home/xiang/Documents/cs-drbc/cs445/testBroad/mastermind.bC)
+Failed: 
+diff -y <(./bC /home/xiang/Documents/cs-drbc/cs445/testBroad/miller.bC) <(/home/xiang/Documents/cs-drbc/cs445/bC 5  /home/xiang/Documents/cs-drbc/cs445/testBroad/miller.bC)
+Passed /home/xiang/Documents/cs-drbc/cs445/testBroad/nest.bC
+Failed: 
+diff -y <(./bC /home/xiang/Documents/cs-drbc/cs445/testBroad/op1.bC) <(/home/xiang/Documents/cs-drbc/cs445/bC 5  /home/xiang/Documents/cs-drbc/cs445/testBroad/op1.bC)
+Failed: 
+diff -y <(./bC /home/xiang/Documents/cs-drbc/cs445/testBroad/ops.bC) <(/home/xiang/Documents/cs-drbc/cs445/bC 5  /home/xiang/Documents/cs-drbc/cs445/testBroad/ops.bC)
+Failed: 
+diff -y <(./bC /home/xiang/Documents/cs-drbc/cs445/testBroad/permlist.bC) <(/home/xiang/Documents/cs-drbc/cs445/bC 5  /home/xiang/Documents/cs-drbc/cs445/testBroad/permlist.bC)
+Failed: 
+diff -y <(./bC /home/xiang/Documents/cs-drbc/cs445/testBroad/pi.bC) <(/home/xiang/Documents/cs-drbc/cs445/bC 5  /home/xiang/Documents/cs-drbc/cs445/testBroad/pi.bC)
+Passed /home/xiang/Documents/cs-drbc/cs445/testBroad/poker.bC
+Passed /home/xiang/Documents/cs-drbc/cs445/testBroad/polynum.bC
+Failed: 
+diff -y <(./bC /home/xiang/Documents/cs-drbc/cs445/testBroad/proc.bC) <(/home/xiang/Documents/cs-drbc/cs445/bC 5  /home/xiang/Documents/cs-drbc/cs445/testBroad/proc.bC)
+Failed: 
+diff -y <(./bC /home/xiang/Documents/cs-drbc/cs445/testBroad/ptriangle.bC) <(/home/xiang/Documents/cs-drbc/cs445/bC 5  /home/xiang/Documents/cs-drbc/cs445/testBroad/ptriangle.bC)
+Failed: 
+diff -y <(./bC /home/xiang/Documents/cs-drbc/cs445/testBroad/pushpoparray.bC) <(/home/xiang/Documents/cs-drbc/cs445/bC 5  /home/xiang/Documents/cs-drbc/cs445/testBroad/pushpoparray.bC)
+Failed: 
+diff -y <(./bC /home/xiang/Documents/cs-drbc/cs445/testBroad/pushpopcall2.bC) <(/home/xiang/Documents/cs-drbc/cs445/bC 5  /home/xiang/Documents/cs-drbc/cs445/testBroad/pushpopcall2.bC)
+Failed: 
+diff -y <(./bC /home/xiang/Documents/cs-drbc/cs445/testBroad/pushpopcall3.bC) <(/home/xiang/Documents/cs-drbc/cs445/bC 5  /home/xiang/Documents/cs-drbc/cs445/testBroad/pushpopcall3.bC)
+Failed: 
+diff -y <(./bC /home/xiang/Documents/cs-drbc/cs445/testBroad/pushpopcall.bC) <(/home/xiang/Documents/cs-drbc/cs445/bC 5  /home/xiang/Documents/cs-drbc/cs445/testBroad/pushpopcall.bC)
+Failed: 
+diff -y <(./bC /home/xiang/Documents/cs-drbc/cs445/testBroad/pushpopexp.bC) <(/home/xiang/Documents/cs-drbc/cs445/bC 5  /home/xiang/Documents/cs-drbc/cs445/testBroad/pushpopexp.bC)
+Failed: 
+diff -y <(./bC /home/xiang/Documents/cs-drbc/cs445/testBroad/pushpopparm.bC) <(/home/xiang/Documents/cs-drbc/cs445/bC 5  /home/xiang/Documents/cs-drbc/cs445/testBroad/pushpopparm.bC)
+Passed /home/xiang/Documents/cs-drbc/cs445/testBroad/pushpoptiny.bC
+Failed: 
+diff -y <(./bC /home/xiang/Documents/cs-drbc/cs445/testBroad/queens.bC) <(/home/xiang/Documents/cs-drbc/cs445/bC 5  /home/xiang/Documents/cs-drbc/cs445/testBroad/queens.bC)
+Passed /home/xiang/Documents/cs-drbc/cs445/testBroad/return.bC
+Passed /home/xiang/Documents/cs-drbc/cs445/testBroad/righttri.bC
+Failed: 
+diff -y <(./bC /home/xiang/Documents/cs-drbc/cs445/testBroad/scope2.bC) <(/home/xiang/Documents/cs-drbc/cs445/bC 5  /home/xiang/Documents/cs-drbc/cs445/testBroad/scope2.bC)
+Failed: 
+diff -y <(./bC /home/xiang/Documents/cs-drbc/cs445/testBroad/sieve.bC) <(/home/xiang/Documents/cs-drbc/cs445/bC 5  /home/xiang/Documents/cs-drbc/cs445/testBroad/sieve.bC)
+Failed: 
+diff -y <(./bC /home/xiang/Documents/cs-drbc/cs445/testBroad/sort2.bC) <(/home/xiang/Documents/cs-drbc/cs445/bC 5  /home/xiang/Documents/cs-drbc/cs445/testBroad/sort2.bC)
+Failed: 
+diff -y <(./bC /home/xiang/Documents/cs-drbc/cs445/testBroad/sort.bC) <(/home/xiang/Documents/cs-drbc/cs445/bC 5  /home/xiang/Documents/cs-drbc/cs445/testBroad/sort.bC)
+Failed: 
+diff -y <(./bC /home/xiang/Documents/cs-drbc/cs445/testBroad/sudoku.bC) <(/home/xiang/Documents/cs-drbc/cs445/bC 5  /home/xiang/Documents/cs-drbc/cs445/testBroad/sudoku.bC)
+Passed /home/xiang/Documents/cs-drbc/cs445/testBroad/tictactoe.bC
+Failed: 
+diff -y <(./bC /home/xiang/Documents/cs-drbc/cs445/testBroad/tiny3.bC) <(/home/xiang/Documents/cs-drbc/cs445/bC 5  /home/xiang/Documents/cs-drbc/cs445/testBroad/tiny3.bC)
+Passed /home/xiang/Documents/cs-drbc/cs445/testBroad/tinyArray.bC
+Failed: 
+diff -y <(./bC /home/xiang/Documents/cs-drbc/cs445/testBroad/tinyAssignBool.bC) <(/home/xiang/Documents/cs-drbc/cs445/bC 5  /home/xiang/Documents/cs-drbc/cs445/testBroad/tinyAssignBool.bC)
+Failed: 
+diff -y <(./bC /home/xiang/Documents/cs-drbc/cs445/testBroad/tinyAssignChar.bC) <(/home/xiang/Documents/cs-drbc/cs445/bC 5  /home/xiang/Documents/cs-drbc/cs445/testBroad/tinyAssignChar.bC)
+Failed: 
+diff -y <(./bC /home/xiang/Documents/cs-drbc/cs445/testBroad/tinyAssignInt.bC) <(/home/xiang/Documents/cs-drbc/cs445/bC 5  /home/xiang/Documents/cs-drbc/cs445/testBroad/tinyAssignInt.bC)
+Passed /home/xiang/Documents/cs-drbc/cs445/testBroad/tiny.bC
+Passed /home/xiang/Documents/cs-drbc/cs445/testBroad/tinyBreak2.bC
+Failed: 
+diff -y <(./bC /home/xiang/Documents/cs-drbc/cs445/testBroad/tinyCall2.bC) <(/home/xiang/Documents/cs-drbc/cs445/bC 5  /home/xiang/Documents/cs-drbc/cs445/testBroad/tinyCall2.bC)
+Failed: 
+diff -y <(./bC /home/xiang/Documents/cs-drbc/cs445/testBroad/tinyCall3.bC) <(/home/xiang/Documents/cs-drbc/cs445/bC 5  /home/xiang/Documents/cs-drbc/cs445/testBroad/tinyCall3.bC)
+Failed: 
+diff -y <(./bC /home/xiang/Documents/cs-drbc/cs445/testBroad/tinyCall.bC) <(/home/xiang/Documents/cs-drbc/cs445/bC 5  /home/xiang/Documents/cs-drbc/cs445/testBroad/tinyCall.bC)
+Passed /home/xiang/Documents/cs-drbc/cs445/testBroad/tinyConstants.bC
+Failed: 
+diff -y <(./bC /home/xiang/Documents/cs-drbc/cs445/testBroad/tinyExp.bC) <(/home/xiang/Documents/cs-drbc/cs445/bC 5  /home/xiang/Documents/cs-drbc/cs445/testBroad/tinyExp.bC)
+Passed /home/xiang/Documents/cs-drbc/cs445/testBroad/tinyInit2.bC
+Failed: 
+diff -y <(./bC /home/xiang/Documents/cs-drbc/cs445/testBroad/tinyInit3.bC) <(/home/xiang/Documents/cs-drbc/cs445/bC 5  /home/xiang/Documents/cs-drbc/cs445/testBroad/tinyInit3.bC)
+Passed /home/xiang/Documents/cs-drbc/cs445/testBroad/tinyNest.bC
+Failed: 
+diff -y <(./bC /home/xiang/Documents/cs-drbc/cs445/testBroad/tinyOps.bC) <(/home/xiang/Documents/cs-drbc/cs445/bC 5  /home/xiang/Documents/cs-drbc/cs445/testBroad/tinyOps.bC)
+Failed: 
+diff -y <(./bC /home/xiang/Documents/cs-drbc/cs445/testBroad/tinyRandomRoll.bC) <(/home/xiang/Documents/cs-drbc/cs445/bC 5  /home/xiang/Documents/cs-drbc/cs445/testBroad/tinyRandomRoll.bC)
+Passed /home/xiang/Documents/cs-drbc/cs445/testBroad/tinyStatic.bC
+Failed: 
+diff -y <(./bC /home/xiang/Documents/cs-drbc/cs445/testBroad/tinyVarAssign.bC) <(/home/xiang/Documents/cs-drbc/cs445/bC 5  /home/xiang/Documents/cs-drbc/cs445/testBroad/tinyVarAssign.bC)
+Failed: 
+diff -y <(./bC /home/xiang/Documents/cs-drbc/cs445/testBroad/tinyVarPair.bC) <(/home/xiang/Documents/cs-drbc/cs445/bC 5  /home/xiang/Documents/cs-drbc/cs445/testBroad/tinyVarPair.bC)
+Failed: 
+diff -y <(./bC /home/xiang/Documents/cs-drbc/cs445/testBroad/unary.bC) <(/home/xiang/Documents/cs-drbc/cs445/bC 5  /home/xiang/Documents/cs-drbc/cs445/testBroad/unary.bC)
+Failed: 
+diff -y <(./bC /home/xiang/Documents/cs-drbc/cs445/testBroad/var2.bC) <(/home/xiang/Documents/cs-drbc/cs445/bC 5  /home/xiang/Documents/cs-drbc/cs445/testBroad/var2.bC)
+Failed: 
+diff -y <(./bC /home/xiang/Documents/cs-drbc/cs445/testBroad/vararray.bC) <(/home/xiang/Documents/cs-drbc/cs445/bC 5  /home/xiang/Documents/cs-drbc/cs445/testBroad/vararray.bC)
+Failed: 
+diff -y <(./bC /home/xiang/Documents/cs-drbc/cs445/testBroad/var.bC) <(/home/xiang/Documents/cs-drbc/cs445/bC 5  /home/xiang/Documents/cs-drbc/cs445/testBroad/var.bC)
+Failed: 
+diff -y <(./bC /home/xiang/Documents/cs-drbc/cs445/testBroad/varnovoid.bC) <(/home/xiang/Documents/cs-drbc/cs445/bC 5  /home/xiang/Documents/cs-drbc/cs445/testBroad/varnovoid.bC)
+Failed: 
+diff -y <(./bC /home/xiang/Documents/cs-drbc/cs445/testBroad/walsh.bC) <(/home/xiang/Documents/cs-drbc/cs445/bC 5  /home/xiang/Documents/cs-drbc/cs445/testBroad/walsh.bC)
+Passed /home/xiang/Documents/cs-drbc/cs445/testBroad/while.bC
+0 Files skipped.
+28/98 Passed.
+7/25 Points.
+Saving: w05_xian7710_120_846415041.tar
+Making .tar
+/bin/rm *~ parser.tab.o lex.yy.o treeUtils.o semantics.o symbolTable.o codegen.o emitcode.o  bC lex.yy.c parser.tab.h parser.tab.c parser.tar parser.output  
+/bin/rm: cannot remove '*~': No such file or directory
+/bin/rm: cannot remove 'parser.tar': No such file or directory
+make: *** [makefile:53: clean] Error 1
+tar -cvf w05_xian7710_120_846415041.tar *
+0_bC_Context_Free_Grammar.txt
+child[0]
+codegen.cpp
+codegen.cpp\\
+codegen.cpp.save
+codegen.cpp.save.1
+codegen.cpp.save.2
+codegen.cpp.save.3
+codegen.cpp.save.4
+codegen.h
+currentNode-.save
+emitcode.cpp
+emitcode.h
+makefile
+parser.l
+parser.l.save
+parser.y
+parser.y.save
+parser.y.save.1
+parser.y.save.2
+parser.y.save.3
+parser.y.save.4
+readme.txt
+scanType.h
+semantics.cpp
+semantics.cpp.save
+semantics.cpp.save.1
+semantics.cpp.save.2
+semantics.h
+symbolTable.cpp
+symbolTable.h
+test00.bC
+test0setValue.bC
+test1.bC
+testb.bC
+treeNodes.h
+treeUtils.cpp
+treeUtils.cpp.save
+treeUtils.h
+
+Your current directory is /home/xian7710/cs445/w05, 
+Enter file name to check in: Course to check file in for (e.g., cs150): Submission of /home/xian7710/cs445/w05/w05_xian7710_120_846415041.tar completed on Fri May 16 16:18:52 2025
+Names of files you have checked in:
+	Date				Size	Name
+	Fri May 16 16:18:52 2025	389120	xian7710.w05_xian7710_120_846415041.tar
+	Fri May 16 16:15:30 2025	153600	xian7710.w06_xian7710_151_1010237196.tar
+End of list
+rm w05_xian7710_120_846415041.tar
+bison -v -t -d parser.y  
+parser.y: warning: 1 shift/reduce conflict [-Wconflicts-sr]
+g++  -O3       -c -o parser.tab.o parser.tab.c
+flex parser.l
+g++  -O3       -c -o lex.yy.o lex.yy.c
+g++  -O3       -c -o treeUtils.o treeUtils.cpp
+g++  -O3       -c -o semantics.o semantics.cpp
+g++  -O3       -c -o symbolTable.o symbolTable.cpp
+g++  -O3       -c -o codegen.o codegen.cpp
+g++  -O3       -c -o emitcode.o emitcode.cpp
+g++ -O3      parser.tab.o lex.yy.o treeUtils.o semantics.o symbolTable.o codegen.o emitcode.o  -lm  -o bC
+That gives you 120 marks.
+You can get 30 more marks through this process.
+*** Submission successful! ***

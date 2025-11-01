@@ -1,0 +1,106 @@
+#DRBC w01
+#DRBC test all production rules in bC   //prod rule 2
+
+int testIntA, testIntB;
+
+int main() {   //prod rule 3   
+
+   static int x: 5;
+   int y: 10;   //prod rule 8
+   
+   int a: x + y;
+   int b: y-x;
+   int c: x*y;
+   int d: y / x;
+
+   int e: ?10;
+   int f: 20%2; 
+   int g: -5;
+
+   int max: 4 :>: 5;
+   int min: 5 :<: 6;
+
+   char myChar, yourChar: 'c';
+
+   int s: 5, f: 4;
+
+   bool myBool: true;
+
+   int myAdd: add(3, 4);
+
+   int mylist[5];
+
+   int s: anotherFunc(1, 2, 'c');
+
+   for m = 0 to 100 do { 
+
+      for n = 0 to 100 by 2 do
+
+         if (true == true) then {y += 2;}
+
+         else while (true == false) do
+
+             if (false != false) then y = -100;
+
+   }
+
+   myList[a - b];
+   
+   if ((a > b) or (a = b)) then (a += 1);
+   
+   if ((a < b) and (b > 3)) then (a -= 1);
+
+   while (a < b) do (a += 1); 
+
+   for i = 1 to 5 by 1 do a+i;
+
+   for j = 0 to 5 do b+j;
+
+   if (a < b) then a+1; else b+1; 
+
+   while (true) do
+      a+=1;
+      if (a > 49) then break;;
+  
+   if (a >= b) then a+b;
+   
+   if (a <= b) then a+b;
+
+   if (a != b) then a+b;
+
+   if (a == b) then a+b;
+
+   if (not a==b) then a=b; else b=a; 
+
+   myFunc(*listOne, listTwo);
+
+   randomFunc();
+}
+
+
+int add (int a; int b) {
+
+   if (a > b) then return a -= b;
+   return a + b;
+   return a += b;
+   return a *= b;
+   return a /= b;
+   return a++;
+   return a--;
+   return "cole";
+   return ; 
+}
+
+int myFunc (int list[], listTwo[]) {
+
+}
+
+int randomFunc() {
+   return 5;
+}
+
+func(int a) if (true == true) then return 1;
+
+int anotherFunc(int a, b; char c) {
+   return 5;
+}

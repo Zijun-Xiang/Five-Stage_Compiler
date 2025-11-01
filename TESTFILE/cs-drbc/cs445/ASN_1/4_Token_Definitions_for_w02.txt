@@ -1,0 +1,45 @@
+Some Token Definitions
+ letter = a | . . . | z | A | . . . | Z | _
+ digit = 0 | . . . | 9
+ letdig = digit | letter
+
+ ID = letter letdig*
+ NUMCONST = digit+
+
+CHARCONST = is a representation for a single character by placing that character 
+in single quotes. A backslash is an escape character. Any character preceded by 
+a backslash is interpreted as that character. For example: 
+   \x is the letter x, 
+   \' is a single quote, 
+   \\ is a single backslash. 
+There are only two exceptions to this rule: 
+   \n is a newline character and (Be carful using this one!)
+   \0 is the null character.
+
+STRINGCONST = any series of zero or more characters enclosed by double quotes. 
+A backslash is an escape character. Any character preceded by a backslash is 
+interpreted as that character without meaning to the string syntax. For example: 
+   \x is the letter x, 
+   \" is a double quote, 
+   \' is a single quote, 
+   \\ is a single backslash. 
+There are only two exceptions to this rule: 
+   \n is a newline character and (Be carful!!!)
+   \0 is the null character. 
+The string constant can be an empty string: a string of length 0. 
+All string constants are terminated by the first unescaped double quote. 
+String constants must be entirely contained on a single line, that is, they
+contain no unescaped newlines!
+
+White space (a sequence of blanks and tabs) is ignored. Whitespace may be 
+required to separate some tokens in order to get the scanner not to collapse 
+them into one token. For example: 
+   "intx" is a single ID while 
+   "int x" is the type int followed by the ID x. 
+The scanner, by its nature, is a greedy matcher.
+
+Comments are ignored by the scanner. Comments begin with // and run to the end 
+of the line.
+ 
+All keywords are in lowercase. You need not worry about being case independent 
+since not all lex/flex programs make that easy.

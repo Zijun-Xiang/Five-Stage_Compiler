@@ -1,0 +1,68 @@
+A table of all operators in the language. 
+Note that bC supports = for all types of arrays. 
+It does not support relative testing: ≥, ≤, >, < for any arrays.
+
+Operator          Arguments
+===============   ==========
+initialization    equal,string
+initialization    equal 
+---------------   ----------
+
+
+Name   Operator    Arguments   Return Type
+====   =========   =========   ==========
+NOT    not         bool        bool
+AND    and         bool,bool   bool
+OR     or          bool,bool   bool
+----   ---------   ---------   ---------
+EQ     ==          equal types bool
+NEQ    !=          equal types bool
+LEQ    <=          int,int     bool
+<      <           int,int     bool
+GEQ    >=          int,int     bool
+>      >           int,int     bool
+LEQ    <=          char,char   bool
+<      <           char,char   bool
+GEQ    >=          char,char   bool
+>      >           char,char   bool
+----   ---------   ---------   ---------
+=      =           equal types type of lhs
+                   (incl. arrays)
+ADDASS +=          int,int     int
+SUBASS −=          int,int     int
+MULASS *=          int,int     int
+DIVASS /=          int,int     int
+DEC    −−          int         int
+INC    ++          int         int
+----   ---------   ---------   ---------
+*      *           any array   int
+−      −           int         int
+?      ?           int         int
+----   ---------   ---------   ---------
+*      *           int,int     int
++      +           int,int     int
+−      −           int,int     int
+/      /           int,int     int
+%      %           int,int     int
+[ ]    [ ]         array,int   type of lhs
+----   ---------   ---------   ---------
+
+Name   Operator   Arguments   Return Type
+=====  =========  =========   ==========
+MIN    :<:        int,int     int
+MAX    :>:        int,int     int
+
+Notes:
+?n generates a uniform random integer in the range 0 to |n|-1 
+with the sign of n attached to the result. 
+?5 is a random number in the range 0 to 4. 
+?-5 is a random number in the range 0 to -4. 
+?0 is undefined.
+
+x :<: y returns the smaller of the two integers.
+4 :<: 5 returns 4.
+
+The unary * takes an array as an argument and returns the size of the array.
+like: *myArray
+
+The logical operators & and | are NOT short-circuiting.

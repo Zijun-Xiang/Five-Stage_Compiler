@@ -1,0 +1,80 @@
+Semantic Notes
+
+The only types are int char and bool.
+
+There is no conversion or coercion between types such as between ints and bools 
+or bools and ints.
+
+There can only be one function with a given name. There is no function overloading. 
+The function name space is the same as the variable name space so a function and 
+a variable cannot have the same name in the same scope.
+
+The STRINGCONST token translates to a fixed size char array.
+
+In if statements the else is associated with the most recent if. The grammar 
+allows for ambiguous associations between else and if. In your assignment you 
+will have to fix this.
+
+Expressions are evaluated in order consistent with operator associativity and 
+precedence found in mathematics. Also, no reordering of operands is allowed.
+
+A char occupies the same space as an integer or bool. This is an artifact of the 
+virtual machine.
+
+A string is a constant char array.
+
+Initialization of variables can only be done with expressions that are constant, 
+that is, they are able to be evaluated to a constant at compile time. 
+For this class, it is not necessary that you actually evaluate the constant 
+expression at compile time. But you will have to keep track of whether the 
+expression is constant. Type of variable and expression must match (see
+exception for char arrays below).
+
+Array assignment works. The source array is copied to the target array. 
+If the target array is smaller the source array is trimmed. 
+If the target array is larger all the source elements are copied and the 
+remainder of the target is zero filled (this is false in bool, and end of 
+string in char). There is hardware support for this.
+
+  To be clear, assignment of a string (char array) to a char array works as if it 
+  is any other array assignment. It will not overrun the end of the lhs array. 
+  If it is too short it will pad the lhs array with null characters which are 
+  equivalent to zeroes.
+
+Passing of arrays is done by reference implemented as pointers. Functions cannot 
+return an array, but they can modify the content of an array passed in.
+
+Array comparison works. There is hardware support for this.
+
+Assignments in expressions happen at the time the assignment operator is 
+encountered in the order of evaluation. The value returned is value of the rhs 
+of the assignment. Assignments include the ++ and -- operator. That is, the ++ 
+and -- operator do NOT behave as in C or C++. NOTE: assignment does NOT occur 
+in a simpleExpression without enclosing parens.
+
+The initializing a char array to a string behaves like an array assignment to 
+the whole array.
+
+Initializing an array to a scalar constant fills the array with that constant.
+
+Function return type is specied in the function declaration, however, if no type 
+is given to the function in the declaration then it is assumed the function does 
+not return a value. To aid discussion of this case, the type of the return value 
+is said to be void, even though there is no void keyword for the type specifier.
+
+Code that exits a procedure without a return 
+  returns a 0 for an function returning int and 
+  false for a function returning bool and 
+  a blank for a function returning char.
+
+All variables, functions must be declared before use.
+
+// Not all years
+The for loop is a simple loop for going through all the elements of an array. 
+It takes two ID's of the same type, 
+   the first of which is a scalar and 
+   the second is an array. 
+It successively assigns each element of the array to the scalar. It opens a new 
+scope at the keyword for and the first ID is declared in the new scope to be of 
+the type of the array on the right of the in.
+Note the array is not an expression it is simply an array.

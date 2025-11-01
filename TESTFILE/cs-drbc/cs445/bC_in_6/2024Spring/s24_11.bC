@@ -1,0 +1,84 @@
+#DRBC Assignment 1
+#DRBC Required Precompiler List
+
+int pointlessWapper(int num) output(num);
+
+int pointlessLoops() {
+	int x:4, y:1;
+	char cat[10]: "cat";	
+
+	while 2 == 2 do 
+		break;
+	
+
+	for x = cat to 10 by 1 do; 	
+	
+	for y = y to x do
+		if false then {}
+
+	while (true == true) do;
+
+	while true do 
+		if false then {}
+}
+
+
+int pointlessMath(int num1, num2) {
+	output(num1 * num2);
+	output(num1 / num2);
+	output(num1 + num2);
+	output(num1 - num2);
+	output(num1 % num2);
+	output(?num1);
+	output(*num1);
+	num1 *= num1;
+	num2 /= num2;
+	num1 += num1;
+	num2 -= num2;
+	output(num1 :>: num2);
+	output(num1 :<: num2);
+	output(num1 != num2);
+	output(num1 >= num2);
+	output(num1 <= num2);
+	return;
+}
+
+int pointlessCheck(int num1, num2; char same[], diff[]) {
+	char bad[10];
+	char good[10]: "good";
+	bad[0]='b';
+	bad[1]='a';
+	bad[2]='d';
+	bad[2]--;
+	if num1 == num2 then output(same);
+	else output(diff);
+	if (num1 > num2) and (num1 > num2) then output(bad);
+	if num1 == 0 or num2 == 0 then output(bad);
+
+	if not true then output(same);
+	
+	
+	if true then
+		if true then
+			output(2);
+		else
+			if true then
+				output(2);
+	
+	return;
+}
+
+int z;
+
+main() {
+	int x:-2, y:3;
+	bool t, f;
+	static int z;
+
+	if x > y then x++; // We do a simple check to ensure the universe isn't broken
+	if x*x+x < y*y-y then x += y;
+	else y += x;
+	pointlessMath(3,2);
+	pointlessLoops();
+	return 0;
+}

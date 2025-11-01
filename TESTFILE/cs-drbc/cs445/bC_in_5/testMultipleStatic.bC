@@ -1,0 +1,9 @@
+int dog() {
+     static int z:333; // Notice 2 static variables with the same name
+}
+
+main()
+{
+     static int z:555;
+}
+

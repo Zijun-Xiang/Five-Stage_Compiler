@@ -1,0 +1,8 @@
+int dog(  ; bool z){
+   if z==true then return 1;
+}
+
+int main() {
+   dog(true);
+   return 0;
+}

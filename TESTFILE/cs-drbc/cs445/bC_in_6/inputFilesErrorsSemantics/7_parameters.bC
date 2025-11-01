@@ -1,0 +1,65 @@
+myInts(int x, y, z) {
+   x = y;
+   y = z;
+}
+
+myChars(char x, y, z) {
+   x = y;
+   y = z;
+}
+
+myBools(bool x, y, z) {
+   x = y;
+   y = z;
+
+}
+
+myIntsArray(int x[], y[], z[]) {
+   x = y;
+   y = z;
+}
+
+myCharsArray(char x[], y[], z[]) {
+   x = y;
+   y = z;
+}
+
+myBoolsArray(bool x[], y[], z[]) {
+   x = y;
+   y = z;
+}
+
+
+
+
+int main()
+{
+    int x[1];
+    char y[1];
+    bool z[1];
+
+    x[0] =1;
+    y[0] = 'c';
+    z[0] = true;
+
+    myInts(1,1,1,1);
+    myInts(1,1);
+
+    myInts(1,'c',true);
+    myChars(1,'c',true);
+    myBools(1,'c',true);
+
+    myInts(x,y,z);
+    myChars(x,y,z);
+    myBools(x,y,z);
+
+    myIntsArray(1,'c',true);
+    myCharsArray(1,'c',true);
+    myBoolsArray(1,'c',true);
+
+    myIntsArray(x,y,z);
+    myCharsArray(x,y,z);
+    myBoolsArray(x,y,z);
+
+    return 0;
+}

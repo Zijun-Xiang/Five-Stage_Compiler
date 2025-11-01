@@ -1,0 +1,90 @@
+#DRBC My first program
+#DRBC comment
+
+int a;
+int b:0;
+int c:8, d:5;
+int e;
+int x:42, y:666;
+int i;
+bool flag;
+char z;
+char zz[10];
+char zev[10]:"corgis";
+int array[10];
+int randNum1:?5;
+int main() {
+
+
+;
+
+
+for a = 1 to 10 by 2 do {
+    b += 5;
+    b -= 1;
+    b /= 2;
+    b *= 3;
+    b--;
+}
+
+for a = 1 to 10 do b++;
+while a < 15 do a++;
+
+e = (a + b);
+e = max(a + b, c - d);
+a = -a;
+e = c/d;
+functionWithNoParams();
+e = a:<:b;
+e = a:>:b;
+while a == 1 do if e == a then a += 1;
+for a=1 to 10 by 2 do if e>0 then e--;
+return b-1;
+}
+
+
+
+    int ant(int bat, cat[]; bool dog, elk; int fox; char gnu)
+    {
+
+   
+        int goat, hog[100];
+        gnu = 'W';
+        goat = hog[2] = 3**cat;
+        if dog and elk or bat > cat[3] then dog = dog;
+        else fox++;
+        if not dog then dog = dog;
+        else dog = dog;
+        if bat <= fox then {
+            while dog do {
+                static int hog;
+               
+                hog = fox;
+                dog = fred(fox++, cat)>666;
+                if hog>bat then break;
+                else if fox !=0 then fox += 7;
+            }
+        }
+        if x==1 then cat[i] = bat;
+        if (x==2) then cat[i] = bat%17;
+        if (x<=3) then cat[i] = 78;
+        if (x>=3) then cat[i] = 78;
+        if (x<3) then cat[i] = 78;
+        if (x>3) then cat[i] = 78;
+        if (x!=3) then cat[i] = 78;
+
+        else x++;
+        
+    return (fox+bat*cat[bat])/-fox;
+    }
+    int max(int a, b) if a>b then return a; else return b;
+    int test(int a, b) if a>b then return;
+    test1(int a, b) if a>b then return;
+    functionWithNoParams() {
+    int x: 10;
+    int y: 20;
+    int result;
+
+    result = x + y;
+
+}

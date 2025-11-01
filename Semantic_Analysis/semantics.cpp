@@ -1,0 +1,519 @@
+#include "semantics.h"
+#include "parser.tab.h"
+void treeTraverse(TreeNode *syntree,SymbolTable *symtab);
+static int goffset;
+static int foffset;
+static int temp = -100000;
+//int strleng(const char* str);
+TreeNode *loadIOLib(TreeNode *syntree) 
+{
+TreeNode *input, *output, *param_output;
+ TreeNode *inputb, *outputb, *param_outputb;
+ TreeNode *inputc, *outputc, *param_outputc;
+ TreeNode *outnl;
+ 
+ input = newDeclNode(FuncK, Integer);
+ input->lineno = -1; // all are -1
+ input->attr.name = strdup("input"); //We named the variables well
+ input->type = Integer;
+
+  inputb = newDeclNode(FuncK, Boolean);
+ inputb->lineno = -1; // all are -1
+ inputb->attr.name = strdup("inputb"); //We named the variables well
+ inputb->type = Boolean;
+
+ inputc = newDeclNode(FuncK, Boolean);
+ inputc->lineno = -1; // all are -1
+ inputc->attr.name = strdup("inputc"); //We named the variables well
+ inputc->type = Char;
+
+
+ param_output = newDeclNode(ParamK, Void);
+ param_output->lineno = -1; // all are -1    //////////这行
+  param_output->attr.name = strdup("*dummy*"); //We named the variables well
+  param_output->type = Integer;
+
+ output = newDeclNode(FuncK, Void);
+  output->lineno = -1; // all are -1
+ output->attr.name = strdup("output"); //We named the variables well
+ output->type = Void;
+ output->child[0] = param_output;
+
+ /*param_output = newDeclNode(ParamK, Void);
+ param_output->lineno = -2; // all are -1    //////////这行
+  param_output->attr.name = strdup("param_output"); //We named the variables well
+  param_output->type = Integer;
+*/
+
+ param_outputb = newDeclNode(ParamK, Void); //////这行
+ param_outputb->lineno = -1; // all are -1
+ param_outputb->attr.name = strdup("*dummy*"); //We named the variables well
+ param_outputb->type = Boolean;
+ 
+
+ outputb = newDeclNode(FuncK, Void);
+ outputb->lineno = -1; // all are -1
+ outputb->attr.name = strdup("outputb"); //We named the variables well
+ outputb->type = Void;
+ outputb->child[0] = param_outputb;
+
+ param_outputc = newDeclNode(ParamK, Void); ///////////////这行
+ param_outputc->lineno = -1; // all are -1
+ param_outputc->attr.name = strdup("*dummy*"); //We named the variables well
+ param_outputc->type = Char;
+
+ outputc = newDeclNode(FuncK, Void);
+ outputc->lineno = -1; // all are -1
+ outputc->attr.name = strdup("outputc"); //We named the variables well
+ outputc->type = Void;
+ outputc->child[0] = param_outputc;
+
+ outnl = newDeclNode(FuncK, Void);
+ outnl->lineno = -1; // all are -1
+ outnl->attr.name = strdup("outnl"); //We named the variables well
+ outnl->type = Void;
+ ///////// Stuff from next slides
+ // link them and prefix the tree we are interested in traversing. 
+// This will put the symbols in the symbol table.
+ input->sibling = output;
+ output->sibling = inputb;
+ inputb->sibling = outputb;
+ outputb->sibling = inputc;
+ inputc->sibling = outputc;
+ outputc->sibling = outnl;
+ outnl->sibling = syntree;  // add in the tree we were given
+ return input;
+}
+
+void treeTraverseDecl(TreeNode *currentNode,SymbolTable *symtab)
+{  	if(currentNode == NULL){
+         return;
+	}
+	switch(currentNode->kind.decl){
+                case VarK:
+                        treeTraverse(currentNode->child[0],symtab);
+                        //break; no break no purpose
+			currentNode->varKind = Global;
+			currentNode->offset=goffset;
+                case ParamK:
+                      //  treeTraverseParam,symtab);
+			symtab->insert(currentNode->attr.name,currentNode);
+                        if(symtab->depth()==1)
+			{
+				currentNode->varKind = Global;
+				currentNode->offset=goffset;
+			        goffset -= currentNode->size;	
+			}
+			else if(currentNode->isStatic)
+			{//下面三行可以去
+				currentNode->varKind = Global;
+                                currentNode->offset=goffset;
+                                goffset -= currentNode->size;	
+			}
+			else
+			{
+				currentNode->varKind = Local;
+                                if(foffset<temp)
+					currentNode->offset = temp;
+				else{
+					currentNode->offset = foffset;
+				        
+				}
+				temp = -100000; /////////////////
+                                foffset -= currentNode->size;
+			}
+			if(currentNode->kind.decl ==ParamK){
+			currentNode-> varKind = Parameter;
+			}
+			else if(currentNode->isArray)
+			{
+				//temp = currentNode->offset;
+				currentNode->offset -= 1;
+			}
+
+			break;
+                case FuncK:
+                        // treeTraverseFuncK(syntree,symtab);
+			symtab->insert(currentNode->attr.name,currentNode);
+                        symtab->enter(currentNode->attr.name);
+			foffset = -2;
+			treeTraverse(currentNode->child[0],symtab);
+			currentNode->varKind = Global;
+			currentNode->size = foffset;
+			treeTraverse(currentNode->child[1],symtab);
+			symtab->leave();
+			break;
+        }
+}
+
+void treeTraverseStmt(TreeNode *currentNode,SymbolTable *symtab)
+{       if(currentNode == NULL){
+         return;
+        }
+	int loopSize = 0;
+	//IfK, WhileK, ForK, CompoundK, ReturnK, BreakK, RangeK
+	 switch(currentNode->kind.stmt){
+                case IfK:
+			treeTraverse(currentNode->child[0],symtab);
+ 			treeTraverse(currentNode->child[1],symtab);
+ 			treeTraverse(currentNode->child[2],symtab);
+                        //treeTraverseDecl(syntree,symtab);
+                        break;
+                case WhileK:
+			treeTraverse(currentNode->child[0],symtab);
+ 			treeTraverse(currentNode->child[1],symtab);
+ 			treeTraverse(currentNode->child[2],symtab);
+                        //treeTraverseExp(syntree,symtab);
+                        break;
+
+                case ForK:    //currentNode->kind.stmt
+			//int loopSize = 0;
+			symtab->enter((char *)"ForStmt");
+			temp = foffset;
+			foffset = foffset-2;
+			treeTraverse(currentNode->child[0],symtab);
+ 			treeTraverse(currentNode->child[1],symtab);
+ 			treeTraverse(currentNode->child[2],symtab);
+			treeTraverse(currentNode->child[3],symtab);
+                        //foffset = foffset-2;
+			currentNode->size = foffset;
+			//foffset = foffset-2;
+			//currentNode->size = currentNode->size - 2;
+		        symtab -> leave();
+			break;
+
+		case CompoundK:
+			{
+			int save;
+			//foffset = foffset - 2;
+			save = foffset;
+			//currentNode->size = foffset;
+			symtab->enter((char *)"CompoundStmt");
+			treeTraverse(currentNode->child[0],symtab);
+			//foffset = foffset - 2;
+			currentNode->size = foffset;/////////////
+			//save = save - 2;
+			// currentNode->size = currentNode->size - 2;//语句块，语句越多内存越大，动态变化的
+                        treeTraverse(currentNode->child[1],symtab);
+                        treeTraverse(currentNode->child[2],symtab);
+			/*if (currentNode->child[1])
+                                currentNode->size += currentNode->child[1]->size-1;
+                        if (currentNode->child[2])
+                                currentNode->size += currentNode->child[2]->size-2;*/
+			//currentNode->size = foffset;
+			foffset = save;
+			symtab -> leave();		//treeTraverseDecl(syntree,symtab);
+                        }
+			break;
+                case ReturnK:
+                        //treeTraverseExp(syntree,symtab);
+                        treeTraverse(currentNode->child[0],symtab);
+                        treeTraverse(currentNode->child[1],symtab);
+                        treeTraverse(currentNode->child[2],symtab);
+			break;
+                case BreakK:
+                        //treeTraverseStmt(syntree,symtab);
+                        treeTraverse(currentNode->child[0],symtab);
+                        treeTraverse(currentNode->child[1],symtab);
+                        treeTraverse(currentNode->child[2],symtab);
+			break;
+		case RangeK:
+			treeTraverse(currentNode->child[0],symtab);
+                        treeTraverse(currentNode->child[1],symtab);
+                        treeTraverse(currentNode->child[2],symtab);
+                        //treeTraverseStmt(syntree,symtab);
+                        break;
+		}
+}//varKind
+
+
+void treeTraverseExp(TreeNode *currentNode,SymbolTable *symtab)
+{       
+	if(currentNode == NULL){
+         return;
+        }
+	switch (currentNode->kind.exp) {
+        case AssignK: {
+            // 处理左侧和右侧表达式
+            treeTraverse(currentNode->child[0], symtab);
+            treeTraverse(currentNode->child[1], symtab);
+	    //treeTraverse(currentNode->child[1], symtab);
+            // 设置当前表达式类型为左侧的类型（简单规则）
+            if (currentNode->child[0]){
+		 /*TreeNode *idNode = currentNode->child[0];  // SIZEOF(ID)，ID存在child[0]
+        treeTraverse(idNode, symtab);              // 先遍历ID本身
+
+        TreeNode *declNode = (TreeNode *)symtab->lookup(idNode->attr.name);
+	        if (declNode == NULL) {
+        	    currentNode->type = UndefinedType;
+        	} else if (!declNode->isArray) {
+            		currentNode->type = UndefinedType;
+        	} else {
+            	currentNode->type = declNode->type;
+            	currentNode->attr.value = declNode->size;  // 把 size 存到 sizeof 节点的 value 里
+        	}*/			
+		//currentNode->child[0]->type = Char;
+            	currentNode->type = currentNode->child[0]->type;
+		currentNode->varKind = currentNode->child[0]->varKind;
+		//currentNode->child[2]->offset = foffset;
+	    }				//currentNode->child[0]->varKind;}//Global;
+            else
+                currentNode->type = UndefinedType;
+
+            // 可加入类型不匹配的报错提示
+            /*if (currentNode->child[0] && currentNode->child[1] &&
+                currentNode->child[0]->type != currentNode->child[1]->type) {
+            }*/
+            break;
+        }
+
+        case CallK: {
+            // 处理所有参数子节点
+            for (int i = 0; i < MAXCHILDREN; i++) {
+                treeTraverse(currentNode->child[i], symtab);
+            }
+
+            // 查询函数定义获取返回类型
+            TreeNode *funcDef = (TreeNode *)symtab->lookup(currentNode->attr.name);
+            if (funcDef != NULL && funcDef->kind.decl == FuncK) {
+                currentNode->type = funcDef->type;
+            } else {
+                printf("ERROR: Call to undefined function '%s' at line %d\n", currentNode->attr.name, currentNode->lineno);
+                currentNode->type = UndefinedType;
+            }
+            break;
+        }
+
+        case ConstantK:
+	    {int i = 0;
+	     //currentNode->attr.string = "corgis";
+	    if (currentNode->isArray && currentNode->type == Char && currentNode->attr.string != NULL) { //currentNode->attr.string永远都是NULL，也就是没接收到
+		while(currentNode->attr.string[i]!='\0')
+			{
+			 i = i+1;
+			}
+		currentNode->varKind = Global;
+        	currentNode->offset = goffset-1;//加了-1，正确了
+		currentNode->size = i-1;
+        	goffset -= currentNode->size;
+    		
+		}
+	     	break;
+            }
+
+        case IdK: {
+            TreeNode *declNode = (TreeNode *)symtab->lookup(currentNode->attr.name);
+            if (declNode == NULL) {
+                printf("ERROR: Undeclared identifier '%s' at line %d\n", currentNode->attr.name, currentNode->lineno);
+                currentNode->type = UndefinedType;
+            } else {
+                // 从定义节点复制类型和偏移
+                currentNode->type = declNode->type;
+                currentNode->offset = declNode->offset;
+                currentNode->varKind = declNode->varKind;
+		 currentNode->size = declNode->size;
+		currentNode->isArray = declNode->isArray;
+		currentNode->isStatic = declNode->isStatic;
+		currentNode->varKind = declNode->varKind;
+		if(currentNode->isStatic==true && currentNode->varKind==Global)
+			currentNode->varKind = LocalStatic;
+            }
+            break;
+        }
+
+        case OpK: {
+    		treeTraverse(currentNode->child[0], symtab);
+    		treeTraverse(currentNode->child[1], symtab);
+
+    ExpType leftType = currentNode->child[0] ? currentNode->child[0]->type : UndefinedType;
+    ExpType rightType = currentNode->child[1] ? currentNode->child[1]->type : UndefinedType;
+    OpKind op = currentNode->attr.op;
+
+    switch (op) {
+        case OR:
+        case AND:
+            if (leftType == Boolean && rightType == Boolean) {
+                currentNode->type = Boolean;
+            } else {
+                printf("ERROR: Boolean operator type mismatch at line %d\n", currentNode->lineno);
+                currentNode->type = UndefinedType;
+            }
+            break;
+
+        case NOT:
+            if (leftType == Boolean) {
+                currentNode->type = Boolean;
+            } else {
+                printf("ERROR: NOT operator expects boolean at line %d\n", currentNode->lineno);
+                currentNode->type = UndefinedType;
+            }
+            break;
+
+	case INC:
+        case DEC:  // 自减 b[1]--
+            if (leftType == Integer or rightType == Integer) {
+                currentNode->type = Integer;
+            } else {
+                //printf("ERROR: Increment/Decrement expects integer at line %d\n", currentNode->lineno);
+                currentNode->type = UndefinedType;
+            }
+            break;
+
+	case MIN:
+        case MAX:
+            if (leftType == Integer && rightType == Integer) {
+                currentNode->type = Integer;
+            } else {
+                printf("ERROR: Arithmetic operator type mismatch at line %d\n", currentNode->lineno);
+                currentNode->type = UndefinedType;
+            }
+            break;
+
+        case '+':
+        case '-':
+        case '*':
+	case '/':
+        case '%':
+            if (leftType == Integer && rightType == Integer) {
+                currentNode->type = Integer;
+            } else {
+                printf("ERROR: Arithmetic operator type mismatch at line %d\n", currentNode->lineno);
+                currentNode->type = UndefinedType;
+            }
+            break;
+
+	case SIZEOF:
+	{  TreeNode *idNode = currentNode->child[0];  // SIZEOF(ID)，ID存在child[0]
+        treeTraverse(idNode, symtab);              // 先遍历ID本身
+        
+        TreeNode *declNode = (TreeNode *)symtab->lookup(idNode->attr.name);
+        if (declNode == NULL) {
+            printf("ERROR: sizeof on undeclared identifier '%s' at line %d\n", idNode->attr.name, currentNode->lineno);
+            currentNode->type = UndefinedType;
+        } else if (!declNode->isArray) {
+            printf("ERROR: sizeof applied to non-array '%s' at line %d\n", idNode->attr.name, currentNode->lineno);
+            currentNode->type = UndefinedType;
+        } else {
+            currentNode->type = Integer;
+            currentNode->attr.value = declNode->size;  // 把 size 存到 sizeof 节点的 value 里
+        }
+        break;
+	}
+
+	case CHSIGN:
+        if (leftType == Integer) {
+            currentNode->type = Integer;
+        } else {
+            printf("ERROR: Unary operator expects integer at line %d\n", currentNode->lineno);
+            currentNode->type = UndefinedType;
+        }
+        break;
+
+	case '?':
+        currentNode->type = Integer;
+	/*if (leftType == Boolean) {  // 检查条件表达式的类型
+            currentNode->type = rightType;  // 根据右边的类型推断结果类型
+        } else {
+            printf("ERROR: Ternary operator requires boolean condition at line %d\n", currentNode->lineno);
+            currentNode->type = UndefinedType;
+        }*/
+        break;
+
+	case '[':  // 数组访问
+	     if (currentNode->child[0] && currentNode->child[0]->isArray &&
+                currentNode->child[1] && currentNode->child[1]->type == Integer) {
+                // 数组访问合法，结果是数组元素的类型（一般是 int）
+                currentNode->type = currentNode->child[0]->type;
+		currentNode->child[0]->isArray = true;
+		currentNode->child[1]->isArray = false;
+            }
+	    else {
+                printf("ERROR: Invalid array access at line %d\n", currentNode->lineno);
+                currentNode->type = UndefinedType;
+            }
+            break;
+
+        case EQ:
+        case NEQ:
+        case LEQ:
+        case GEQ:
+        case '>':
+        case '<':
+	    currentNode->type = Boolean;
+            /*if (leftType == Integer && rightType == Integer) {
+                currentNode->type = Boolean;
+            } else if (leftType == Boolean && rightType == Boolean) {
+                currentNode->type = Boolean;
+            }else {
+                printf("ERROR: Relational operator type mismatch at line %d\n", currentNode->lineno);
+                currentNode->type = UndefinedType;
+            }*/
+            break;
+
+        default:
+            printf("ERROR: Unknown operator at line %d\n", currentNode->lineno);
+            currentNode->type = UndefinedType;
+            break;
+    }
+    break; 
+          /*  treeTraverse(currentNode->child[0], symtab);
+            treeTraverse(currentNode->child[1], symtab);
+
+            // 假设所有操作符都是整型操作符
+            ExpType leftType = currentNode->child[0] ? currentNode->child[0]->type : UndefinedType;
+            ExpType rightType = currentNode->child[1] ? currentNode->child[1]->type : UndefinedType;
+
+            if (leftType == Integer && rightType == Integer) {
+                currentNode->type = Integer;
+            } else {
+                printf("ERROR: Operator type mismatch at line %d\n", currentNode->lineno);
+                currentNode->type = UndefinedType;
+            }
+            break;*/
+        }
+	}
+/*	switch(currentNode->kind.exp){
+		case AssignK:
+			printf("**0**");
+			break;
+		case CallK:
+			printf("**1**");
+			break;
+		case ConstantK:
+			printf("**2**");
+			break;
+		case IdK:
+			printf("**3**");
+			break;
+		case OpK:
+			printf("**4**");
+			break;
+	}*/
+}
+void treeTraverse(TreeNode *syntree,SymbolTable *symtab){
+	if(syntree == NULL){
+	 return;
+	} 	
+	switch(syntree-> nodekind){
+		case DeclK:
+			treeTraverseDecl(syntree,symtab);
+			break;
+		case ExpK:
+			treeTraverseExp(syntree,symtab);
+			break;
+		case StmtK:
+                        treeTraverseStmt(syntree,symtab);
+                        break;
+	}
+	treeTraverse(syntree->sibling,symtab);
+}
+TreeNode *semanticAnalysis(TreeNode *syntree,          // pass in and return an annotated syntax tree
+                           SymbolTable *symtabX,       // pass in and return the symbol table
+                           int &globalOffset )            // return the offset past the globals
+    {syntree = loadIOLib(syntree);
+	goffset = 0;
+	foffset = 0;
+	treeTraverse(syntree,symtabX);
+	return syntree;
+	}
+

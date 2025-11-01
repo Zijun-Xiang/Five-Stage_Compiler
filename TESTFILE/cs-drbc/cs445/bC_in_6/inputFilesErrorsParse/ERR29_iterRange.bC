@@ -1,0 +1,5 @@
+int main() {
+   for x = 3  5 by do { x++;}
+   return 0;
+}
+

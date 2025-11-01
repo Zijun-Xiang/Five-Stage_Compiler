@@ -1,0 +1,71 @@
+#DRBC w01
+
+char myName[999999999];
+int somenum, someotherint;
+int x;
+
+int addTwoNums(int a, b; bool c[]) {
+   int l : 5;
+   return (a + b);
+}
+
+func2() {
+   static int mystaticint : 4;
+   return;
+}
+
+int func3(int a) {
+   return 1;
+}
+
+bool func4(int a, b) {
+   return a :<: b;
+}
+
+// relop
+bool myLEQ(int a, b) {
+   return (a <= b);
+}
+
+// Entry
+main() {
+
+   char someString[6] : "mine";
+   char c : someString[2 + 3 - 3];
+   int a: 5, b: *4;
+   char d : 'd';
+   x = 5 * 4 + 6 / -2 - 4 % 4; 
+   x = someString;
+   if (((10 :>: 3 < 5) or true) or true) then {} else {};
+ 
+   while (x > 100) do if (x != 90) then break;
+
+   while (x < 150) do x++;
+
+   for i = 1 to 10 do {
+      // do nothing
+   } 
+
+   for i = 5 to 10 do if i == 9 then break;
+   
+   if i == 9 then break; else if (i != 9) then break;
+   
+   x--;
+   
+   func2();
+   
+   for i = 4 to 10 by 1 do {};
+
+   x = x % 2;
+
+   x = ?10;
+
+   x *= 3;
+   x /= 2;
+   x += 1;
+   x -= 0;
+
+   if (x >= 10 and not (x == 0)) then {};
+   if (x <= 10) then {};
+   addTwoNums(2, 2, true, true);
+}

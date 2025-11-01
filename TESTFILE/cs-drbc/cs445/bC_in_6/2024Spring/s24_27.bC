@@ -1,0 +1,133 @@
+#DRBC w01.bc
+#DRBC precompiler list
+
+int add(int arg1; int arg2)
+{
+    return arg1 + arg2;
+}
+
+int twentyOne()
+{
+    return 21;
+}
+
+// 43 48
+int takesArr(char str1[], str2[])
+{
+    // print str
+}
+
+// 30
+void() {
+    // do nothing
+}
+
+int outOfScope : 2;
+
+int main() // Production rule 3
+{
+    // declarations
+
+    int varDeclList1 : 2, varDeclList2 : 1;
+
+    int minimum, maximum;
+
+    // 13
+    static int scopedVar : 8;
+
+    // 26 155
+    int x : 3;
+
+    // 28 156
+    char a : 'a';
+    // 27
+    bool b : true;
+
+    //
+
+    // 157
+    char str[9] : "test_str";
+
+    int returnedVal;
+    int negate : 3;
+    // 134 137
+    negate = -negate;
+
+    // 19 & 20 (66, 72 & 73)
+    for m = 0 to 100 do { // 19a
+        for n = 0 to 100 by 2 do {
+            if (b == true) then {
+                x += 1;
+            }
+            else {
+                while (b == false) do {
+                    if false != false then x -= 1;
+                    // 64
+                    break;
+                }
+            }
+        }
+    }
+
+    str[5] = 'z';
+
+    returnedVal = add(negate, x);
+    // 127
+    returnedVal = returnedVal - negate;
+    // 131
+    returnedVal = returnedVal * negate;
+    // 132
+    returnedVal = returnedVal / negate;
+    // 133
+    returnedVal = returnedVal % negate;
+    // 138
+    *str;
+    // 139
+    ?returnedVal;
+    // 89
+    returnedVal++;
+
+    // 99
+    returnedVal *= returnedVal;
+    // 100
+    returnedVal /= returnedVal;
+
+    // 90
+    returnedVal--;
+
+    // 151
+    twentyOne();
+
+    // 114
+    if (twentyOne() < 22) then {
+        // print something?
+        // 115
+    } else if (twentyOne() > 22) then {
+        // how did this happen
+        // 113
+    } else if (twentyOne() <= 22) then {
+        // this is acceptable
+        // 116
+    } else if (twentyOne() >= 22) then {
+        // this is NOT acceptable
+    }
+
+    // 107, 104, 101
+    b = not (b and true or false);
+
+
+    // 78
+    ;
+
+    // 72
+    while (true) do if (true) then b = !b;
+    // 73
+    for n = 0 to 100 do if (true) then b = !b;
+
+
+    minimum = returnedVal :<: negate;
+    maximum = returnedVal :>: negate;
+    return;
+}
+
+

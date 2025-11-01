@@ -1,0 +1,128 @@
+#DRBC assignment 1
+#DRBC this is another precompile directive
+#DRBC a tic-tac-toe game
+
+// testing rules 10-16
+char getInput(char prompt[]);
+printCharArray(char arr[]; int n);
+int someArrayStuff(int arr[],n);
+
+// testing rules 3, 4, 5, 7, 8, 9, 10
+int counter:0;
+int winningScore:10;
+bool won:true;
+
+main() {
+   // testing rule 10,3,4,5,6
+   char player1:'X',player2:'0';
+
+   // testing rule 10
+   bool isPlayerTurn:true;
+
+   // testing rules 5, 6
+   static int player1Score,player2Score;
+
+   char board[6];
+
+   int i;
+
+   // testing rule 40, 41
+   int boardSize:*board;
+   
+   // testing rule 17, 18, 
+   for i=0 to 2 by 1 do {
+      int j;
+      for j=0 to 2 do board[i * 2 + j] = 'Z';
+   }
+
+   player1Score = player2Score = 0;
+
+   while true do {
+      int playerXInput:getInput("Enter X coordinate[0-2]: ");
+      int playerYInput:getInput("Enter Y coordinate[0-2]: ");
+      int i,j,winner;
+      
+      if isPlayerTurn then {
+         if playerXInput <= 2 and playerXInput >= 0 and playerYInput <= 2 and playerYInput >= 0 then { 
+            board[playerXInput * 2 + playerYInput] = player1;
+            isPlayerTurn = false;
+         }
+      } 
+      else {
+         while not isPlayerTurn do {
+            int playerTwoX:?2;
+            int playerTwoY:?2;
+            
+            if board[playerTwoX * 2 + playerTwoY] == 'Z' then {
+               board[playerTwoX * 2 + playerTwoY] = player2;
+               isPlayerTurn = true;
+               break;
+            }
+            else {
+               printf("That position has already been chosen!");
+            }
+         }
+      }
+
+      // check if 3 in a row are achieved or board is filled without winner
+      for i=0 to 2 by 1 do {
+         for j=0 to 2 do {
+            // check character for null, p1 or p2 char
+               // check up,down,left,right for match until edge
+               // if all matches, set victory var
+         }
+      }
+
+      // check winner and add to score accumulator
+      if (winner == 1) then player1Score++;
+      else if (winner == 2) then player2Score++;
+
+      if (player1Score >= winningScore) then { won = true; break; }
+      else if (player2Score >= winningScore) then { won = false; break; }
+   }
+
+   // 
+
+   // testing rules 45, 46, 47
+   minMaxNum(1,2);
+   printArray(board);
+   someNumStuff();
+
+   // testing rule 25
+   return;
+}
+
+bool someNumStuff() {
+   // testing rules 37, 38
+   int modulusResult, divResult, subResult, addResult, mulResult;
+   modulusResult = 19 % 10;
+   divResult = 19 / 10;
+   subResult = 19 - 10;
+   mulResult = 1;
+
+   // testing rule 28
+   mulResult *= subResult;
+   addResult += modulusResult;
+   divResult /= 1;
+   subResult -= 3;
+
+   // testing rule 27
+   if divResult >= subResult or modulusResult <= addResult or modulusResult != addResult then subResult--;
+         
+   return true;
+}
+
+unmatchedStuff() {
+   // Testing Rule 20
+   for m = 0 to 100 do { // 19a
+      for n = 0 to 100 by 2 do
+         if (true == true) then {y += 2;}
+         else while (true == false) do
+             if (1 > 2 or 1 < 2) then y = -100;
+   }
+}
+
+int maxMinNum(int a,b) {
+   return a :>: b or a :<: b;
+}
+

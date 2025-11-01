@@ -1,0 +1,6 @@
+dog()
+
+int main() {
+   //b = true;
+   return 0;
+}

@@ -1,0 +1,4 @@
+int main() {
+   bad badFun(;
+   return 0;
+}

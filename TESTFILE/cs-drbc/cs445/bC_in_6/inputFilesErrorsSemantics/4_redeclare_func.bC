@@ -1,0 +1,8 @@
+dog();
+dog();
+
+int main()
+{
+   dog();
+   return 0;
+}

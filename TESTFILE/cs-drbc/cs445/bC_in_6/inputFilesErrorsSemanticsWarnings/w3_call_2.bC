@@ -1,0 +1,5 @@
+int main()
+{
+    dog();
+    return 1;
+}

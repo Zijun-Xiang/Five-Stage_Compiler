@@ -1,0 +1,126 @@
+#DRBC My first Program
+#DRBC This program tests every production rule.
+
+// global variables
+int dayOfMonth : 0;
+int stringLength : 10;
+
+bool goodFortune, badFortune;
+
+// scoped varDecl with ID and brackets
+char userName[10];
+
+// takes two integer parameters to perform
+// calculations on, demonstrates operators
+int integerCalculator(int a, b){
+   int c : 0;
+   int d, e, f;
+   int x : 2;
+   int y : 3;
+   int numArray[10];
+   d = numArray[x+y];
+
+   d = 0;
+   c += a;
+   d -= b;
+   e *= c;
+   f /= d;
+
+   // Testing for ';' expstmt
+   if c > a then {
+     return a;
+   }else{
+     ;
+   }
+
+   return b;
+}
+
+
+// create a "void" function that accepts many parameters
+// can iterate with many outcomes, allows for nesting and matching
+fortuneTeller(char firstInitial, lastInitial, bloodType; int age, height){
+
+    int a, b, c, d, e, i;
+
+    c = (age * height);
+    c = (age - height);
+    d = age % height;
+    d = age / height;
+
+    for e = 1 to b do{
+        if bloodType != 'A' or bloodType == 'B' and age == height then{
+           badFortune = true;
+           break;
+        }
+    }
+
+    if age < height then {
+       goodFortune = true;
+    }
+
+    while age < height do{
+      age += age;
+      for e = age to height do
+      if age % 2 == 0 then
+        goodFortune = true;
+      else
+      while height % 2 == 0 do
+        if height < 1000 then
+	  height += height;
+    }
+
+    for i = 0 to b by 2 do
+      age += age;
+    
+}
+
+int lengthOfString(char input[]){
+    int x : 0;
+    
+    return;
+}
+
+int noParams(){
+    return 1; 
+}
+
+int main(){ // Production rule 3
+    int x : 5;
+    int y : 12;
+    static int z;
+    char a, b, c, userInitial; // declList
+    char day[10] : "Sunday";
+
+    if x <= y then
+      z = x + y; else if x >= y then 
+      z = -x;  else 
+      z = ?x;
+
+    while x <= y do
+      x++;
+
+    while !(x != y) do
+      x--;
+
+    if not (x < y) then
+       x++;
+
+   // char userInitial;
+    userInitial = *userName;
+
+    z = x :<: y;
+    z = x :>: y;
+
+    // calls to functions
+    integerCalculator(x, y);
+
+    fortuneTeller(a, b, c, x, y);
+
+    lengthOfString(userName);
+
+
+    noParams(); // 46/151
+
+    return 0;
+}

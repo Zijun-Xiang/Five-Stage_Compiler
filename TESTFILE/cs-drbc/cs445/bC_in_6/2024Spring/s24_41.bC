@@ -1,0 +1,103 @@
+#DRBC First Program
+#DRBC first
+//main
+int happiness:0;
+bool flag;
+int main()
+{
+   int x:0, y:1;
+   char c[5]:"mean";
+   char l:'c';
+
+   static int fun:0;
+   static bool havingfun:false;
+
+   if(fun < 50) then {havingfun=false;}
+   else while (havingfun == true) do
+      if (x > 0) then y = x;
+
+   if(fun > 50) then 
+   {
+      if( y == x) then {havingfun=true;}
+      else x = y;
+   }
+   else while (havingfun == true) do
+      if (x > 0) then y = x;
+
+   while (x == 0) do
+      x++;
+      y--;
+
+   if( x >= y) then fun = x*=y;
+   if( x <= y) then fun = x/=y;
+   if( x >= y) then fun = x%y;
+   if( x <= y) then fun = x+y;
+   if( x >= y) then fun = x-y;   
+   x :<: y;
+   x :>: y;
+
+   -x;   
+   ?x;
+   *c;
+   *c[1];
+
+   if(x > time or y < time) then flag = not flag;
+
+   return (x*y-x)/y;
+}
+
+int play()
+{
+   static int time;
+   for time=0 to 10 do 
+   {
+      happiness += 1;
+   }
+
+   return;
+}
+
+sob(int sadness, happiness; bool iscrying; char ch[])
+{
+   sadness = 0;
+}
+
+laugh();
+
+int cry( int sadness)
+{
+   int time;
+   int time2;
+   int m;
+   int n;
+   int x;
+   sadness += (sadness * happiness);
+   for time = 0 to 20 by 2 do
+   {
+      for time2 = 0 to 1 do
+      {
+         if (sadness == 0) then
+            break;
+
+         else while(true == false) do
+            if(false != false) then happiness -= 100;
+         sadness -= 1;
+      }
+   }
+
+   for m=0 to 100 do
+   {
+      for n=0 to 100 by 2 do
+         if(true == true or false == false) then {happiness += 10;}
+         else while (true == false and false == true) do
+            if(false != false) then happiness -=100; 
+
+   }
+  
+   play(); 
+   max(sadness, happiness);
+   MAX(sadness, happiness); 
+   if sadness>happiness then return sadness; else return happiness;   
+  
+   return sadness; 
+}

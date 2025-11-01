@@ -1,0 +1,11 @@
+int dog() {
+   int x[4];
+   x[0] = 2;
+   return x;
+}
+
+int main()
+{
+    dog();
+    return 0;
+}

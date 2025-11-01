@@ -1,0 +1,104 @@
+#DRBC Assignment 1
+#DRBC precompiler list (rule 2)
+
+int A, B; //3,4,5
+
+int testing(int a); // rule 12a, 13b, 14, 15b, 16a (35, 38, 41, 45, 47)
+int testing2(char c[]); // rule 16b (48)
+testing3(int a, b) if a<b then a++; // rule 11a (30) (no return type specified)
+testing4(bool b; int a, b); // rule 13a (37)
+
+int main()
+{
+   int x:5; // rule 8, 9, 10
+   int y,z; // rule 7
+   static int a; // rule 6
+   bool k; // rule 48
+   char d:'o'; // rule 48 
+   char s[3]:"str"; // rule 48 (157) 
+
+   // rule 18 (51, 52)
+   while (happy == 0) do {
+      if (goodvibes > 0) then {
+         happy -= 1;
+      }
+      else {
+         happy += 1;
+      }
+   } // end of while
+
+   // rule 19, 20 (66, 72, 73)
+   for m=0 to 100 do 
+   {
+      for n=0 to 100 by 2 do 
+         if (true == true) then {happy += 20;}
+         else
+            while (true == false) do
+            if(false != false) then {happy -= 100;}
+   } // end of outer for loop
+
+   // rule 34, 35
+   z = 5 :>: 4;
+   z = 5 :<: 4;
+
+   // rule 37
+   z = x+y;
+   z = x-y;
+   // rule 38
+   z = x*y;
+   z = x/y;
+   z = x%y;
+
+   // rule 41 (137, 138, 139)
+   z = -x;
+   z = *s[3];
+   z = ?x;
+
+   if x < y then
+   {
+      break; // rule 26 (87)
+   }
+   else
+   {
+      return; // rule 25 (84)
+   }
+
+   z = add(x, y); // rule 45 (148)
+
+   z = subtract(); // rule 46b (empty)
+
+   if x <= y then // rule 33 (113)
+   {
+      x++;
+   }
+   if x >= y then // rule 33 (116)
+   {
+      x--;
+   }
+
+   if (x > y) or (k == false) then // rule 29 (101)
+   {
+      z+=10; // rule 28
+   }
+
+   if (x < y) and (k == false) then // rule 30 (104)
+   {
+      z*=10; // rule 28 (99)
+   }
+
+   // rule 31 (107)
+   if (x > y) and not k then
+   {
+      z -=10; // rule 28
+   }
+
+   if (true == true) then
+   {
+      z /=10; // rule 28 (100)
+   }
+
+   z = max(x,y); // rule 34 (119)
+
+   return 0; // rule 25 (85)
+
+} // end of int main

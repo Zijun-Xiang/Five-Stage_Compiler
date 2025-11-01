@@ -1,0 +1,315 @@
+[xian7710@cs-course87 w02]$ /y/shared/Engineering/cs-drbc/submit4145 w02
+Welcome xian7710
+Attempting to submit your code directory
+Compiling
+rm -f lex.yy.o parser.tab.o bC lex.yy.c parser.tab.h parser.tab.c bC.tar parser.output core
+bison -v -t -d parser.y  
+flex parser.l
+g++    -c -o lex.yy.o lex.yy.c
+g++    -c -o parser.tab.o parser.tab.c
+g++  lex.yy.o parser.tab.o -lm  -o bC
+Targeted Testing: /home/xiang/Documents/cs-drbc/cs445/bC_in_2/*.bC
+Passed /home/xiang/Documents/cs-drbc/cs445/bC_in_2/CHARCONST.bC
+Passed /home/xiang/Documents/cs-drbc/cs445/bC_in_2/CHARCONST_fails.bC
+Passed /home/xiang/Documents/cs-drbc/cs445/bC_in_2/dinosar.bC
+Passed /home/xiang/Documents/cs-drbc/cs445/bC_in_2/input_01.bC
+Passed /home/xiang/Documents/cs-drbc/cs445/bC_in_2/input_02.bC
+Passed /home/xiang/Documents/cs-drbc/cs445/bC_in_2/input_03.bC
+Passed /home/xiang/Documents/cs-drbc/cs445/bC_in_2/input_04.bC
+Passed /home/xiang/Documents/cs-drbc/cs445/bC_in_2/input_05.bC
+Passed /home/xiang/Documents/cs-drbc/cs445/bC_in_2/NUMCONST.bC
+Passed /home/xiang/Documents/cs-drbc/cs445/bC_in_2/NUMCONST_Fails.bC
+Passed /home/xiang/Documents/cs-drbc/cs445/bC_in_2/operators.bC
+Passed /home/xiang/Documents/cs-drbc/cs445/bC_in_2/randomHtml.bC
+Passed /home/xiang/Documents/cs-drbc/cs445/bC_in_2/STRINGCONST.bC
+Passed /home/xiang/Documents/cs-drbc/cs445/bC_in_2/typeSpec.bC
+0 Files skipped.
+14/14 Passed.
+100/100 Points.
+Unit Testing: /home/xiang/Documents/cs-drbc/cs445/testsUnit/*.bC
+Passed /home/xiang/Documents/cs-drbc/cs445/testsUnit/a001.bC
+Passed /home/xiang/Documents/cs-drbc/cs445/testsUnit/a002.bC
+Passed /home/xiang/Documents/cs-drbc/cs445/testsUnit/a00.bC
+Passed /home/xiang/Documents/cs-drbc/cs445/testsUnit/a01.bC
+Passed /home/xiang/Documents/cs-drbc/cs445/testsUnit/a02.bC
+Passed /home/xiang/Documents/cs-drbc/cs445/testsUnit/a03.bC
+Passed /home/xiang/Documents/cs-drbc/cs445/testsUnit/a045.bC
+Passed /home/xiang/Documents/cs-drbc/cs445/testsUnit/a04.bC
+Passed /home/xiang/Documents/cs-drbc/cs445/testsUnit/a05.bC
+Passed /home/xiang/Documents/cs-drbc/cs445/testsUnit/a06.bC
+Passed /home/xiang/Documents/cs-drbc/cs445/testsUnit/a07.bC
+Passed /home/xiang/Documents/cs-drbc/cs445/testsUnit/a08.bC
+Passed /home/xiang/Documents/cs-drbc/cs445/testsUnit/a09.bC
+Passed /home/xiang/Documents/cs-drbc/cs445/testsUnit/b01.bC
+Passed /home/xiang/Documents/cs-drbc/cs445/testsUnit/b02.bC
+Passed /home/xiang/Documents/cs-drbc/cs445/testsUnit/b03.bC
+Passed /home/xiang/Documents/cs-drbc/cs445/testsUnit/b04.bC
+Passed /home/xiang/Documents/cs-drbc/cs445/testsUnit/b05.bC
+Passed /home/xiang/Documents/cs-drbc/cs445/testsUnit/b06.bC
+Passed /home/xiang/Documents/cs-drbc/cs445/testsUnit/b07.bC
+Passed /home/xiang/Documents/cs-drbc/cs445/testsUnit/b08.bC
+Passed /home/xiang/Documents/cs-drbc/cs445/testsUnit/b09.bC
+Passed /home/xiang/Documents/cs-drbc/cs445/testsUnit/b0a.bC
+Passed /home/xiang/Documents/cs-drbc/cs445/testsUnit/b0b.bC
+Passed /home/xiang/Documents/cs-drbc/cs445/testsUnit/b0c.bC
+Passed /home/xiang/Documents/cs-drbc/cs445/testsUnit/c01.bC
+Passed /home/xiang/Documents/cs-drbc/cs445/testsUnit/c02.bC
+Passed /home/xiang/Documents/cs-drbc/cs445/testsUnit/c03.bC
+Passed /home/xiang/Documents/cs-drbc/cs445/testsUnit/c04.bC
+Passed /home/xiang/Documents/cs-drbc/cs445/testsUnit/c05.bC
+Passed /home/xiang/Documents/cs-drbc/cs445/testsUnit/c06.bC
+Passed /home/xiang/Documents/cs-drbc/cs445/testsUnit/c07.bC
+Passed /home/xiang/Documents/cs-drbc/cs445/testsUnit/c08.bC
+Passed /home/xiang/Documents/cs-drbc/cs445/testsUnit/c09.bC
+Passed /home/xiang/Documents/cs-drbc/cs445/testsUnit/c0a.bC
+Passed /home/xiang/Documents/cs-drbc/cs445/testsUnit/c0b.bC
+Passed /home/xiang/Documents/cs-drbc/cs445/testsUnit/c0c2.bC
+Passed /home/xiang/Documents/cs-drbc/cs445/testsUnit/c0c3.bC
+Passed /home/xiang/Documents/cs-drbc/cs445/testsUnit/c0c4.bC
+Passed /home/xiang/Documents/cs-drbc/cs445/testsUnit/c0c.bC
+Passed /home/xiang/Documents/cs-drbc/cs445/testsUnit/c0d.bC
+Passed /home/xiang/Documents/cs-drbc/cs445/testsUnit/c0e.bC
+Passed /home/xiang/Documents/cs-drbc/cs445/testsUnit/c0f.bC
+Passed /home/xiang/Documents/cs-drbc/cs445/testsUnit/c0g.bC
+Passed /home/xiang/Documents/cs-drbc/cs445/testsUnit/c0h.bC
+Passed /home/xiang/Documents/cs-drbc/cs445/testsUnit/c13.bC
+Passed /home/xiang/Documents/cs-drbc/cs445/testsUnit/c14.bC
+Passed /home/xiang/Documents/cs-drbc/cs445/testsUnit/c15.bC
+Passed /home/xiang/Documents/cs-drbc/cs445/testsUnit/c16.bC
+Passed /home/xiang/Documents/cs-drbc/cs445/testsUnit/c17.bC
+Passed /home/xiang/Documents/cs-drbc/cs445/testsUnit/c18.bC
+Passed /home/xiang/Documents/cs-drbc/cs445/testsUnit/c19.bC
+Passed /home/xiang/Documents/cs-drbc/cs445/testsUnit/c20.bC
+Passed /home/xiang/Documents/cs-drbc/cs445/testsUnit/c21.bC
+Passed /home/xiang/Documents/cs-drbc/cs445/testsUnit/d015.bC
+Passed /home/xiang/Documents/cs-drbc/cs445/testsUnit/d01.bC
+Passed /home/xiang/Documents/cs-drbc/cs445/testsUnit/d02.bC
+Passed /home/xiang/Documents/cs-drbc/cs445/testsUnit/d03.bC
+Passed /home/xiang/Documents/cs-drbc/cs445/testsUnit/d045.bC
+Passed /home/xiang/Documents/cs-drbc/cs445/testsUnit/d04.bC
+Passed /home/xiang/Documents/cs-drbc/cs445/testsUnit/d05.bC
+Passed /home/xiang/Documents/cs-drbc/cs445/testsUnit/e01.bC
+Passed /home/xiang/Documents/cs-drbc/cs445/testsUnit/e02.bC
+Passed /home/xiang/Documents/cs-drbc/cs445/testsUnit/e03.bC
+Passed /home/xiang/Documents/cs-drbc/cs445/testsUnit/e04.bC
+Passed /home/xiang/Documents/cs-drbc/cs445/testsUnit/e05.bC
+Passed /home/xiang/Documents/cs-drbc/cs445/testsUnit/e06.bC
+Passed /home/xiang/Documents/cs-drbc/cs445/testsUnit/e07.bC
+Passed /home/xiang/Documents/cs-drbc/cs445/testsUnit/e08.bC
+Passed /home/xiang/Documents/cs-drbc/cs445/testsUnit/e09.bC
+Passed /home/xiang/Documents/cs-drbc/cs445/testsUnit/e0a.bC
+Passed /home/xiang/Documents/cs-drbc/cs445/testsUnit/e0b.bC
+Passed /home/xiang/Documents/cs-drbc/cs445/testsUnit/e0c.bC
+Passed /home/xiang/Documents/cs-drbc/cs445/testsUnit/e0d.bC
+Passed /home/xiang/Documents/cs-drbc/cs445/testsUnit/f01.bC
+Passed /home/xiang/Documents/cs-drbc/cs445/testsUnit/f02.bC
+Passed /home/xiang/Documents/cs-drbc/cs445/testsUnit/f03.bC
+Passed /home/xiang/Documents/cs-drbc/cs445/testsUnit/f04.bC
+Passed /home/xiang/Documents/cs-drbc/cs445/testsUnit/f05.bC
+Passed /home/xiang/Documents/cs-drbc/cs445/testsUnit/f06.bC
+Passed /home/xiang/Documents/cs-drbc/cs445/testsUnit/f07.bC
+Passed /home/xiang/Documents/cs-drbc/cs445/testsUnit/f08.bC
+Passed /home/xiang/Documents/cs-drbc/cs445/testsUnit/f09.bC
+Passed /home/xiang/Documents/cs-drbc/cs445/testsUnit/f0a.bC
+Passed /home/xiang/Documents/cs-drbc/cs445/testsUnit/f0b.bC
+Passed /home/xiang/Documents/cs-drbc/cs445/testsUnit/f0c.bC
+Passed /home/xiang/Documents/cs-drbc/cs445/testsUnit/f0d.bC
+Passed /home/xiang/Documents/cs-drbc/cs445/testsUnit/g00.bC
+Passed /home/xiang/Documents/cs-drbc/cs445/testsUnit/g01.bC
+Passed /home/xiang/Documents/cs-drbc/cs445/testsUnit/g02.bC
+Passed /home/xiang/Documents/cs-drbc/cs445/testsUnit/g03.bC
+Passed /home/xiang/Documents/cs-drbc/cs445/testsUnit/g04.bC
+Passed /home/xiang/Documents/cs-drbc/cs445/testsUnit/g05.bC
+Passed /home/xiang/Documents/cs-drbc/cs445/testsUnit/g06.bC
+Passed /home/xiang/Documents/cs-drbc/cs445/testsUnit/g07.bC
+Passed /home/xiang/Documents/cs-drbc/cs445/testsUnit/g08.bC
+Passed /home/xiang/Documents/cs-drbc/cs445/testsUnit/g09.bC
+Passed /home/xiang/Documents/cs-drbc/cs445/testsUnit/g0a.bC
+Passed /home/xiang/Documents/cs-drbc/cs445/testsUnit/g0b.bC
+Passed /home/xiang/Documents/cs-drbc/cs445/testsUnit/g0c.bC
+Passed /home/xiang/Documents/cs-drbc/cs445/testsUnit/g0d.bC
+Passed /home/xiang/Documents/cs-drbc/cs445/testsUnit/g0e.bC
+Passed /home/xiang/Documents/cs-drbc/cs445/testsUnit/g0f.bC
+Passed /home/xiang/Documents/cs-drbc/cs445/testsUnit/h01.bC
+Passed /home/xiang/Documents/cs-drbc/cs445/testsUnit/h02.bC
+Passed /home/xiang/Documents/cs-drbc/cs445/testsUnit/h03.bC
+Passed /home/xiang/Documents/cs-drbc/cs445/testsUnit/h04.bC
+Passed /home/xiang/Documents/cs-drbc/cs445/testsUnit/h05.bC
+Passed /home/xiang/Documents/cs-drbc/cs445/testsUnit/h06.bC
+Passed /home/xiang/Documents/cs-drbc/cs445/testsUnit/h07.bC
+Passed /home/xiang/Documents/cs-drbc/cs445/testsUnit/h08.bC
+Passed /home/xiang/Documents/cs-drbc/cs445/testsUnit/i00.bC
+Passed /home/xiang/Documents/cs-drbc/cs445/testsUnit/i01.bC
+Passed /home/xiang/Documents/cs-drbc/cs445/testsUnit/i02.bC
+Passed /home/xiang/Documents/cs-drbc/cs445/testsUnit/i03.bC
+Passed /home/xiang/Documents/cs-drbc/cs445/testsUnit/i04.bC
+Passed /home/xiang/Documents/cs-drbc/cs445/testsUnit/i05.bC
+Passed /home/xiang/Documents/cs-drbc/cs445/testsUnit/i06.bC
+Passed /home/xiang/Documents/cs-drbc/cs445/testsUnit/i07.bC
+Passed /home/xiang/Documents/cs-drbc/cs445/testsUnit/i08.bC
+Passed /home/xiang/Documents/cs-drbc/cs445/testsUnit/i09.bC
+Passed /home/xiang/Documents/cs-drbc/cs445/testsUnit/i0a.bC
+Passed /home/xiang/Documents/cs-drbc/cs445/testsUnit/i0b.bC
+Passed /home/xiang/Documents/cs-drbc/cs445/testsUnit/i0c.bC
+Passed /home/xiang/Documents/cs-drbc/cs445/testsUnit/j00.bC
+Passed /home/xiang/Documents/cs-drbc/cs445/testsUnit/k00.bC
+Passed /home/xiang/Documents/cs-drbc/cs445/testsUnit/k01.bC
+Passed /home/xiang/Documents/cs-drbc/cs445/testsUnit/k02.bC
+Passed /home/xiang/Documents/cs-drbc/cs445/testsUnit/k03.bC
+Passed /home/xiang/Documents/cs-drbc/cs445/testsUnit/k04.bC
+Passed /home/xiang/Documents/cs-drbc/cs445/testsUnit/k05.bC
+Passed /home/xiang/Documents/cs-drbc/cs445/testsUnit/k06.bC
+Passed /home/xiang/Documents/cs-drbc/cs445/testsUnit/k07.bC
+Passed /home/xiang/Documents/cs-drbc/cs445/testsUnit/k08.bC
+Passed /home/xiang/Documents/cs-drbc/cs445/testsUnit/mod.bC
+Passed /home/xiang/Documents/cs-drbc/cs445/testsUnit/s00.bC
+Passed /home/xiang/Documents/cs-drbc/cs445/testsUnit/s013.bC
+Passed /home/xiang/Documents/cs-drbc/cs445/testsUnit/s015.bC
+Passed /home/xiang/Documents/cs-drbc/cs445/testsUnit/s01.bC
+Passed /home/xiang/Documents/cs-drbc/cs445/testsUnit/s025.bC
+Passed /home/xiang/Documents/cs-drbc/cs445/testsUnit/s02.bC
+Passed /home/xiang/Documents/cs-drbc/cs445/testsUnit/s02e.bC
+Passed /home/xiang/Documents/cs-drbc/cs445/testsUnit/s03.bC
+Passed /home/xiang/Documents/cs-drbc/cs445/testsUnit/s04.bC
+Passed /home/xiang/Documents/cs-drbc/cs445/testsUnit/s05.bC
+Passed /home/xiang/Documents/cs-drbc/cs445/testsUnit/t00.bC
+Passed /home/xiang/Documents/cs-drbc/cs445/testsUnit/t01.bC
+Passed /home/xiang/Documents/cs-drbc/cs445/testsUnit/t02.bC
+Passed /home/xiang/Documents/cs-drbc/cs445/testsUnit/t03.bC
+Passed /home/xiang/Documents/cs-drbc/cs445/testsUnit/u00.bC
+Passed /home/xiang/Documents/cs-drbc/cs445/testsUnit/u01.bC
+Passed /home/xiang/Documents/cs-drbc/cs445/testsUnit/u02.bC
+Passed /home/xiang/Documents/cs-drbc/cs445/testsUnit/u03.bC
+0 Files skipped.
+153/153 Passed.
+25/25 Points.
+Broad Testing: /home/xiang/Documents/cs-drbc/cs445/testBroad/*.bC
+Passed /home/xiang/Documents/cs-drbc/cs445/testBroad/aamain2.bC
+Passed /home/xiang/Documents/cs-drbc/cs445/testBroad/array0.bC
+Passed /home/xiang/Documents/cs-drbc/cs445/testBroad/array1.bC
+Passed /home/xiang/Documents/cs-drbc/cs445/testBroad/array2.bC
+Passed /home/xiang/Documents/cs-drbc/cs445/testBroad/array.bC
+Passed /home/xiang/Documents/cs-drbc/cs445/testBroad/arraysize.bC
+Passed /home/xiang/Documents/cs-drbc/cs445/testBroad/assign1.bC
+Passed /home/xiang/Documents/cs-drbc/cs445/testBroad/assign2.bC
+Passed /home/xiang/Documents/cs-drbc/cs445/testBroad/assign3.bC
+Passed /home/xiang/Documents/cs-drbc/cs445/testBroad/assign4.bC
+Passed /home/xiang/Documents/cs-drbc/cs445/testBroad/assign5.bC
+Passed /home/xiang/Documents/cs-drbc/cs445/testBroad/assign6.bC
+Passed /home/xiang/Documents/cs-drbc/cs445/testBroad/break2.bC
+Passed /home/xiang/Documents/cs-drbc/cs445/testBroad/call2.bC
+Passed /home/xiang/Documents/cs-drbc/cs445/testBroad/call5.bC
+Passed /home/xiang/Documents/cs-drbc/cs445/testBroad/call.bC
+Passed /home/xiang/Documents/cs-drbc/cs445/testBroad/charout.bC
+Passed /home/xiang/Documents/cs-drbc/cs445/testBroad/comb.bC
+Passed /home/xiang/Documents/cs-drbc/cs445/testBroad/combslow.bC
+Passed /home/xiang/Documents/cs-drbc/cs445/testBroad/compare.bC
+Passed /home/xiang/Documents/cs-drbc/cs445/testBroad/control2.bC
+Passed /home/xiang/Documents/cs-drbc/cs445/testBroad/e.bC
+Passed /home/xiang/Documents/cs-drbc/cs445/testBroad/examplearray3.bC
+Passed /home/xiang/Documents/cs-drbc/cs445/testBroad/exp3.bC
+Passed /home/xiang/Documents/cs-drbc/cs445/testBroad/factor2.bC
+Passed /home/xiang/Documents/cs-drbc/cs445/testBroad/factor.bC
+Passed /home/xiang/Documents/cs-drbc/cs445/testBroad/factorial2.bC
+Passed /home/xiang/Documents/cs-drbc/cs445/testBroad/factorial.bC
+Passed /home/xiang/Documents/cs-drbc/cs445/testBroad/factorialr.bC
+Passed /home/xiang/Documents/cs-drbc/cs445/testBroad/fib.bC
+Passed /home/xiang/Documents/cs-drbc/cs445/testBroad/fromroman.bC
+Passed /home/xiang/Documents/cs-drbc/cs445/testBroad/gcd.bC
+Passed /home/xiang/Documents/cs-drbc/cs445/testBroad/gcdsm.bC
+Passed /home/xiang/Documents/cs-drbc/cs445/testBroad/globalArray.bC
+Passed /home/xiang/Documents/cs-drbc/cs445/testBroad/global.bC
+Passed /home/xiang/Documents/cs-drbc/cs445/testBroad/if.bC
+Passed /home/xiang/Documents/cs-drbc/cs445/testBroad/inc.bC
+Passed /home/xiang/Documents/cs-drbc/cs445/testBroad/initbig.bC
+Passed /home/xiang/Documents/cs-drbc/cs445/testBroad/io.bC
+Passed /home/xiang/Documents/cs-drbc/cs445/testBroad/localArray.bC
+Passed /home/xiang/Documents/cs-drbc/cs445/testBroad/local.bC
+Passed /home/xiang/Documents/cs-drbc/cs445/testBroad/logic2.bC
+Passed /home/xiang/Documents/cs-drbc/cs445/testBroad/logic.bC
+Passed /home/xiang/Documents/cs-drbc/cs445/testBroad/main2.bC
+Passed /home/xiang/Documents/cs-drbc/cs445/testBroad/mastermind.bC
+Passed /home/xiang/Documents/cs-drbc/cs445/testBroad/miller.bC
+Passed /home/xiang/Documents/cs-drbc/cs445/testBroad/nest.bC
+Passed /home/xiang/Documents/cs-drbc/cs445/testBroad/op1.bC
+Passed /home/xiang/Documents/cs-drbc/cs445/testBroad/ops.bC
+Passed /home/xiang/Documents/cs-drbc/cs445/testBroad/permlist.bC
+Passed /home/xiang/Documents/cs-drbc/cs445/testBroad/pi.bC
+Passed /home/xiang/Documents/cs-drbc/cs445/testBroad/poker.bC
+Passed /home/xiang/Documents/cs-drbc/cs445/testBroad/polynum.bC
+Passed /home/xiang/Documents/cs-drbc/cs445/testBroad/proc.bC
+Passed /home/xiang/Documents/cs-drbc/cs445/testBroad/ptriangle.bC
+Passed /home/xiang/Documents/cs-drbc/cs445/testBroad/pushpoparray.bC
+Passed /home/xiang/Documents/cs-drbc/cs445/testBroad/pushpopcall2.bC
+Passed /home/xiang/Documents/cs-drbc/cs445/testBroad/pushpopcall3.bC
+Passed /home/xiang/Documents/cs-drbc/cs445/testBroad/pushpopcall.bC
+Passed /home/xiang/Documents/cs-drbc/cs445/testBroad/pushpopexp.bC
+Passed /home/xiang/Documents/cs-drbc/cs445/testBroad/pushpopparm.bC
+Passed /home/xiang/Documents/cs-drbc/cs445/testBroad/pushpoptiny.bC
+Passed /home/xiang/Documents/cs-drbc/cs445/testBroad/queens.bC
+Passed /home/xiang/Documents/cs-drbc/cs445/testBroad/return.bC
+Passed /home/xiang/Documents/cs-drbc/cs445/testBroad/righttri.bC
+Passed /home/xiang/Documents/cs-drbc/cs445/testBroad/scope2.bC
+Passed /home/xiang/Documents/cs-drbc/cs445/testBroad/sieve.bC
+Passed /home/xiang/Documents/cs-drbc/cs445/testBroad/sort2.bC
+Passed /home/xiang/Documents/cs-drbc/cs445/testBroad/sort.bC
+Passed /home/xiang/Documents/cs-drbc/cs445/testBroad/sudoku.bC
+Passed /home/xiang/Documents/cs-drbc/cs445/testBroad/tictactoe.bC
+Passed /home/xiang/Documents/cs-drbc/cs445/testBroad/tiny3.bC
+Passed /home/xiang/Documents/cs-drbc/cs445/testBroad/tinyArray.bC
+Passed /home/xiang/Documents/cs-drbc/cs445/testBroad/tinyAssignBool.bC
+Passed /home/xiang/Documents/cs-drbc/cs445/testBroad/tinyAssignChar.bC
+Passed /home/xiang/Documents/cs-drbc/cs445/testBroad/tinyAssignInt.bC
+Passed /home/xiang/Documents/cs-drbc/cs445/testBroad/tiny.bC
+Passed /home/xiang/Documents/cs-drbc/cs445/testBroad/tinyBreak2.bC
+Passed /home/xiang/Documents/cs-drbc/cs445/testBroad/tinyCall2.bC
+Passed /home/xiang/Documents/cs-drbc/cs445/testBroad/tinyCall3.bC
+Passed /home/xiang/Documents/cs-drbc/cs445/testBroad/tinyCall.bC
+Passed /home/xiang/Documents/cs-drbc/cs445/testBroad/tinyConstants.bC
+Passed /home/xiang/Documents/cs-drbc/cs445/testBroad/tinyExp.bC
+Passed /home/xiang/Documents/cs-drbc/cs445/testBroad/tinyInit2.bC
+Passed /home/xiang/Documents/cs-drbc/cs445/testBroad/tinyInit3.bC
+Passed /home/xiang/Documents/cs-drbc/cs445/testBroad/tinyNest.bC
+Passed /home/xiang/Documents/cs-drbc/cs445/testBroad/tinyOps.bC
+Passed /home/xiang/Documents/cs-drbc/cs445/testBroad/tinyRandomRoll.bC
+Passed /home/xiang/Documents/cs-drbc/cs445/testBroad/tinyStatic.bC
+Passed /home/xiang/Documents/cs-drbc/cs445/testBroad/tinyVarAssign.bC
+Passed /home/xiang/Documents/cs-drbc/cs445/testBroad/tinyVarPair.bC
+Passed /home/xiang/Documents/cs-drbc/cs445/testBroad/unary.bC
+Passed /home/xiang/Documents/cs-drbc/cs445/testBroad/var2.bC
+Passed /home/xiang/Documents/cs-drbc/cs445/testBroad/vararray.bC
+Passed /home/xiang/Documents/cs-drbc/cs445/testBroad/var.bC
+Passed /home/xiang/Documents/cs-drbc/cs445/testBroad/varnovoid.bC
+Passed /home/xiang/Documents/cs-drbc/cs445/testBroad/walsh.bC
+Passed /home/xiang/Documents/cs-drbc/cs445/testBroad/while.bC
+0 Files skipped.
+98/98 Passed.
+25/25 Points.
+Saving: w02_xian7710_150_518770604.tar
+Making .tar
+rm -f lex.yy.o parser.tab.o bC lex.yy.c parser.tab.h parser.tab.c bC.tar parser.output core
+tar -cvf w02_xian7710_150_518770604.tar parser.l parser.y makefile scanType.h
+parser.l
+parser.y
+makefile
+scanType.h
+
+Your current directory is /home/xian7710/cs445/w02, 
+Enter file name to check in: Course to check file in for (e.g., cs150): Submission of /home/xian7710/cs445/w02/w02_xian7710_150_518770604.tar completed on Fri May 16 16:24:16 2025
+Names of files you have checked in:
+	Date				Size	Name
+	Fri May 16 16:18:52 2025	389120	xian7710.w05_xian7710_120_846415041.tar
+	Fri May 16 16:22:07 2025	40960	xian7710.w03_xian7710_150_627985422.tar
+	Fri May 16 16:24:16 2025	20480	xian7710.w02_xian7710_150_518770604.tar
+	Fri May 16 16:20:49 2025	204800	xian7710.w04_xian7710_150_1610919008.tar
+	Fri May 16 16:15:30 2025	153600	xian7710.w06_xian7710_151_1010237196.tar
+End of list
+rm w02_xian7710_150_518770604.tar
+bison -v -t -d parser.y  
+flex parser.l
+g++    -c -o lex.yy.o lex.yy.c
+g++    -c -o parser.tab.o parser.tab.c
+g++  lex.yy.o parser.tab.o -lm  -o bC
+That gives you 150 marks.
+You can get 0 more marks through this process.
+*** Submission successful! ***

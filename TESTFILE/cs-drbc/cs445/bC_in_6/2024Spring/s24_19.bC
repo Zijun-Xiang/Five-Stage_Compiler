@@ -1,0 +1,88 @@
+#DRBC Stockbroker Simulator/bC Production Rules Test
+#DRBC This program tests every production rule of the bC language.
+
+int subtraction(int x, y){
+   return y - x; 
+}
+
+int paycuts(char mad[]; int x){                                                
+   int i ;
+   for i = 0 to x do 
+      if mad[0] == 'y' then x -= (1 / 2);
+
+   return x;
+} 
+
+int grocery(int x){                                                             
+   x /= 2;                                                                      
+   return x;                                                                    
+} 
+
+int newGoal(int x){
+   return x + x :>: x*2 - x;
+}
+
+maxpay(int x){
+   int i;
+   for i = 0 to x do 
+      x++;
+}
+
+sleep();
+
+int goal:max;  
+
+int main() { // Production Rule 3
+   char bossMad[1] : 'n';
+   char diary[256] ;  
+   int dailyGoal:10, potDef: 0; // Potential deficit today
+   int goalPercent;
+   int happiness : ?100;
+   static int funds: 1**2;
+   bool goodDay:true;
+   while (funds < goal) do {
+      if (goal > (funds*10)) then {
+         dailyGoal = 100; // The goal isn't attainable today
+         break;
+      }
+      else {
+         break;       
+      }
+   }
+
+   potDef = -dailyGoal;
+   goalPercent = dailyGoal/goal;
+   goalPercent *= 100;
+   
+   if(goalPercent < 5) or ((goalPercent > 5) and (funds <= goal % dailyGoal)) then {
+      goodDay = false; 
+   } 
+   
+   dailyGoal = subtraction(funds,dailyGoal);
+   funds = funds - funds; // Subtracts current funds from the daily goal
+   
+   for m = 0 to dailyGoal do { // 19a
+      for n = 0 to dailyGoal by 5 do {
+         if(goodDay == true) then {funds += 5;}
+         else 
+            while (goodDay == false) do
+            if(false != false) then {funds--;}
+      }
+   }
+   
+   if not (funds >= dailyGoal) then {bossMad[0] = 'y';} 
+   maxpay(funds); // Dreaming of the money they could have made
+   funds = paycuts(bossMad[0], funds);
+   funds = grocerytrip(funds); // Grocery run after work
+   goal = goal - newGoal(funds);
+   if(funds >= 5 * 2) then {
+      diary = "Today was a good day";
+   }
+   else
+      diary = "Today was not a good day";
+      happiness = happines :<: 25;
+ 
+   sleep();
+   return;
+}
+
